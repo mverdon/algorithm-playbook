@@ -1,13 +1,32 @@
 import type { AnimationStep } from '@/types/algorithms';
 import { AnimationState } from '@/types/algorithms';
 
+/**
+ * Result returned by the heap sort algorithm
+ */
 export interface HeapSortResult {
+  /** The sorted array */
   sortedArray: number[];
+  /** Array of animation steps for visualization */
   animationSteps: AnimationStep[];
+  /** Total number of comparisons performed */
   comparisons: number;
+  /** Total number of swaps performed */
   swaps: number;
 }
 
+/**
+ * Heap Sort Algorithm with Animation Generation
+ * 
+ * Implements heap sort by building a max heap and repeatedly extracting the maximum.
+ * First builds a max heap, then swaps root with last element and heapifies.
+ * Time Complexity: O(n log n)
+ * Space Complexity: O(1)
+ * Stable: No
+ * 
+ * @param arr - Array of numbers to sort
+ * @returns HeapSortResult with sorted array, animation steps, and statistics
+ */
 export function heapSort(arr: number[]): HeapSortResult {
   const array = [...arr];
   const animationSteps: AnimationStep[] = [];
@@ -58,6 +77,17 @@ export function heapSort(arr: number[]): HeapSortResult {
   return { sortedArray: array, animationSteps, comparisons, swaps };
 }
 
+/**
+ * Maintains the max heap property for a subtree rooted at the given index
+ * 
+ * @param array - The array being heapified
+ * @param heapSize - Size of the heap (elements beyond this are considered sorted)
+ * @param rootIndex - Root index of the subtree to heapify
+ * @param steps - Array to collect animation steps
+ * @param comparisons - Current comparison count
+ * @param swaps - Current swap count
+ * @returns Updated comparison and swap counts
+ */
 function heapify(
   array: number[],
   heapSize: number,

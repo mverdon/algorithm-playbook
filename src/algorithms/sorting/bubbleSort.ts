@@ -1,12 +1,31 @@
 import { AnimationStep, AnimationState } from '@/types/algorithms';
 
+/**
+ * Result returned by the bubble sort algorithm
+ */
 export interface BubbleSortResult {
+  /** The sorted array */
   sortedArray: number[];
+  /** Array of animation steps for visualization */
   animationSteps: AnimationStep[];
+  /** Total number of comparisons performed */
   comparisons: number;
+  /** Total number of swaps performed */
   swaps: number;
 }
 
+/**
+ * Bubble Sort Algorithm with Animation Generation
+ * 
+ * Implements the bubble sort algorithm, repeatedly stepping through the array,
+ * comparing adjacent elements and swapping them if they're in the wrong order.
+ * Time Complexity: O(n²)
+ * Space Complexity: O(1)
+ * Stable: Yes
+ * 
+ * @param arr - Array of numbers to sort
+ * @returns BubbleSortResult with sorted array, animation steps, and statistics
+ */
 export function bubbleSort(arr: number[]): BubbleSortResult {
   const array = [...arr];
   const animationSteps: AnimationStep[] = [];
