@@ -1,4 +1,11 @@
 <script setup lang="ts">
+/**
+ * ThemeToggle Component
+ * 
+ * Provides a button to toggle between light and dark themes.
+ * Persists the user's theme preference in localStorage and respects
+ * the system's prefers-color-scheme setting when no preference is saved.
+ */
 import { ref, onMounted, watch } from 'vue';
 
 const isDark = ref(false);

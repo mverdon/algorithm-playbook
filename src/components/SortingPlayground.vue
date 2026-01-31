@@ -66,6 +66,14 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * SortingPlayground Component
+ * 
+ * The main component for the sorting algorithm visualizer.
+ * Provides controls for selecting sorting algorithms, adjusting animation speed,
+ * changing array size, and controlling playback. Visualizes the sorting process
+ * with animated bar charts and displays completion notifications.
+ */
 import { ref, computed, watch } from 'vue';
 import AlgorithmSelector from './AlgorithmSelector.vue';
 import SpeedControl from './SpeedControl.vue';

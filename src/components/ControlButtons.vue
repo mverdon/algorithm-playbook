@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+/**
+ * Props for the ControlButtons component
+ */
 interface Props {
+  /** Whether the animation is currently playing */
   isPlaying: boolean
+  /** Whether the animation has completed */
   isComplete: boolean
+  /** Whether the play button should be enabled */
   canPlay: boolean
 }
 
@@ -13,10 +19,17 @@ const props = withDefaults(defineProps<Props>(), {
   canPlay: true
 })
 
+/**
+ * Events emitted by the ControlButtons component
+ */
 const emit = defineEmits<{
+  /** Emitted when the user clicks the play button */
   play: []
+  /** Emitted when the user clicks the pause button */
   pause: []
+  /** Emitted when the user clicks the reset button */
   reset: []
+  /** Emitted when the user clicks the shuffle button */
   shuffle: []
 }>()
 

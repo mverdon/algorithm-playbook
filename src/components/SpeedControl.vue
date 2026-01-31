@@ -2,11 +2,19 @@
 import { computed } from 'vue';
 import { AnimationSpeed } from '@/types/algorithms';
 
+/**
+ * Props for the SpeedControl component
+ */
 interface Props {
+  /** The current animation speed setting */
   speed: AnimationSpeed;
 }
 
+/**
+ * Events emitted by the SpeedControl component
+ */
 interface Emits {
+  /** Emitted when the user changes the animation speed */
   (e: 'update:speed', speed: AnimationSpeed): void;
 }
 

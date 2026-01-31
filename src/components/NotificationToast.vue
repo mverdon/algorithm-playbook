@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue';
 
+/**
+ * Props for the NotificationToast component
+ */
 export interface NotificationProps {
+  /** The message text to display in the notification */
   message: string;
+  /** The type of notification determining its styling and icon (default: 'info') */
   type?: 'success' | 'info' | 'warning' | 'error';
+  /** Duration in milliseconds before auto-dismissing (default: 3000) */
   duration?: number;
+  /** Whether the notification should be visible (default: false) */
   show?: boolean;
 }
 
@@ -14,7 +21,11 @@ const props = withDefaults(defineProps<NotificationProps>(), {
   show: false,
 });
 
+/**
+ * Events emitted by the NotificationToast component
+ */
 const emit = defineEmits<{
+  /** Emitted when the notification is closed (either manually or auto-dismissed) */
   close: [];
 }>();
 

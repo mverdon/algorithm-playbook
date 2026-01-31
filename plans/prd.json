@@ -2130,7 +2130,7 @@
       "Run 'npm run typecheck' to verify",
       "Verify TypeScript intellisense shows docs"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "polish",

@@ -1,7 +1,13 @@
 <script setup lang="ts">
+/**
+ * Props for the ArraySizeInput component
+ */
 interface Props {
+  /** The current size of the array */
   size: number;
+  /** The minimum allowed array size (default: 5) */
   min?: number;
+  /** The maximum allowed array size (default: 100) */
   max?: number;
 }
 
@@ -10,7 +16,11 @@ const props = withDefaults(defineProps<Props>(), {
   max: 100,
 });
 
+/**
+ * Events emitted by the ArraySizeInput component
+ */
 const emit = defineEmits<{
+  /** Emitted when the user changes the array size */
   'update:size': [size: number];
 }>();
 

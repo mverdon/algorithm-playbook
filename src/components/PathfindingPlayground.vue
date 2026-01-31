@@ -83,6 +83,14 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * PathfindingPlayground Component
+ * 
+ * The main component for the pathfinding algorithm visualizer.
+ * Provides controls for selecting pathfinding algorithms, adjusting animation speed,
+ * and controlling playback. Features an interactive grid where users can draw walls,
+ * set start/end points, and visualize how different algorithms find the shortest path.
+ */
 import { ref, computed, watch, onMounted } from 'vue';
 import AlgorithmSelector from './AlgorithmSelector.vue';
 import SpeedControl from './SpeedControl.vue';

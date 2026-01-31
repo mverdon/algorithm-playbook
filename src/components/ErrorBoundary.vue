@@ -41,6 +41,13 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * ErrorBoundary Component
+ * 
+ * Catches and handles errors from child components, displaying a user-friendly
+ * error message with options to retry or reset. Prevents the entire application
+ * from crashing when a child component throws an error.
+ */
 import { ref, onErrorCaptured } from 'vue';
 
 const error = ref(false);

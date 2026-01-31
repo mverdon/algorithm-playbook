@@ -2,12 +2,21 @@
 import { computed } from 'vue';
 import { SortingAlgorithm, PathfindingAlgorithm, AlgorithmCategory } from '@/types/algorithms';
 
+/**
+ * Props for the AlgorithmSelector component
+ */
 interface Props {
+  /** The category of algorithms to display (Sorting or Pathfinding) */
   category: AlgorithmCategory;
+  /** The currently selected algorithm */
   selectedAlgorithm: SortingAlgorithm | PathfindingAlgorithm;
 }
 
+/**
+ * Events emitted by the AlgorithmSelector component
+ */
 interface Emits {
+  /** Emitted when the user selects a different algorithm */
   (e: 'update:selectedAlgorithm', value: SortingAlgorithm | PathfindingAlgorithm): void;
 }
 

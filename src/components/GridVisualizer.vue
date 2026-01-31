@@ -21,10 +21,17 @@ import type { Grid, GridAnimationStep } from '../types/grid';
 import { NodeState } from '../types/grid';
 import { getPathfindingColors, isDarkMode } from '@/utils/colorScheme';
 
+/**
+ * Props for the GridVisualizer component
+ */
 interface Props {
+  /** The 2D grid of nodes to visualize */
   grid: Grid;
+  /** The current animation step being displayed (null if not animating) */
   currentStep?: GridAnimationStep | null;
+  /** Canvas width in pixels (default: 600) */
   width?: number;
+  /** Canvas height in pixels (default: 600) */
   height?: number;
 }
 
@@ -34,9 +41,15 @@ const props = withDefaults(defineProps<Props>(), {
   currentStep: null,
 });
 
+/**
+ * Events emitted by the GridVisualizer component
+ */
 const emit = defineEmits<{
+  /** Emitted when the user clicks to toggle a wall at the specified position */
   toggleWall: [row: number, col: number];
+  /** Emitted when the user sets the start node at the specified position */
   setStart: [row: number, col: number];
+  /** Emitted when the user sets the end node at the specified position */
   setEnd: [row: number, col: number];
 }>();
 

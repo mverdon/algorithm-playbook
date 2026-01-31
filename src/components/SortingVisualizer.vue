@@ -26,10 +26,17 @@ import { ref, onMounted, watch, computed, onUnmounted } from 'vue';
 import { AnimationState, type AnimationStep } from '@/types/algorithms';
 import { getSortingColors, isDarkMode } from '@/utils/colorScheme';
 
+/**
+ * Props for the SortingVisualizer component
+ */
 interface Props {
+  /** The array of numbers to visualize */
   array: number[];
+  /** The current animation step being displayed (null if not animating) */
   currentStep?: AnimationStep | null;
+  /** Canvas width in pixels (default: 800) */
   width?: number;
+  /** Canvas height in pixels (default: 400) */
   height?: number;
 }
 
@@ -39,10 +46,17 @@ const props = withDefaults(defineProps<Props>(), {
   height: 400,
 });
 
+/**
+ * Events emitted by the SortingVisualizer component
+ */
 const emit = defineEmits<{
+  /** Emitted when the user presses Space or Enter to play */
   play: [];
+  /** Emitted when the user presses Escape to pause */
   pause: [];
+  /** Emitted when the user presses R to reset */
   reset: [];
+  /** Emitted when the user presses S to shuffle */
   shuffle: [];
 }>();
 
