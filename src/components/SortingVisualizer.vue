@@ -65,6 +65,8 @@ const containerRef = ref<HTMLDivElement | null>(null);
 const canvasWidth = computed(() => props.width);
 const canvasHeight = computed(() => props.height);
 const screenReaderAnnouncement = ref<string>('');
+const animationFrameId = ref<number | null>(null);
+const isDirty = ref(true);
 
 const ariaLabel = computed(() => {
   const array = props.currentStep?.values || props.array;
@@ -159,8 +161,8 @@ function getBarColor(index: number, step: AnimationStep | null): string {
   return colorScheme.default;
 }
 
-function drawBars() {
-  if (!canvasRef.value) return;
+function drawBarsInternal() {
+  if (!canvasRef.value || !isDirty.value) return;
 
   const canvas = canvasRef.value;
   const ctx = canvas.getContext('2d');
@@ -193,6 +195,20 @@ function drawBars() {
       ctx.fillText(value.toString(), x + barWidth / 2, canvas.height - 5);
     }
   });
+
+  isDirty.value = false;
+}
+
+function drawBars() {
+  isDirty.value = true;
+  
+  // Cancel any pending animation frame
+  if (animationFrameId.value !== null) {
+    cancelAnimationFrame(animationFrameId.value);
+  }
+  
+  // Schedule draw on next animation frame for smooth 60fps rendering
+  animationFrameId.value = requestAnimationFrame(drawBarsInternal);
 }
 
 // Watch for changes in array or current step
@@ -219,6 +235,10 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
+  // Clean up animation frame
+  if (animationFrameId.value !== null) {
+    cancelAnimationFrame(animationFrameId.value);
+  }
   observer.disconnect();
 });
 </script>

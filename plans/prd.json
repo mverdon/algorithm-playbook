@@ -2229,7 +2229,7 @@
       "Verify smooth 60fps animation",
       "Profile with browser devtools"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "polish",

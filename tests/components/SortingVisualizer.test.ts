@@ -3,6 +3,15 @@ import { mount } from '@vue/test-utils';
 import SortingVisualizer from '@/components/SortingVisualizer.vue';
 import { AnimationState, type AnimationStep } from '@/types/algorithms';
 
+// Helper to wait for requestAnimationFrame
+const waitForAnimationFrame = () => {
+  return new Promise((resolve) => {
+    requestAnimationFrame(() => {
+      resolve(undefined);
+    });
+  });
+};
+
 describe('SortingVisualizer', () => {
   let mockContext: CanvasRenderingContext2D;
 
@@ -83,6 +92,7 @@ describe('SortingVisualizer', () => {
       });
 
       await wrapper.vm.$nextTick();
+      await waitForAnimationFrame();
       
       // fillRect should be called for each bar (4 bars + potentially labels)
       expect(mockContext.fillRect).toHaveBeenCalled();
@@ -96,10 +106,12 @@ describe('SortingVisualizer', () => {
       });
 
       await wrapper.vm.$nextTick();
+      await waitForAnimationFrame();
       const callCountBefore = (mockContext.fillRect as any).mock.calls.length;
 
       await wrapper.setProps({ array: [1, 2, 3, 4] });
       await wrapper.vm.$nextTick();
+      await waitForAnimationFrame();
 
       const callCountAfter = (mockContext.fillRect as any).mock.calls.length;
       expect(callCountAfter).toBeGreaterThan(callCountBefore);
@@ -113,6 +125,7 @@ describe('SortingVisualizer', () => {
       });
 
       await wrapper.vm.$nextTick();
+      await waitForAnimationFrame();
       
       // Should clear canvas but not draw bars
       expect(mockContext.clearRect).toHaveBeenCalled();
@@ -129,6 +142,7 @@ describe('SortingVisualizer', () => {
       });
 
       await wrapper.vm.$nextTick();
+      await waitForAnimationFrame();
       expect(mockContext.clearRect).toHaveBeenCalled();
     });
 
@@ -147,6 +161,7 @@ describe('SortingVisualizer', () => {
       });
 
       await wrapper.vm.$nextTick();
+      await waitForAnimationFrame();
       expect(mockContext.fillRect).toHaveBeenCalled();
     });
 
@@ -165,6 +180,7 @@ describe('SortingVisualizer', () => {
       });
 
       await wrapper.vm.$nextTick();
+      await waitForAnimationFrame();
       expect(mockContext.fillRect).toHaveBeenCalled();
     });
 
@@ -183,6 +199,7 @@ describe('SortingVisualizer', () => {
       });
 
       await wrapper.vm.$nextTick();
+      await waitForAnimationFrame();
       expect(mockContext.fillRect).toHaveBeenCalled();
     });
 
@@ -201,6 +218,7 @@ describe('SortingVisualizer', () => {
       });
 
       await wrapper.vm.$nextTick();
+      await waitForAnimationFrame();
       const callCountBefore = (mockContext.clearRect as any).mock.calls.length;
 
       const step2: AnimationStep = {
@@ -211,6 +229,7 @@ describe('SortingVisualizer', () => {
 
       await wrapper.setProps({ currentStep: step2 });
       await wrapper.vm.$nextTick();
+      await waitForAnimationFrame();
 
       const callCountAfter = (mockContext.clearRect as any).mock.calls.length;
       expect(callCountAfter).toBeGreaterThan(callCountBefore);
@@ -226,6 +245,7 @@ describe('SortingVisualizer', () => {
       });
 
       await wrapper.vm.$nextTick();
+      await waitForAnimationFrame();
       expect(mockContext.clearRect).toHaveBeenCalledWith(0, 0, 800, 400);
     });
 
@@ -239,6 +259,7 @@ describe('SortingVisualizer', () => {
       });
 
       await wrapper.vm.$nextTick();
+      await waitForAnimationFrame();
       
       // fillRect should be called with appropriate heights
       expect(mockContext.fillRect).toHaveBeenCalled();
@@ -256,6 +277,7 @@ describe('SortingVisualizer', () => {
       });
 
       await wrapper.vm.$nextTick();
+      await waitForAnimationFrame();
       expect(mockContext.fillRect).toHaveBeenCalled();
 
       document.documentElement.classList.remove('dark');
@@ -271,6 +293,7 @@ describe('SortingVisualizer', () => {
       });
 
       await wrapper.vm.$nextTick();
+      await waitForAnimationFrame();
       expect(mockContext.fillRect).toHaveBeenCalled();
     });
 
@@ -284,6 +307,7 @@ describe('SortingVisualizer', () => {
       });
 
       await wrapper.vm.$nextTick();
+      await waitForAnimationFrame();
       expect(mockContext.fillRect).toHaveBeenCalled();
     });
 
@@ -295,6 +319,7 @@ describe('SortingVisualizer', () => {
       });
 
       await wrapper.vm.$nextTick();
+      await waitForAnimationFrame();
       expect(mockContext.fillRect).toHaveBeenCalled();
     });
 
@@ -306,6 +331,7 @@ describe('SortingVisualizer', () => {
       });
 
       await wrapper.vm.$nextTick();
+      await waitForAnimationFrame();
       expect(mockContext.fillRect).toHaveBeenCalled();
     });
   });
