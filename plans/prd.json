@@ -2144,7 +2144,7 @@
       "Clear loading after animation starts",
       "Verify loading state works correctly"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "polish",

@@ -30,7 +30,7 @@
           <div class="flex items-end">
             <button
               @click="generateNewArray"
-              :disabled="isPlaying"
+              :disabled="isPlaying || isLoading"
               class="w-full px-4 py-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:bg-purple-700 dark:hover:bg-purple-600"
             >
               Shuffle
@@ -49,7 +49,19 @@
         />
       </div>
 
-      <div class="visualizer-container bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md">
+      <div class="visualizer-container bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md relative">
+        <!-- Loading Overlay -->
+        <div 
+          v-if="isLoading" 
+          class="absolute inset-0 bg-white/80 dark:bg-gray-900/80 flex items-center justify-center z-10 rounded-lg"
+          role="status"
+          aria-live="polite"
+        >
+          <div class="text-center">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
+            <p class="mt-3 text-gray-700 dark:text-gray-300 font-medium">Generating animation steps...</p>
+          </div>
+        </div>
         <SortingVisualizer
           :array="displayArray"
           :currentStep="currentAnimationStep"
@@ -108,6 +120,7 @@ const animationSteps = ref<SortingAnimationStep[]>([]);
 const showNotification = ref(false);
 const notificationMessage = ref('');
 const notificationType = ref<'success' | 'info' | 'warning' | 'error'>('success');
+const isLoading = ref(false);
 
 const generateNewArray = () => {
   const newArray = Array.from({ length: arraySize.value }, () =>
@@ -126,6 +139,10 @@ const sortingAlgorithms = {
 };
 
 const startSorting = () => {
+  // Set loading state - Vue will batch this with the next state update
+  // so in practice the loading spinner will show briefly during computation
+  isLoading.value = true;
+  
   const sortFn = sortingAlgorithms[selectedAlgorithm.value];
   const result = sortFn([...array.value]);
   
@@ -148,6 +165,9 @@ const startSorting = () => {
   });
   
   animationSteps.value = stepsWithArrays;
+  
+  // Clear loading state immediately after computation
+  isLoading.value = false;
 };
 
 const animationEngine = useAnimationEngine<SortingAnimationStep>(
@@ -180,7 +200,7 @@ const currentAnimationStep = computed(() => {
 });
 const isPlaying = computed(() => animationEngine.isPlaying.value);
 const isComplete = computed(() => animationEngine.isComplete.value);
-const canPlay = computed(() => animationEngine.canPlay.value);
+const canPlay = computed(() => animationEngine.canPlay.value && !isLoading.value);
 
 const handlePlay = () => {
   if (animationEngine.totalSteps.value === 0) {
