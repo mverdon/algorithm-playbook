@@ -675,7 +675,7 @@
       "Return Grid type",
       "Verify TypeScript syntax is correct"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "core-test",
@@ -701,7 +701,7 @@
       "Return updated grid",
       "Verify TypeScript syntax is correct"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "core-test",
@@ -727,7 +727,7 @@
       "Return updated grid",
       "Verify TypeScript syntax is correct"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "core-test",
@@ -753,7 +753,7 @@
       "Return updated grid",
       "Verify TypeScript syntax is correct"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "core-test",
@@ -780,7 +780,7 @@
       "Return updated grid",
       "Verify TypeScript syntax is correct"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "core-test",
