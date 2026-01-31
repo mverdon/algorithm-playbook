@@ -69,7 +69,7 @@
       "Set target to Node runtime",
       "Verify file is valid JSON"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
