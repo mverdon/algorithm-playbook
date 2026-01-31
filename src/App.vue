@@ -43,8 +43,10 @@
     <main>
       <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div class="px-4 py-6 sm:px-0">
-          <SortingPlayground v-if="activeTab === 'sorting'" />
-          <PathfindingPlayground v-else-if="activeTab === 'pathfinding'" />
+          <ErrorBoundary>
+            <SortingPlayground v-if="activeTab === 'sorting'" />
+            <PathfindingPlayground v-else-if="activeTab === 'pathfinding'" />
+          </ErrorBoundary>
         </div>
       </div>
     </main>
@@ -56,6 +58,7 @@ import { ref } from 'vue';
 import SortingPlayground from './components/SortingPlayground.vue';
 import PathfindingPlayground from './components/PathfindingPlayground.vue';
 import ThemeToggle from './components/ThemeToggle.vue';
+import ErrorBoundary from './components/ErrorBoundary.vue';
 
 type Tab = 'sorting' | 'pathfinding';
 const activeTab = ref<Tab>('sorting');

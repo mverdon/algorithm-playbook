@@ -2159,7 +2159,7 @@
       "Test with intentional error",
       "Verify error is caught and displayed"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "polish",
