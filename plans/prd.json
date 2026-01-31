@@ -1989,7 +1989,7 @@
       "Add aria-live for pathfinding state",
       "Verify keyboard control works"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "accessibility",

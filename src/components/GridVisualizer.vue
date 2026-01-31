@@ -3,11 +3,15 @@
     ref="canvasRef"
     :width="width"
     :height="height"
-    class="border-2 border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800"
+    tabindex="0"
+    role="grid"
+    :aria-label="`Interactive pathfinding grid with ${props.grid.length} rows and ${props.grid[0]?.length || 0} columns`"
+    class="border-2 border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
     @mousedown="handleMouseDown"
     @mousemove="handleMouseMove"
     @mouseup="handleMouseUp"
     @mouseleave="handleMouseUp"
+    @keydown="handleKeyDown"
   ></canvas>
 </template>
 
@@ -38,6 +42,7 @@ const emit = defineEmits<{
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const isDragging = ref(false);
 const dragMode = ref<'wall' | 'start' | 'end' | null>(null);
+const focusedCell = ref<{ row: number; col: number } | null>(null);
 
 const cellSize = computed(() => {
   const rows = props.grid.length;
@@ -121,6 +126,13 @@ function drawGrid() {
       ctx.strokeStyle = colors.border;
       ctx.lineWidth = 1;
       ctx.strokeRect(x, y, size, size);
+
+      // Draw focus indicator for keyboard navigation
+      if (focusedCell.value && focusedCell.value.row === row && focusedCell.value.col === col) {
+        ctx.strokeStyle = '#3b82f6';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(x + 1, y + 1, size - 2, size - 2);
+      }
     }
   }
 }
@@ -197,6 +209,69 @@ function handleMouseUp() {
   dragMode.value = null;
 }
 
+function handleKeyDown(event: KeyboardEvent) {
+  const rows = props.grid.length;
+  const cols = props.grid[0]?.length || 0;
+  
+  if (rows === 0 || cols === 0) return;
+  
+  // Initialize focused cell to start position if not set
+  if (!focusedCell.value) {
+    const startNode = props.grid.flat().find(node => node.isStart);
+    if (startNode) {
+      focusedCell.value = { row: startNode.position.row, col: startNode.position.col };
+    } else {
+      focusedCell.value = { row: 0, col: 0 };
+    }
+  }
+  
+  const { row, col } = focusedCell.value;
+  let newRow = row;
+  let newCol = col;
+  let handled = true;
+  
+  switch (event.key) {
+    case 'ArrowUp':
+      newRow = Math.max(0, row - 1);
+      break;
+    case 'ArrowDown':
+      newRow = Math.min(rows - 1, row + 1);
+      break;
+    case 'ArrowLeft':
+      newCol = Math.max(0, col - 1);
+      break;
+    case 'ArrowRight':
+      newCol = Math.min(cols - 1, col + 1);
+      break;
+    case ' ':
+    case 'Enter':
+      // Toggle wall on space or enter
+      const node = props.grid[row][col];
+      if (!node.isStart && !node.isEnd) {
+        emit('toggleWall', row, col);
+      }
+      break;
+    case 's':
+    case 'S':
+      // Set start node
+      emit('setStart', row, col);
+      break;
+    case 'e':
+    case 'E':
+      // Set end node
+      emit('setEnd', row, col);
+      break;
+    default:
+      handled = false;
+  }
+  
+  if (handled) {
+    event.preventDefault();
+    focusedCell.value = { row: newRow, col: newCol };
+    drawGrid();
+  }
+}
+
 // Set up dark mode observer
 let observer: MutationObserver | null = null;
 
@@ -223,4 +298,5 @@ onUnmounted(() => {
 // Watch for prop changes
 watch(() => props.grid, drawGrid, { deep: true });
 watch(() => props.currentStep, drawGrid, { deep: true });
+watch(focusedCell, drawGrid, { deep: true });
 </script>
