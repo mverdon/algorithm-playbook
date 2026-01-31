@@ -1,5 +1,12 @@
 <template>
   <div class="sorting-playground bg-white dark:bg-gray-900 min-h-screen p-6">
+    <NotificationToast
+      :show="showNotification"
+      :message="notificationMessage"
+      :type="notificationType"
+      @close="showNotification = false"
+    />
+    
     <div class="max-w-7xl mx-auto">
       <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
         Sorting Algorithm Visualizer
@@ -65,6 +72,7 @@ import SpeedControl from './SpeedControl.vue';
 import ArraySizeInput from './ArraySizeInput.vue';
 import ControlButtons from './ControlButtons.vue';
 import SortingVisualizer from './SortingVisualizer.vue';
+import NotificationToast from './NotificationToast.vue';
 import { useAnimationEngine } from '@/composables/useAnimationEngine';
 import { bubbleSort } from '@/algorithms/sorting/bubbleSort';
 import { quickSort } from '@/algorithms/sorting/quickSort';
@@ -88,6 +96,10 @@ const arraySize = ref<number>(50);
 const array = ref<number[]>([]);
 const displayArray = ref<number[]>([]);
 const animationSteps = ref<SortingAnimationStep[]>([]);
+
+const showNotification = ref(false);
+const notificationMessage = ref('');
+const notificationType = ref<'success' | 'info' | 'warning' | 'error'>('success');
 
 const generateNewArray = () => {
   const newArray = Array.from({ length: arraySize.value }, () =>
@@ -137,6 +149,18 @@ const animationEngine = useAnimationEngine<SortingAnimationStep>(
     if (step) {
       displayArray.value = [...step.array];
     }
+  },
+  () => {
+    // On completion callback
+    const algorithmNames = {
+      [SortingAlgorithm.Bubble]: 'Bubble Sort',
+      [SortingAlgorithm.Quick]: 'Quick Sort',
+      [SortingAlgorithm.Merge]: 'Merge Sort',
+      [SortingAlgorithm.Heap]: 'Heap Sort',
+    };
+    notificationMessage.value = `${algorithmNames[selectedAlgorithm.value]} completed! Array is sorted.`;
+    notificationType.value = 'success';
+    showNotification.value = true;
   }
 );
 

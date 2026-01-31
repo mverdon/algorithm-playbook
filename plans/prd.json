@@ -2173,7 +2173,7 @@
       "Add sound effect (optional)",
       "Verify notification appears on completion"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "polish",

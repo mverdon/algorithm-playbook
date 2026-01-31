@@ -13,7 +13,8 @@ export interface AnimationEngineState {
 export function useAnimationEngine<T>(
   steps: Ref<T[]>,
   speed: Ref<AnimationSpeed>,
-  onStepChange?: (step: T, index: number) => void
+  onStepChange?: (step: T, index: number) => void,
+  onComplete?: () => void
 ) {
   const isPlaying = ref(false);
   const isPaused = ref(false);
@@ -59,6 +60,9 @@ export function useAnimationEngine<T>(
       animationTimer = setTimeout(scheduleNextFrame, speed.value) as unknown as number;
     } else {
       isPlaying.value = false;
+      if (onComplete) {
+        onComplete();
+      }
     }
   }
 

@@ -7,6 +7,13 @@
     :aria-label="ariaLabel"
     ref="containerRef"
   >
+    <NotificationToast
+      :show="showNotification"
+      :message="notificationMessage"
+      :type="notificationType"
+      @close="showNotification = false"
+    />
+    
     <div class="max-w-7xl mx-auto">
       <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
         Pathfinding Algorithm Visualizer
@@ -81,6 +88,7 @@ import AlgorithmSelector from './AlgorithmSelector.vue';
 import SpeedControl from './SpeedControl.vue';
 import ControlButtons from './ControlButtons.vue';
 import GridVisualizer from './GridVisualizer.vue';
+import NotificationToast from './NotificationToast.vue';
 import { useAnimationEngine } from '@/composables/useAnimationEngine';
 import { aStarAnimated } from '@/algorithms/grid/aStar';
 import { dijkstraAnimated } from '@/algorithms/grid/dijkstra';
@@ -105,6 +113,10 @@ const selectedAlgorithm = ref<PathfindingAlgorithm>(PathfindingAlgorithm.AStar);
 const animationSpeed = ref<AnimationSpeed>(AnimationSpeed.Normal);
 const containerRef = ref<HTMLDivElement | null>(null);
 const screenReaderAnnouncement = ref<string>('');
+
+const showNotification = ref(false);
+const notificationMessage = ref('');
+const notificationType = ref<'success' | 'info' | 'warning' | 'error'>('success');
 
 const gridConfig: GridConfig = {
   rows: 25,
@@ -156,6 +168,27 @@ const animationEngine = useAnimationEngine<GridAnimationStepWithGrid>(
     if (step) {
       displayGrid.value = step.grid;
     }
+  },
+  () => {
+    // On completion callback
+    const algorithmNames = {
+      [PathfindingAlgorithm.AStar]: 'A* Pathfinding',
+      [PathfindingAlgorithm.Dijkstra]: "Dijkstra's Algorithm",
+      [PathfindingAlgorithm.BFS]: 'Breadth-First Search',
+      [PathfindingAlgorithm.DFS]: 'Depth-First Search',
+    };
+    
+    // Check if a path was found by looking for NodeState.Path in the final grid
+    const pathFound = displayGrid.value.flat().some(node => node.state === NodeState.Path);
+    
+    if (pathFound) {
+      notificationMessage.value = `${algorithmNames[selectedAlgorithm.value]} completed! Path found.`;
+      notificationType.value = 'success';
+    } else {
+      notificationMessage.value = `${algorithmNames[selectedAlgorithm.value]} completed. No path exists.`;
+      notificationType.value = 'info';
+    }
+    showNotification.value = true;
   }
 );
 
