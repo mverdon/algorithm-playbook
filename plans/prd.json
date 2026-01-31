@@ -1960,7 +1960,7 @@
       "Run accessibility audit",
       "Verify no violations"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "accessibility",

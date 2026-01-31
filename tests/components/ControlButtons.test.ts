@@ -171,7 +171,7 @@ describe('ControlButtons', () => {
         props: { isPlaying: false }
       })
       const playButton = wrapper.findAll('button')[0]
-      expect(playButton.attributes('aria-label')).toBe('Play')
+      expect(playButton.attributes('aria-label')).toBe('Play algorithm animation')
     })
 
     it('has aria-label for pause button', () => {
@@ -179,19 +179,19 @@ describe('ControlButtons', () => {
         props: { isPlaying: true }
       })
       const playButton = wrapper.findAll('button')[0]
-      expect(playButton.attributes('aria-label')).toBe('Pause')
+      expect(playButton.attributes('aria-label')).toBe('Pause algorithm animation')
     })
 
     it('has aria-label for reset button', () => {
       const wrapper = mount(ControlButtons)
       const resetButton = wrapper.findAll('button')[1]
-      expect(resetButton.attributes('aria-label')).toBe('Reset')
+      expect(resetButton.attributes('aria-label')).toBe('Reset algorithm visualization to initial state')
     })
 
     it('has aria-label for shuffle button', () => {
       const wrapper = mount(ControlButtons)
       const shuffleButton = wrapper.findAll('button')[2]
-      expect(shuffleButton.attributes('aria-label')).toBe('Shuffle')
+      expect(shuffleButton.attributes('aria-label')).toBe('Shuffle array to generate new random values')
     })
 
     it('has focus ring styling on all buttons', () => {
@@ -201,6 +201,71 @@ describe('ControlButtons', () => {
         expect(button.classes()).toContain('focus:outline-none')
         expect(button.classes()).toContain('focus:ring-2')
       })
+    })
+
+    it('has role="group" on control container', () => {
+      const wrapper = mount(ControlButtons)
+      const container = wrapper.find('div')
+      expect(container.attributes('role')).toBe('group')
+      expect(container.attributes('aria-label')).toBe('Algorithm visualization controls')
+    })
+
+    it('has type="button" on all buttons', () => {
+      const wrapper = mount(ControlButtons)
+      const buttons = wrapper.findAll('button')
+      buttons.forEach(button => {
+        expect(button.attributes('type')).toBe('button')
+      })
+    })
+
+    it('has aria-pressed on play/pause button', () => {
+      const wrapper = mount(ControlButtons, {
+        props: { isPlaying: true }
+      })
+      const playButton = wrapper.findAll('button')[0]
+      expect(playButton.attributes('aria-pressed')).toBe('true')
+    })
+
+    it('has aria-disabled on disabled buttons', () => {
+      const wrapper = mount(ControlButtons, {
+        props: { canPlay: false }
+      })
+      const playButton = wrapper.findAll('button')[0]
+      expect(playButton.attributes('aria-disabled')).toBe('true')
+    })
+
+    it('provides screen reader feedback for disabled play button', () => {
+      const wrapper = mount(ControlButtons, {
+        props: { canPlay: false }
+      })
+      const playButton = wrapper.findAll('button')[0]
+      expect(playButton.attributes('aria-describedby')).toBe('play-pause-disabled-reason')
+      const reasonSpan = wrapper.find('#play-pause-disabled-reason')
+      expect(reasonSpan.exists()).toBe(true)
+      expect(reasonSpan.classes()).toContain('sr-only')
+      expect(reasonSpan.text()).toBe('Cannot play animation')
+    })
+
+    it('provides screen reader feedback for completed animation', () => {
+      const wrapper = mount(ControlButtons, {
+        props: { isComplete: true }
+      })
+      const playButton = wrapper.findAll('button')[0]
+      expect(playButton.attributes('aria-describedby')).toBe('play-pause-disabled-reason')
+      const reasonSpan = wrapper.find('#play-pause-disabled-reason')
+      expect(reasonSpan.text()).toBe('Animation is complete')
+    })
+
+    it('provides screen reader feedback for disabled shuffle button', () => {
+      const wrapper = mount(ControlButtons, {
+        props: { isPlaying: true }
+      })
+      const shuffleButton = wrapper.findAll('button')[2]
+      expect(shuffleButton.attributes('aria-describedby')).toBe('shuffle-disabled-reason')
+      const reasonSpan = wrapper.find('#shuffle-disabled-reason')
+      expect(reasonSpan.exists()).toBe(true)
+      expect(reasonSpan.classes()).toContain('sr-only')
+      expect(reasonSpan.text()).toBe('Cannot shuffle while animation is playing')
     })
   })
 })
