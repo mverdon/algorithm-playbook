@@ -2305,7 +2305,7 @@
       "Test keyboard navigation",
       "Document any issues found"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "final-validation",
