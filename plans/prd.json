@@ -567,7 +567,7 @@
       "Add JSDoc comments",
       "Verify TypeScript syntax is correct"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "core-test",
@@ -581,7 +581,7 @@
       "Write test case for reverse sorted array",
       "Run 'npm run test:unit' and verify tests pass"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "core-algorithm",
@@ -594,7 +594,7 @@
       "Yield AnimationStep for merged results",
       "Verify TypeScript syntax is correct"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "core-test",
@@ -607,7 +607,7 @@
       "Write test to verify final state is sorted",
       "Run 'npm run test:unit' and verify tests pass"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "core-algorithm",
