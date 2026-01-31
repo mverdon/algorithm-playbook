@@ -48,6 +48,10 @@
           :currentStep="currentAnimationStep"
           :width="800"
           :height="400"
+          @play="handlePlay"
+          @pause="handlePause"
+          @reset="handleReset"
+          @shuffle="generateNewArray"
         />
       </div>
     </div>
