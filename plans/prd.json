@@ -231,7 +231,7 @@
       "Verify devDependencies contains vitest, @vue/test-utils, and happy-dom",
       "Check node_modules for installed packages"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
@@ -245,7 +245,7 @@
       "Add resolve alias '@' to './src'",
       "Verify TypeScript syntax is correct"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
@@ -256,7 +256,7 @@
       "Add 'test:coverage' script: 'vitest --coverage'",
       "Verify JSON is valid"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
@@ -271,7 +271,7 @@
       "Add playwright-report/",
       "Verify file is created"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
