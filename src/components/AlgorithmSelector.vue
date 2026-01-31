@@ -47,6 +47,9 @@ const handleChange = (event: Event) => {
       id="algorithm-select"
       :value="selectedAlgorithm"
       @change="handleChange"
+      role="combobox"
+      :aria-label="`Select ${category === AlgorithmCategory.Sorting ? 'sorting' : 'pathfinding'} algorithm`"
+      aria-required="false"
       class="block w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100"
     >
       <option
