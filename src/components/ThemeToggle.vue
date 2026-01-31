@@ -1,0 +1,37 @@
+<script setup lang="ts">
+import { ref, onMounted, watch } from 'vue';
+
+const isDark = ref(false);
+
+const toggleTheme = () => {
+  isDark.value = !isDark.value;
+};
+
+watch(isDark, (newValue) => {
+  if (newValue) {
+    document.documentElement.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
+  }
+});
+
+onMounted(() => {
+  const savedTheme = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  isDark.value = savedTheme === 'dark' || (!savedTheme && prefersDark);
+});
+</script>
+
+<template>
+  <button
+    @click="toggleTheme"
+    :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+    class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+  >
+    <span v-if="isDark" class="text-xl">☀️</span>
+    <span v-else class="text-xl">🌙</span>
+  </button>
+</template>
