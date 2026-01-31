@@ -1,0 +1,2327 @@
+[
+  {
+    "category": "setup",
+    "description": "Initialize git repository",
+    "steps": [
+      "Navigate to project root directory",
+      "Run 'git init'",
+      "Verify .git directory is created",
+      "Run 'git status' to confirm repository initialized"
+    ],
+    "passes": true
+  },
+  {
+    "category": "setup",
+    "description": "Create package.json with project metadata",
+    "steps": [
+      "Create package.json in root directory",
+      "Set name to 'algorithm-visualizer-playground'",
+      "Set version to '0.1.0'",
+      "Set type to 'module'",
+      "Add description field",
+      "Verify file is valid JSON"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Install Vue 3 and Vite",
+    "steps": [
+      "Run 'npm install vue@latest vite@latest'",
+      "Verify package.json has vue and vite in dependencies",
+      "Check node_modules contains vue and vite directories",
+      "Verify package-lock.json is created"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Install TypeScript and Vue TypeScript support",
+    "steps": [
+      "Run 'npm install -D typescript @vitejs/plugin-vue vue-tsc'",
+      "Verify devDependencies contains typescript, @vitejs/plugin-vue, and vue-tsc",
+      "Check node_modules for installed packages"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Create tsconfig.json for TypeScript configuration",
+    "steps": [
+      "Create tsconfig.json in root directory",
+      "Set target to 'ES2020'",
+      "Enable 'strict' mode",
+      "Set module to 'ESNext'",
+      "Set moduleResolution to 'bundler'",
+      "Include 'src/**/*.ts' and 'src/**/*.vue'",
+      "Add Vue-specific compiler options",
+      "Verify file is valid JSON"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Create tsconfig.node.json for Vite config",
+    "steps": [
+      "Create tsconfig.node.json in root directory",
+      "Extend from tsconfig.json",
+      "Include only vite.config.ts",
+      "Set target to Node runtime",
+      "Verify file is valid JSON"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Install TailwindCSS and dependencies",
+    "steps": [
+      "Run 'npm install -D tailwindcss postcss autoprefixer'",
+      "Verify devDependencies contains tailwindcss, postcss, and autoprefixer",
+      "Check node_modules for installed packages"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Initialize TailwindCSS configuration",
+    "steps": [
+      "Run 'npx tailwindcss init -p'",
+      "Verify tailwind.config.js is created",
+      "Verify postcss.config.js is created",
+      "Update content paths to include src/**/*.{vue,ts}"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Create vite.config.ts",
+    "steps": [
+      "Create vite.config.ts in root directory",
+      "Import vue plugin from @vitejs/plugin-vue",
+      "Configure plugins array with vue()",
+      "Set resolve alias '@' to './src'",
+      "Configure server port to 5173",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Install Playwright for browser testing",
+    "steps": [
+      "Run 'npm install -D playwright @playwright/test'",
+      "Verify devDependencies contains playwright and @playwright/test",
+      "Run 'npx playwright install chromium'",
+      "Verify Playwright browsers are installed"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Create playwright.config.ts",
+    "steps": [
+      "Create playwright.config.ts in root directory",
+      "Configure testDir to './tests'",
+      "Set baseURL to 'http://localhost:5173'",
+      "Configure chromium browser",
+      "Enable screenshots on failure",
+      "Set testMatch pattern",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Configure Playwright MCP server in workspace",
+    "steps": [
+      "Create .vscode/mcp-servers.json if not exists",
+      "Add playwright server configuration",
+      "Set command to 'npx'",
+      "Set args to ['@modelcontextprotocol/server-playwright']",
+      "Verify JSON is valid",
+      "Document MCP setup in README section"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Create index.html entry point",
+    "steps": [
+      "Create index.html in root directory",
+      "Add HTML5 doctype and structure",
+      "Create div with id='app'",
+      "Add script tag referencing '/src/main.ts'",
+      "Set viewport meta tag for responsive design",
+      "Add title 'Algorithm Visualizer Playground'",
+      "Verify HTML is valid"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Create src directory structure",
+    "steps": [
+      "Create src/ directory in root",
+      "Create src/components/ directory",
+      "Create src/algorithms/ directory",
+      "Create src/types/ directory",
+      "Create src/utils/ directory",
+      "Create src/composables/ directory",
+      "Verify all directories exist"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Create main.ts entry file",
+    "steps": [
+      "Create src/main.ts file",
+      "Import createApp from vue",
+      "Import App component from './App.vue'",
+      "Import TailwindCSS styles",
+      "Call createApp(App).mount('#app')",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Create main CSS file with TailwindCSS directives",
+    "steps": [
+      "Create src/style.css file",
+      "Add @tailwind base directive",
+      "Add @tailwind components directive",
+      "Add @tailwind utilities directive",
+      "Add basic body styling",
+      "Verify CSS syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Create App.vue root component skeleton",
+    "steps": [
+      "Create src/App.vue file",
+      "Add <template> section with main container",
+      "Add <script setup lang='ts'> section",
+      "Add <style scoped> section",
+      "Verify Vue SFC syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Add npm scripts to package.json",
+    "steps": [
+      "Open package.json",
+      "Add 'dev' script: 'vite'",
+      "Add 'build' script: 'vue-tsc && vite build'",
+      "Add 'preview' script: 'vite preview'",
+      "Add 'typecheck' script: 'vue-tsc --noEmit'",
+      "Add 'test' script: 'playwright test'",
+      "Verify JSON is valid"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Install Vitest for unit testing",
+    "steps": [
+      "Run 'npm install -D vitest @vue/test-utils happy-dom'",
+      "Verify devDependencies contains vitest, @vue/test-utils, and happy-dom",
+      "Check node_modules for installed packages"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Create vitest.config.ts",
+    "steps": [
+      "Create vitest.config.ts in root directory",
+      "Import defineConfig from vitest/config",
+      "Import vue plugin",
+      "Configure test environment to 'happy-dom'",
+      "Set test.globals to true",
+      "Add resolve alias '@' to './src'",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Add unit test script to package.json",
+    "steps": [
+      "Open package.json",
+      "Add 'test:unit' script: 'vitest'",
+      "Add 'test:coverage' script: 'vitest --coverage'",
+      "Verify JSON is valid"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Create .gitignore file",
+    "steps": [
+      "Create .gitignore in root directory",
+      "Add node_modules/",
+      "Add dist/",
+      "Add .DS_Store",
+      "Add *.local",
+      "Add test-results/",
+      "Add playwright-report/",
+      "Verify file is created"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Verify dev server starts successfully",
+    "steps": [
+      "Run 'npm run dev' in background",
+      "Wait for server to start",
+      "Verify server is running on port 5173",
+      "Check console output for errors",
+      "Stop dev server"
+    ],
+    "passes": false
+  },
+  {
+    "category": "setup",
+    "description": "Verify TypeScript compilation works",
+    "steps": [
+      "Run 'npm run typecheck'",
+      "Verify no TypeScript errors",
+      "Check command exits with code 0",
+      "Review any warnings in output"
+    ],
+    "passes": false
+  },
+  {
+    "category": "testing-infrastructure",
+    "description": "Create tests directory structure",
+    "steps": [
+      "Create tests/ directory in root",
+      "Create tests/unit/ directory",
+      "Create tests/e2e/ directory",
+      "Create tests/fixtures/ directory",
+      "Verify all directories exist"
+    ],
+    "passes": false
+  },
+  {
+    "category": "testing-infrastructure",
+    "description": "Create test fixture for small integer array",
+    "steps": [
+      "Create tests/fixtures/arrays.ts file",
+      "Export smallArray constant with 10 random integers",
+      "Add TypeScript type annotation",
+      "Verify file compiles without errors"
+    ],
+    "passes": false
+  },
+  {
+    "category": "testing-infrastructure",
+    "description": "Create test fixture for medium integer array",
+    "steps": [
+      "Open tests/fixtures/arrays.ts",
+      "Export mediumArray constant with 50 random integers",
+      "Add TypeScript type annotation",
+      "Verify file compiles without errors"
+    ],
+    "passes": false
+  },
+  {
+    "category": "testing-infrastructure",
+    "description": "Create test fixture for large integer array",
+    "steps": [
+      "Open tests/fixtures/arrays.ts",
+      "Export largeArray constant with 100 random integers",
+      "Add TypeScript type annotation",
+      "Verify file compiles without errors"
+    ],
+    "passes": false
+  },
+  {
+    "category": "testing-infrastructure",
+    "description": "Create test fixture for sorted array",
+    "steps": [
+      "Open tests/fixtures/arrays.ts",
+      "Export sortedArray constant with sorted integers 1-20",
+      "Add TypeScript type annotation",
+      "Verify file compiles without errors"
+    ],
+    "passes": false
+  },
+  {
+    "category": "testing-infrastructure",
+    "description": "Create test fixture for reverse sorted array",
+    "steps": [
+      "Open tests/fixtures/arrays.ts",
+      "Export reverseSortedArray constant with integers 20-1",
+      "Add TypeScript type annotation",
+      "Verify file compiles without errors"
+    ],
+    "passes": false
+  },
+  {
+    "category": "testing-infrastructure",
+    "description": "Create test fixture for grid state",
+    "steps": [
+      "Create tests/fixtures/grids.ts file",
+      "Export smallGrid constant 10x10",
+      "Export mediumGrid constant 20x20",
+      "Add TypeScript type annotations",
+      "Verify file compiles without errors"
+    ],
+    "passes": false
+  },
+  {
+    "category": "testing-infrastructure",
+    "description": "Create test fixture for grid with walls",
+    "steps": [
+      "Open tests/fixtures/grids.ts",
+      "Export gridWithWalls constant with predefined wall positions",
+      "Add start and end node positions",
+      "Add TypeScript type annotation",
+      "Verify file compiles without errors"
+    ],
+    "passes": false
+  },
+  {
+    "category": "testing-infrastructure",
+    "description": "Create Playwright helper utilities",
+    "steps": [
+      "Create tests/helpers/playwright.ts file",
+      "Export function to start dev server",
+      "Export function to take screenshot",
+      "Export function to wait for animation complete",
+      "Add TypeScript type annotations",
+      "Verify file compiles without errors"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-types",
+    "description": "Define algorithm types",
+    "steps": [
+      "Create src/types/algorithms.ts file",
+      "Define SortingAlgorithm enum with Bubble, Quick, Merge, Heap",
+      "Define PathfindingAlgorithm enum with AStar, Dijkstra, BFS, DFS",
+      "Define AlgorithmCategory enum with Sorting, Pathfinding",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-types",
+    "description": "Define animation state types",
+    "steps": [
+      "Open src/types/algorithms.ts",
+      "Define AnimationState type with comparing, swapping, sorted states",
+      "Define AnimationStep interface with indices and state",
+      "Define AnimationSpeed enum with Slow, Normal, Fast",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-types",
+    "description": "Define grid and node types",
+    "steps": [
+      "Create src/types/grid.ts file",
+      "Define NodeType enum with Empty, Wall, Start, End, Path, Visited",
+      "Define GridNode interface with x, y, type, distance, parent",
+      "Define Grid type as 2D array of GridNode",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-types",
+    "description": "Define visualization config types",
+    "steps": [
+      "Create src/types/config.ts file",
+      "Define VisualizationConfig interface with speed, size, theme",
+      "Define ThemeType enum with Light, Dark, Colorful",
+      "Define ColorScheme interface with primary, secondary, accent colors",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement bubble sort algorithm function",
+    "steps": [
+      "Create src/algorithms/bubbleSort.ts file",
+      "Import required types",
+      "Implement bubbleSort function that takes number array",
+      "Return sorted array",
+      "Add JSDoc comments explaining algorithm",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create unit test for bubble sort correctness",
+    "steps": [
+      "Create tests/unit/bubbleSort.test.ts file",
+      "Import bubbleSort function",
+      "Import test fixtures",
+      "Write test case for small array",
+      "Write test case for already sorted array",
+      "Write test case for reverse sorted array",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement bubble sort animation generator",
+    "steps": [
+      "Open src/algorithms/bubbleSort.ts",
+      "Implement bubbleSortAnimated generator function",
+      "Yield AnimationStep for each comparison",
+      "Yield AnimationStep for each swap",
+      "Yield final sorted state",
+      "Add TypeScript return type",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create test for bubble sort animation steps",
+    "steps": [
+      "Open tests/unit/bubbleSort.test.ts",
+      "Import bubbleSortAnimated function",
+      "Write test to verify correct number of steps",
+      "Write test to verify comparison indices are valid",
+      "Write test to verify final state is sorted",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement quick sort algorithm function",
+    "steps": [
+      "Create src/algorithms/quickSort.ts file",
+      "Import required types",
+      "Implement quickSort function with partitioning",
+      "Implement helper partition function",
+      "Return sorted array",
+      "Add JSDoc comments",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create unit test for quick sort correctness",
+    "steps": [
+      "Create tests/unit/quickSort.test.ts file",
+      "Import quickSort function",
+      "Import test fixtures",
+      "Write test case for small array",
+      "Write test case for already sorted array",
+      "Write test case for reverse sorted array",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement quick sort animation generator",
+    "steps": [
+      "Open src/algorithms/quickSort.ts",
+      "Implement quickSortAnimated generator function",
+      "Yield AnimationStep for pivot selection",
+      "Yield AnimationStep for comparisons",
+      "Yield AnimationStep for swaps",
+      "Yield AnimationStep for recursive calls",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create test for quick sort animation steps",
+    "steps": [
+      "Open tests/unit/quickSort.test.ts",
+      "Import quickSortAnimated function",
+      "Write test to verify step sequence",
+      "Write test to verify pivot selection logic",
+      "Write test to verify final state is sorted",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement merge sort algorithm function",
+    "steps": [
+      "Create src/algorithms/mergeSort.ts file",
+      "Import required types",
+      "Implement mergeSort function with divide and conquer",
+      "Implement helper merge function",
+      "Return sorted array",
+      "Add JSDoc comments",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create unit test for merge sort correctness",
+    "steps": [
+      "Create tests/unit/mergeSort.test.ts file",
+      "Import mergeSort function",
+      "Import test fixtures",
+      "Write test case for small array",
+      "Write test case for already sorted array",
+      "Write test case for reverse sorted array",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement merge sort animation generator",
+    "steps": [
+      "Open src/algorithms/mergeSort.ts",
+      "Implement mergeSortAnimated generator function",
+      "Yield AnimationStep for array division",
+      "Yield AnimationStep for merge comparisons",
+      "Yield AnimationStep for merged results",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create test for merge sort animation steps",
+    "steps": [
+      "Open tests/unit/mergeSort.test.ts",
+      "Import mergeSortAnimated function",
+      "Write test to verify divide steps",
+      "Write test to verify merge steps",
+      "Write test to verify final state is sorted",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement heap sort algorithm function",
+    "steps": [
+      "Create src/algorithms/heapSort.ts file",
+      "Import required types",
+      "Implement heapSort function",
+      "Implement heapify helper function",
+      "Return sorted array",
+      "Add JSDoc comments",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create unit test for heap sort correctness",
+    "steps": [
+      "Create tests/unit/heapSort.test.ts file",
+      "Import heapSort function",
+      "Import test fixtures",
+      "Write test case for small array",
+      "Write test case for already sorted array",
+      "Write test case for reverse sorted array",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement heap sort animation generator",
+    "steps": [
+      "Open src/algorithms/heapSort.ts",
+      "Implement heapSortAnimated generator function",
+      "Yield AnimationStep for heap building",
+      "Yield AnimationStep for heapify operations",
+      "Yield AnimationStep for swaps",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create test for heap sort animation steps",
+    "steps": [
+      "Open tests/unit/heapSort.test.ts",
+      "Import heapSortAnimated function",
+      "Write test to verify heap building steps",
+      "Write test to verify heapify steps",
+      "Write test to verify final state is sorted",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement grid initialization function",
+    "steps": [
+      "Create src/algorithms/grid.ts file",
+      "Import required types from types/grid",
+      "Implement createGrid function taking rows and cols",
+      "Initialize all nodes as Empty type",
+      "Set default distance and parent values",
+      "Return Grid type",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create test for grid initialization",
+    "steps": [
+      "Create tests/unit/grid.test.ts file",
+      "Import createGrid function",
+      "Write test to verify grid dimensions",
+      "Write test to verify all nodes are Empty",
+      "Write test to verify node properties",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement grid wall toggle function",
+    "steps": [
+      "Open src/algorithms/grid.ts",
+      "Implement toggleWall function taking grid and coordinates",
+      "Toggle node type between Empty and Wall",
+      "Prevent toggling start or end nodes",
+      "Return updated grid",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create test for wall toggle function",
+    "steps": [
+      "Open tests/unit/grid.test.ts",
+      "Import toggleWall function",
+      "Write test to verify wall is added",
+      "Write test to verify wall is removed",
+      "Write test to verify start/end nodes are protected",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement set start node function",
+    "steps": [
+      "Open src/algorithms/grid.ts",
+      "Implement setStartNode function",
+      "Clear previous start node if exists",
+      "Set new start node type to Start",
+      "Return updated grid",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create test for set start node function",
+    "steps": [
+      "Open tests/unit/grid.test.ts",
+      "Import setStartNode function",
+      "Write test to verify start node is set",
+      "Write test to verify only one start node exists",
+      "Write test to verify previous start is cleared",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement set end node function",
+    "steps": [
+      "Open src/algorithms/grid.ts",
+      "Implement setEndNode function",
+      "Clear previous end node if exists",
+      "Set new end node type to End",
+      "Return updated grid",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create test for set end node function",
+    "steps": [
+      "Open tests/unit/grid.test.ts",
+      "Import setEndNode function",
+      "Write test to verify end node is set",
+      "Write test to verify only one end node exists",
+      "Write test to verify previous end is cleared",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement clear grid function",
+    "steps": [
+      "Open src/algorithms/grid.ts",
+      "Implement clearGrid function",
+      "Reset all nodes except walls to Empty",
+      "Preserve start and end nodes",
+      "Clear distance and parent values",
+      "Return updated grid",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create test for clear grid function",
+    "steps": [
+      "Open tests/unit/grid.test.ts",
+      "Import clearGrid function",
+      "Write test to verify visited nodes are cleared",
+      "Write test to verify walls are preserved",
+      "Write test to verify start/end are preserved",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement A* pathfinding algorithm",
+    "steps": [
+      "Create src/algorithms/aStar.ts file",
+      "Import required types and grid utilities",
+      "Implement aStar function with start and end nodes",
+      "Implement heuristic function (Manhattan distance)",
+      "Implement priority queue logic",
+      "Return path as array of nodes",
+      "Add JSDoc comments",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create unit test for A* correctness",
+    "steps": [
+      "Create tests/unit/aStar.test.ts file",
+      "Import aStar function",
+      "Import grid test fixtures",
+      "Write test for simple path without obstacles",
+      "Write test for path around obstacles",
+      "Write test for no path available case",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement A* animation generator",
+    "steps": [
+      "Open src/algorithms/aStar.ts",
+      "Implement aStarAnimated generator function",
+      "Yield step for each node visited",
+      "Yield step for each node added to frontier",
+      "Yield step for final path reconstruction",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create test for A* animation steps",
+    "steps": [
+      "Open tests/unit/aStar.test.ts",
+      "Import aStarAnimated function",
+      "Write test to verify visited nodes sequence",
+      "Write test to verify path is optimal",
+      "Write test to verify step count is reasonable",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement Dijkstra pathfinding algorithm",
+    "steps": [
+      "Create src/algorithms/dijkstra.ts file",
+      "Import required types and grid utilities",
+      "Implement dijkstra function with start and end nodes",
+      "Implement priority queue with distance",
+      "Track visited nodes",
+      "Return path as array of nodes",
+      "Add JSDoc comments",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create unit test for Dijkstra correctness",
+    "steps": [
+      "Create tests/unit/dijkstra.test.ts file",
+      "Import dijkstra function",
+      "Import grid test fixtures",
+      "Write test for simple path without obstacles",
+      "Write test for path around obstacles",
+      "Write test for no path available case",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement Dijkstra animation generator",
+    "steps": [
+      "Open src/algorithms/dijkstra.ts",
+      "Implement dijkstraAnimated generator function",
+      "Yield step for each node visited",
+      "Yield step for distance updates",
+      "Yield step for final path reconstruction",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create test for Dijkstra animation steps",
+    "steps": [
+      "Open tests/unit/dijkstra.test.ts",
+      "Import dijkstraAnimated function",
+      "Write test to verify visited nodes sequence",
+      "Write test to verify path is optimal",
+      "Write test to verify step count",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement BFS pathfinding algorithm",
+    "steps": [
+      "Create src/algorithms/bfs.ts file",
+      "Import required types and grid utilities",
+      "Implement bfs function with start and end nodes",
+      "Use queue for level-order traversal",
+      "Track visited nodes",
+      "Return path as array of nodes",
+      "Add JSDoc comments",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create unit test for BFS correctness",
+    "steps": [
+      "Create tests/unit/bfs.test.ts file",
+      "Import bfs function",
+      "Import grid test fixtures",
+      "Write test for simple path",
+      "Write test for path around obstacles",
+      "Write test for no path available",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement BFS animation generator",
+    "steps": [
+      "Open src/algorithms/bfs.ts",
+      "Implement bfsAnimated generator function",
+      "Yield step for each level of traversal",
+      "Yield step for each node visited",
+      "Yield step for path reconstruction",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create test for BFS animation steps",
+    "steps": [
+      "Open tests/unit/bfs.test.ts",
+      "Import bfsAnimated function",
+      "Write test to verify level-order traversal",
+      "Write test to verify path is shortest",
+      "Write test to verify step sequence",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement DFS pathfinding algorithm",
+    "steps": [
+      "Create src/algorithms/dfs.ts file",
+      "Import required types and grid utilities",
+      "Implement dfs function with start and end nodes",
+      "Use stack for depth-first traversal",
+      "Track visited nodes",
+      "Return path (may not be optimal)",
+      "Add JSDoc comments",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create unit test for DFS correctness",
+    "steps": [
+      "Create tests/unit/dfs.test.ts file",
+      "Import dfs function",
+      "Import grid test fixtures",
+      "Write test to verify path is found",
+      "Write test for path around obstacles",
+      "Write test for no path available",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-algorithm",
+    "description": "Implement DFS animation generator",
+    "steps": [
+      "Open src/algorithms/dfs.ts",
+      "Implement dfsAnimated generator function",
+      "Yield step for each depth traversal",
+      "Yield step for backtracking",
+      "Yield step for path reconstruction",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create test for DFS animation steps",
+    "steps": [
+      "Open tests/unit/dfs.test.ts",
+      "Import dfsAnimated function",
+      "Write test to verify depth-first traversal",
+      "Write test to verify backtracking",
+      "Write test to verify path is found",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Create AlgorithmSelector component structure",
+    "steps": [
+      "Create src/components/AlgorithmSelector.vue file",
+      "Add <template> with select dropdown",
+      "Add <script setup lang='ts'>",
+      "Add <style scoped>",
+      "Verify Vue SFC syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Implement AlgorithmSelector component logic",
+    "steps": [
+      "Open src/components/AlgorithmSelector.vue",
+      "Import algorithm types",
+      "Define props for category and modelValue",
+      "Define emits for update:modelValue",
+      "Create computed options list based on category",
+      "Implement selection handler",
+      "Verify TypeScript types are correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-test",
+    "description": "Create unit test for AlgorithmSelector",
+    "steps": [
+      "Create tests/unit/AlgorithmSelector.test.ts",
+      "Import component and mount from @vue/test-utils",
+      "Write test to verify component renders",
+      "Write test to verify options are displayed",
+      "Write test to verify selection emits event",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Style AlgorithmSelector component",
+    "steps": [
+      "Open src/components/AlgorithmSelector.vue",
+      "Add TailwindCSS classes for layout",
+      "Style select dropdown with rounded borders",
+      "Add hover and focus states",
+      "Ensure responsive sizing",
+      "Verify styles render correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Create SpeedControl component structure",
+    "steps": [
+      "Create src/components/SpeedControl.vue file",
+      "Add <template> with range slider",
+      "Add label showing current speed",
+      "Add <script setup lang='ts'>",
+      "Add <style scoped>",
+      "Verify Vue SFC syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Implement SpeedControl component logic",
+    "steps": [
+      "Open src/components/SpeedControl.vue",
+      "Import AnimationSpeed type",
+      "Define props for modelValue",
+      "Define emits for update:modelValue",
+      "Implement slider change handler",
+      "Map slider value to speed enum",
+      "Verify TypeScript types are correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-test",
+    "description": "Create unit test for SpeedControl",
+    "steps": [
+      "Create tests/unit/SpeedControl.test.ts",
+      "Import component and mount",
+      "Write test to verify component renders",
+      "Write test to verify slider changes value",
+      "Write test to verify emits correct speed",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Style SpeedControl component",
+    "steps": [
+      "Open src/components/SpeedControl.vue",
+      "Add TailwindCSS classes for layout",
+      "Style range slider with custom colors",
+      "Add label positioning",
+      "Ensure responsive sizing",
+      "Verify styles render correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Create ArraySizeInput component structure",
+    "steps": [
+      "Create src/components/ArraySizeInput.vue file",
+      "Add <template> with number input",
+      "Add min/max constraints",
+      "Add <script setup lang='ts'>",
+      "Add <style scoped>",
+      "Verify Vue SFC syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Implement ArraySizeInput component logic",
+    "steps": [
+      "Open src/components/ArraySizeInput.vue",
+      "Define props for modelValue, min, max",
+      "Define emits for update:modelValue",
+      "Implement input validation",
+      "Implement change handler",
+      "Verify TypeScript types are correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-test",
+    "description": "Create unit test for ArraySizeInput",
+    "steps": [
+      "Create tests/unit/ArraySizeInput.test.ts",
+      "Import component and mount",
+      "Write test to verify component renders",
+      "Write test to verify input validation",
+      "Write test to verify emits correct value",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Style ArraySizeInput component",
+    "steps": [
+      "Open src/components/ArraySizeInput.vue",
+      "Add TailwindCSS classes for input",
+      "Style with borders and padding",
+      "Add focus states",
+      "Ensure responsive sizing",
+      "Verify styles render correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Create ThemeToggle component structure",
+    "steps": [
+      "Create src/components/ThemeToggle.vue file",
+      "Add <template> with button group",
+      "Add icons or labels for themes",
+      "Add <script setup lang='ts'>",
+      "Add <style scoped>",
+      "Verify Vue SFC syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Implement ThemeToggle component logic",
+    "steps": [
+      "Open src/components/ThemeToggle.vue",
+      "Import ThemeType enum",
+      "Define props for modelValue",
+      "Define emits for update:modelValue",
+      "Create theme options array",
+      "Implement click handlers",
+      "Verify TypeScript types are correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-test",
+    "description": "Create unit test for ThemeToggle",
+    "steps": [
+      "Create tests/unit/ThemeToggle.test.ts",
+      "Import component and mount",
+      "Write test to verify component renders",
+      "Write test to verify theme buttons exist",
+      "Write test to verify click emits theme change",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Style ThemeToggle component",
+    "steps": [
+      "Open src/components/ThemeToggle.vue",
+      "Add TailwindCSS classes for button group",
+      "Style active/inactive states",
+      "Add transition effects",
+      "Ensure responsive sizing",
+      "Verify styles render correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Create ControlButtons component structure",
+    "steps": [
+      "Create src/components/ControlButtons.vue file",
+      "Add <template> with play, pause, reset, step buttons",
+      "Add icons or labels for each button",
+      "Add <script setup lang='ts'>",
+      "Add <style scoped>",
+      "Verify Vue SFC syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Implement ControlButtons component logic",
+    "steps": [
+      "Open src/components/ControlButtons.vue",
+      "Define props for isPlaying, canStep",
+      "Define emits for play, pause, reset, step",
+      "Implement click handlers for each button",
+      "Add conditional button disabling logic",
+      "Verify TypeScript types are correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-test",
+    "description": "Create unit test for ControlButtons",
+    "steps": [
+      "Create tests/unit/ControlButtons.test.ts",
+      "Import component and mount",
+      "Write test to verify all buttons render",
+      "Write test to verify play/pause emit events",
+      "Write test to verify reset/step emit events",
+      "Write test to verify disabled states",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Style ControlButtons component",
+    "steps": [
+      "Open src/components/ControlButtons.vue",
+      "Add TailwindCSS classes for button layout",
+      "Style each button with appropriate colors",
+      "Add hover and active states",
+      "Style disabled states",
+      "Ensure responsive sizing",
+      "Verify styles render correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Create SortingVisualizer component structure",
+    "steps": [
+      "Create src/components/SortingVisualizer.vue file",
+      "Add <template> with canvas element",
+      "Add ref for canvas",
+      "Add <script setup lang='ts'>",
+      "Add <style scoped>",
+      "Verify Vue SFC syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Implement SortingVisualizer canvas initialization",
+    "steps": [
+      "Open src/components/SortingVisualizer.vue",
+      "Import ref, onMounted from vue",
+      "Define props for array, highlightIndices",
+      "Get canvas ref and 2D context",
+      "Set canvas dimensions",
+      "Create resizeCanvas function",
+      "Verify TypeScript types are correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Implement SortingVisualizer draw bars function",
+    "steps": [
+      "Open src/components/SortingVisualizer.vue",
+      "Create drawBars function",
+      "Clear canvas before drawing",
+      "Calculate bar width and spacing",
+      "Loop through array and draw rectangles",
+      "Apply highlight colors to specified indices",
+      "Call drawBars on prop changes",
+      "Verify rendering works correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-test",
+    "description": "Create unit test for SortingVisualizer",
+    "steps": [
+      "Create tests/unit/SortingVisualizer.test.ts",
+      "Import component and mount",
+      "Write test to verify canvas element exists",
+      "Write test to verify canvas dimensions",
+      "Write test with mock canvas context",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Style SortingVisualizer component",
+    "steps": [
+      "Open src/components/SortingVisualizer.vue",
+      "Add TailwindCSS classes for container",
+      "Style canvas with border",
+      "Add background color",
+      "Ensure canvas is responsive",
+      "Verify styles render correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Create GridVisualizer component structure",
+    "steps": [
+      "Create src/components/GridVisualizer.vue file",
+      "Add <template> with canvas element",
+      "Add ref for canvas",
+      "Add <script setup lang='ts'>",
+      "Add <style scoped>",
+      "Verify Vue SFC syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Implement GridVisualizer canvas initialization",
+    "steps": [
+      "Open src/components/GridVisualizer.vue",
+      "Import ref, onMounted from vue",
+      "Import Grid type",
+      "Define props for grid",
+      "Get canvas ref and 2D context",
+      "Set canvas dimensions based on grid size",
+      "Create resizeCanvas function",
+      "Verify TypeScript types are correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Implement GridVisualizer draw grid function",
+    "steps": [
+      "Open src/components/GridVisualizer.vue",
+      "Create drawGrid function",
+      "Clear canvas before drawing",
+      "Calculate cell size",
+      "Loop through grid and draw rectangles",
+      "Apply colors based on node type",
+      "Draw grid lines",
+      "Call drawGrid on prop changes",
+      "Verify rendering works correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Implement GridVisualizer mouse interaction",
+    "steps": [
+      "Open src/components/GridVisualizer.vue",
+      "Add mousedown, mousemove, mouseup event listeners",
+      "Calculate grid coordinates from mouse position",
+      "Define emits for cellClick, cellDrag",
+      "Implement click handler to emit coordinates",
+      "Implement drag handler for drawing walls",
+      "Verify TypeScript types are correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-test",
+    "description": "Create unit test for GridVisualizer",
+    "steps": [
+      "Create tests/unit/GridVisualizer.test.ts",
+      "Import component and mount",
+      "Import grid test fixtures",
+      "Write test to verify canvas element exists",
+      "Write test to verify canvas dimensions",
+      "Write test with mock canvas context",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "ui-component",
+    "description": "Style GridVisualizer component",
+    "steps": [
+      "Open src/components/GridVisualizer.vue",
+      "Add TailwindCSS classes for container",
+      "Style canvas with border",
+      "Add cursor pointer for interactivity",
+      "Ensure canvas is responsive",
+      "Verify styles render correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visualization",
+    "description": "Create animation engine composable structure",
+    "steps": [
+      "Create src/composables/useAnimation.ts file",
+      "Import ref, computed from vue",
+      "Import animation types",
+      "Export useAnimation function",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visualization",
+    "description": "Implement animation engine state management",
+    "steps": [
+      "Open src/composables/useAnimation.ts",
+      "Define isPlaying ref",
+      "Define currentStep ref",
+      "Define animationSpeed ref",
+      "Define animationSteps ref array",
+      "Create computed for progress percentage",
+      "Verify TypeScript types are correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visualization",
+    "description": "Implement animation engine play/pause functions",
+    "steps": [
+      "Open src/composables/useAnimation.ts",
+      "Implement play function",
+      "Implement pause function",
+      "Implement reset function",
+      "Implement step function for single step advance",
+      "Update state refs appropriately",
+      "Verify TypeScript types are correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visualization",
+    "description": "Implement animation engine frame scheduler",
+    "steps": [
+      "Open src/composables/useAnimation.ts",
+      "Import requestAnimationFrame",
+      "Create animate function with timestamp",
+      "Calculate frame delay based on speed",
+      "Advance to next step on interval",
+      "Auto-pause when animation complete",
+      "Handle cleanup on unmount",
+      "Verify TypeScript types are correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create test for animation engine",
+    "steps": [
+      "Create tests/unit/useAnimation.test.ts",
+      "Import useAnimation composable",
+      "Write test to verify initial state",
+      "Write test to verify play/pause toggle",
+      "Write test to verify step advance",
+      "Write test to verify reset",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visualization",
+    "description": "Create color scheme manager",
+    "steps": [
+      "Create src/utils/colorSchemes.ts file",
+      "Import ThemeType and ColorScheme types",
+      "Define light theme color scheme object",
+      "Define dark theme color scheme object",
+      "Define colorful theme color scheme object",
+      "Export getColorScheme function",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create test for color scheme manager",
+    "steps": [
+      "Create tests/unit/colorSchemes.test.ts",
+      "Import getColorScheme function",
+      "Write test to verify light theme colors",
+      "Write test to verify dark theme colors",
+      "Write test to verify colorful theme colors",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visualization",
+    "description": "Create theme management composable",
+    "steps": [
+      "Create src/composables/useTheme.ts file",
+      "Import ref, watch from vue",
+      "Import ThemeType",
+      "Define currentTheme ref",
+      "Implement setTheme function",
+      "Watch theme changes and update document classes",
+      "Persist theme to localStorage",
+      "Export useTheme function",
+      "Verify TypeScript syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "core-test",
+    "description": "Create test for theme composable",
+    "steps": [
+      "Create tests/unit/useTheme.test.ts",
+      "Import useTheme composable",
+      "Mock localStorage",
+      "Write test to verify theme initialization",
+      "Write test to verify setTheme updates state",
+      "Write test to verify localStorage persistence",
+      "Run 'npm run test:unit' and verify tests pass"
+    ],
+    "passes": false
+  },
+  {
+    "category": "integration",
+    "description": "Create SortingPlayground container component",
+    "steps": [
+      "Create src/components/SortingPlayground.vue file",
+      "Add <template> with layout structure",
+      "Import all sorting-related components",
+      "Add <script setup lang='ts'>",
+      "Add <style scoped>",
+      "Verify Vue SFC syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "integration",
+    "description": "Implement SortingPlayground state management",
+    "steps": [
+      "Open src/components/SortingPlayground.vue",
+      "Import ref, computed, watch from vue",
+      "Import sorting algorithms",
+      "Import useAnimation composable",
+      "Define array ref with initial random values",
+      "Define selectedAlgorithm ref",
+      "Define animationSpeed ref",
+      "Define arraySize ref",
+      "Verify TypeScript types are correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "integration",
+    "description": "Implement SortingPlayground algorithm execution",
+    "steps": [
+      "Open src/components/SortingPlayground.vue",
+      "Create generateNewArray function",
+      "Create startSorting function",
+      "Get animation generator for selected algorithm",
+      "Collect all animation steps",
+      "Pass steps to animation engine",
+      "Implement algorithm selection handler",
+      "Verify execution works correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "integration",
+    "description": "Wire up SortingPlayground controls",
+    "steps": [
+      "Open src/components/SortingPlayground.vue",
+      "Bind AlgorithmSelector v-model",
+      "Bind SpeedControl v-model",
+      "Bind ArraySizeInput v-model",
+      "Connect ControlButtons event handlers",
+      "Pass array to SortingVisualizer",
+      "Pass highlight indices from animation state",
+      "Verify all controls work together"
+    ],
+    "passes": false
+  },
+  {
+    "category": "integration",
+    "description": "Style SortingPlayground layout",
+    "steps": [
+      "Open src/components/SortingPlayground.vue",
+      "Add TailwindCSS classes for grid layout",
+      "Position controls in header section",
+      "Position visualizer in main section",
+      "Add spacing and padding",
+      "Ensure responsive layout",
+      "Verify styles render correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "integration",
+    "description": "Create PathfindingPlayground container component",
+    "steps": [
+      "Create src/components/PathfindingPlayground.vue file",
+      "Add <template> with layout structure",
+      "Import all pathfinding-related components",
+      "Add <script setup lang='ts'>",
+      "Add <style scoped>",
+      "Verify Vue SFC syntax is correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "integration",
+    "description": "Implement PathfindingPlayground state management",
+    "steps": [
+      "Open src/components/PathfindingPlayground.vue",
+      "Import ref, computed from vue",
+      "Import grid utilities and pathfinding algorithms",
+      "Import useAnimation composable",
+      "Define grid ref with initial state",
+      "Define selectedAlgorithm ref",
+      "Define startNode and endNode refs",
+      "Define drawMode ref (wall, start, end)",
+      "Verify TypeScript types are correct"
+    ],
+    "passes": false
+  },
+  {
+    "category": "integration",
+    "description": "Implement PathfindingPlayground algorithm execution",
+    "steps": [
+      "Open src/components/PathfindingPlayground.vue",
+      "Create clearPath function",
+      "Create startPathfinding function",
+      "Get animation generator for selected algorithm",
+      "Pass start and end nodes to algorithm",
+      "Collect all animation steps",
+      "Pass steps to animation engine",
+      "Update grid with visited nodes and path",
+      "Verify execution works correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "integration",
+    "description": "Implement PathfindingPlayground grid interactions",
+    "steps": [
+      "Open src/components/PathfindingPlayground.vue",
+      "Implement handleCellClick function",
+      "Handle wall toggle based on drawMode",
+      "Handle start node placement",
+      "Handle end node placement",
+      "Implement handleCellDrag for wall drawing",
+      "Update grid ref on interactions",
+      "Verify interactions work correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "integration",
+    "description": "Wire up PathfindingPlayground controls",
+    "steps": [
+      "Open src/components/PathfindingPlayground.vue",
+      "Bind AlgorithmSelector v-model",
+      "Bind SpeedControl v-model",
+      "Add draw mode toggle buttons",
+      "Connect ControlButtons event handlers",
+      "Pass grid to GridVisualizer",
+      "Connect cell interaction handlers",
+      "Verify all controls work together"
+    ],
+    "passes": false
+  },
+  {
+    "category": "integration",
+    "description": "Style PathfindingPlayground layout",
+    "steps": [
+      "Open src/components/PathfindingPlayground.vue",
+      "Add TailwindCSS classes for grid layout",
+      "Position controls in header section",
+      "Position visualizer in main section",
+      "Add spacing and padding",
+      "Ensure responsive layout",
+      "Verify styles render correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "integration",
+    "description": "Create main App.vue navigation",
+    "steps": [
+      "Open src/App.vue",
+      "Import SortingPlayground and PathfindingPlayground",
+      "Import ThemeToggle component",
+      "Import useTheme composable",
+      "Add navigation tabs for Sorting/Pathfinding",
+      "Add activeTab ref",
+      "Conditionally render playground components",
+      "Add ThemeToggle to header",
+      "Verify navigation works correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "integration",
+    "description": "Style App.vue main layout",
+    "steps": [
+      "Open src/App.vue",
+      "Add TailwindCSS classes for full-height layout",
+      "Style navigation tabs",
+      "Style header with title and theme toggle",
+      "Add main content area",
+      "Ensure responsive layout",
+      "Apply theme colors from useTheme",
+      "Verify styles render correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visual-test",
+    "description": "Create Playwright test for sorting visualization",
+    "steps": [
+      "Create tests/e2e/sorting.spec.ts file",
+      "Import test, expect from @playwright/test",
+      "Write test to navigate to app",
+      "Click Sorting tab",
+      "Select bubble sort algorithm",
+      "Click play button",
+      "Wait for animation to start",
+      "Take screenshot named 'sorting-visualization.png'",
+      "Run 'npm run test' and verify test passes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visual-test",
+    "description": "Create baseline screenshot for sorting",
+    "steps": [
+      "Run Playwright test to generate baseline",
+      "Verify screenshot shows bars rendering",
+      "Verify bars have appropriate colors",
+      "Save baseline to tests/e2e/__screenshots__/",
+      "Commit baseline image to git"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visual-test",
+    "description": "Create Playwright test for algorithm selection",
+    "steps": [
+      "Create tests/e2e/algorithm-selection.spec.ts file",
+      "Write test to navigate to app",
+      "Verify AlgorithmSelector dropdown exists",
+      "Click dropdown and verify options visible",
+      "Select each algorithm and verify selection",
+      "Take screenshot for each selection",
+      "Run 'npm run test' and verify test passes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visual-test",
+    "description": "Create Playwright test for control buttons",
+    "steps": [
+      "Create tests/e2e/controls.spec.ts file",
+      "Write test to navigate to app",
+      "Verify play button exists and is clickable",
+      "Click play and verify pause button appears",
+      "Click pause and verify animation pauses",
+      "Click reset and verify array resets",
+      "Click step and verify single step advances",
+      "Run 'npm run test' and verify test passes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visual-test",
+    "description": "Create Playwright test for speed control",
+    "steps": [
+      "Create tests/e2e/speed-control.spec.ts file",
+      "Write test to navigate to app",
+      "Verify speed slider exists",
+      "Set slider to slow speed",
+      "Start animation and measure frame delay",
+      "Set slider to fast speed",
+      "Verify animation speed increases",
+      "Run 'npm run test' and verify test passes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visual-test",
+    "description": "Create Playwright test for theme toggle",
+    "steps": [
+      "Create tests/e2e/theme.spec.ts file",
+      "Write test to navigate to app",
+      "Verify theme toggle buttons exist",
+      "Click light theme and take screenshot",
+      "Click dark theme and take screenshot",
+      "Click colorful theme and take screenshot",
+      "Verify document classes change",
+      "Run 'npm run test' and verify test passes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visual-test",
+    "description": "Create baseline screenshots for all themes",
+    "steps": [
+      "Run theme Playwright test to generate baselines",
+      "Verify screenshots show different color schemes",
+      "Save baselines for light, dark, colorful themes",
+      "Commit baseline images to git"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visual-test",
+    "description": "Create Playwright test for pathfinding grid",
+    "steps": [
+      "Create tests/e2e/pathfinding.spec.ts file",
+      "Write test to navigate to app",
+      "Click Pathfinding tab",
+      "Verify grid canvas exists",
+      "Click cells to place walls",
+      "Set start and end nodes",
+      "Take screenshot named 'grid-setup.png'",
+      "Run 'npm run test' and verify test passes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visual-test",
+    "description": "Create Playwright test for pathfinding visualization",
+    "steps": [
+      "Open tests/e2e/pathfinding.spec.ts",
+      "Add test for algorithm execution",
+      "Select A* algorithm",
+      "Click play button",
+      "Wait for pathfinding to complete",
+      "Verify path is drawn on grid",
+      "Take screenshot named 'pathfinding-complete.png'",
+      "Run 'npm run test' and verify test passes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visual-test",
+    "description": "Create baseline screenshot for pathfinding",
+    "steps": [
+      "Run pathfinding Playwright test to generate baseline",
+      "Verify screenshot shows grid with path",
+      "Verify visited nodes are colored",
+      "Verify final path is highlighted",
+      "Save baseline to tests/e2e/__screenshots__/",
+      "Commit baseline image to git"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visual-test",
+    "description": "Create Playwright test for responsive design",
+    "steps": [
+      "Create tests/e2e/responsive.spec.ts file",
+      "Write test to navigate to app",
+      "Set viewport to mobile size (375x667)",
+      "Take screenshot named 'mobile-view.png'",
+      "Set viewport to tablet size (768x1024)",
+      "Take screenshot named 'tablet-view.png'",
+      "Set viewport to desktop size (1920x1080)",
+      "Take screenshot named 'desktop-view.png'",
+      "Run 'npm run test' and verify test passes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "visual-test",
+    "description": "Create baseline screenshots for responsive views",
+    "steps": [
+      "Run responsive Playwright test to generate baselines",
+      "Verify mobile layout is usable",
+      "Verify tablet layout is optimized",
+      "Verify desktop layout uses space well",
+      "Save baselines for all viewports",
+      "Commit baseline images to git"
+    ],
+    "passes": false
+  },
+  {
+    "category": "accessibility",
+    "description": "Add ARIA labels to AlgorithmSelector",
+    "steps": [
+      "Open src/components/AlgorithmSelector.vue",
+      "Add aria-label to select element",
+      "Add role='combobox'",
+      "Ensure keyboard navigation works",
+      "Run accessibility audit",
+      "Verify no violations"
+    ],
+    "passes": false
+  },
+  {
+    "category": "accessibility",
+    "description": "Add ARIA labels to SpeedControl",
+    "steps": [
+      "Open src/components/SpeedControl.vue",
+      "Add aria-label to range input",
+      "Add aria-valuemin, aria-valuemax, aria-valuenow",
+      "Add role='slider'",
+      "Ensure keyboard navigation works",
+      "Run accessibility audit",
+      "Verify no violations"
+    ],
+    "passes": false
+  },
+  {
+    "category": "accessibility",
+    "description": "Add ARIA labels to ControlButtons",
+    "steps": [
+      "Open src/components/ControlButtons.vue",
+      "Add aria-label to each button",
+      "Add aria-pressed for play/pause toggle",
+      "Ensure keyboard navigation works",
+      "Add focus visible styles",
+      "Run accessibility audit",
+      "Verify no violations"
+    ],
+    "passes": false
+  },
+  {
+    "category": "accessibility",
+    "description": "Add keyboard navigation to SortingVisualizer",
+    "steps": [
+      "Open src/components/SortingVisualizer.vue",
+      "Add tabindex='0' to canvas container",
+      "Add keyboard event listeners",
+      "Implement arrow key navigation",
+      "Add focus indicators",
+      "Add aria-live for animation state",
+      "Verify keyboard control works"
+    ],
+    "passes": false
+  },
+  {
+    "category": "accessibility",
+    "description": "Add keyboard navigation to GridVisualizer",
+    "steps": [
+      "Open src/components/GridVisualizer.vue",
+      "Add tabindex='0' to canvas container",
+      "Add keyboard event listeners",
+      "Implement arrow key grid navigation",
+      "Add space/enter for cell selection",
+      "Add focus indicators",
+      "Add aria-live for pathfinding state",
+      "Verify keyboard control works"
+    ],
+    "passes": false
+  },
+  {
+    "category": "accessibility",
+    "description": "Add color contrast compliance",
+    "steps": [
+      "Open src/utils/colorSchemes.ts",
+      "Verify all color combinations meet WCAG AA",
+      "Adjust colors if contrast ratio < 4.5:1",
+      "Test with contrast checking tool",
+      "Update colorful theme for compliance",
+      "Verify all themes pass contrast checks"
+    ],
+    "passes": false
+  },
+  {
+    "category": "documentation",
+    "description": "Create comprehensive README with setup instructions",
+    "steps": [
+      "Create README.md in root directory",
+      "Add project title and description",
+      "Add features list",
+      "Add prerequisites section",
+      "Add installation steps",
+      "Add 'npm install' command",
+      "Add 'npm run dev' command",
+      "Add link to localhost:5173",
+      "Verify markdown formatting"
+    ],
+    "passes": false
+  },
+  {
+    "category": "documentation",
+    "description": "Add usage instructions to README",
+    "steps": [
+      "Open README.md",
+      "Add Usage section",
+      "Document sorting visualization controls",
+      "Document pathfinding visualization controls",
+      "Add screenshots of UI (reference in tests/e2e/__screenshots__/)",
+      "Add keyboard shortcuts section",
+      "Add theme switching instructions",
+      "Verify markdown formatting"
+    ],
+    "passes": false
+  },
+  {
+    "category": "documentation",
+    "description": "Add available scripts to README",
+    "steps": [
+      "Open README.md",
+      "Add Scripts section",
+      "Document 'npm run dev'",
+      "Document 'npm run build'",
+      "Document 'npm run preview'",
+      "Document 'npm run typecheck'",
+      "Document 'npm run test:unit'",
+      "Document 'npm run test'",
+      "Verify markdown formatting"
+    ],
+    "passes": false
+  },
+  {
+    "category": "documentation",
+    "description": "Add algorithm explanations to README",
+    "steps": [
+      "Open README.md",
+      "Add Algorithms section",
+      "Add subsection for Sorting Algorithms",
+      "Explain bubble sort briefly",
+      "Explain quick sort briefly",
+      "Explain merge sort briefly",
+      "Explain heap sort briefly",
+      "Add subsection for Pathfinding Algorithms",
+      "Explain A* briefly",
+      "Explain Dijkstra briefly",
+      "Explain BFS briefly",
+      "Explain DFS briefly",
+      "Verify markdown formatting"
+    ],
+    "passes": false
+  },
+  {
+    "category": "documentation",
+    "description": "Add Playwright MCP setup to README",
+    "steps": [
+      "Open README.md",
+      "Add Testing section",
+      "Add subsection for Playwright MCP Setup",
+      "Document MCP server configuration steps",
+      "Add code block with .vscode/mcp-servers.json example",
+      "Explain how to install Playwright browsers",
+      "Document how to run E2E tests",
+      "Document how to update screenshots",
+      "Verify markdown formatting"
+    ],
+    "passes": false
+  },
+  {
+    "category": "documentation",
+    "description": "Add JSDoc comments to algorithm files",
+    "steps": [
+      "Open src/algorithms/bubbleSort.ts",
+      "Add JSDoc comment explaining algorithm complexity",
+      "Add @param and @returns tags",
+      "Repeat for quickSort.ts",
+      "Repeat for mergeSort.ts",
+      "Repeat for heapSort.ts",
+      "Run 'npm run typecheck' to verify",
+      "Verify TypeScript intellisense shows docs"
+    ],
+    "passes": false
+  },
+  {
+    "category": "documentation",
+    "description": "Add JSDoc comments to pathfinding files",
+    "steps": [
+      "Open src/algorithms/aStar.ts",
+      "Add JSDoc comment explaining algorithm",
+      "Add @param and @returns tags",
+      "Repeat for dijkstra.ts",
+      "Repeat for bfs.ts",
+      "Repeat for dfs.ts",
+      "Run 'npm run typecheck' to verify",
+      "Verify TypeScript intellisense shows docs"
+    ],
+    "passes": false
+  },
+  {
+    "category": "documentation",
+    "description": "Add JSDoc comments to component props",
+    "steps": [
+      "Open src/components/AlgorithmSelector.vue",
+      "Add JSDoc comments to props",
+      "Repeat for SpeedControl.vue",
+      "Repeat for ArraySizeInput.vue",
+      "Repeat for ThemeToggle.vue",
+      "Repeat for ControlButtons.vue",
+      "Run 'npm run typecheck' to verify",
+      "Verify TypeScript intellisense shows docs"
+    ],
+    "passes": false
+  },
+  {
+    "category": "polish",
+    "description": "Add loading state during algorithm execution",
+    "steps": [
+      "Open src/components/SortingPlayground.vue",
+      "Add isLoading ref",
+      "Set isLoading during step generation",
+      "Add loading spinner component or indicator",
+      "Disable controls while loading",
+      "Clear loading after animation starts",
+      "Verify loading state works correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "polish",
+    "description": "Add error boundary for algorithm errors",
+    "steps": [
+      "Create src/components/ErrorBoundary.vue",
+      "Use onErrorCaptured lifecycle hook",
+      "Display user-friendly error message",
+      "Add retry button",
+      "Log errors to console",
+      "Wrap playgrounds in ErrorBoundary",
+      "Test with intentional error",
+      "Verify error is caught and displayed"
+    ],
+    "passes": false
+  },
+  {
+    "category": "polish",
+    "description": "Add animation completion notification",
+    "steps": [
+      "Open src/composables/useAnimation.ts",
+      "Emit event when animation completes",
+      "Open src/components/SortingPlayground.vue",
+      "Listen for completion event",
+      "Display toast or notification",
+      "Add sound effect (optional)",
+      "Verify notification appears on completion"
+    ],
+    "passes": false
+  },
+  {
+    "category": "polish",
+    "description": "Add array size validation and feedback",
+    "steps": [
+      "Open src/components/ArraySizeInput.vue",
+      "Add validation for min/max values",
+      "Display error message for invalid input",
+      "Disable generate button if invalid",
+      "Add visual feedback (red border)",
+      "Clear error on valid input",
+      "Verify validation works correctly"
+    ],
+    "passes": false
+  },
+  {
+    "category": "polish",
+    "description": "Add smooth transitions between theme changes",
+    "steps": [
+      "Open src/App.vue",
+      "Add CSS transition property to root element",
+      "Transition background-color and color",
+      "Set transition duration to 300ms",
+      "Test theme switching",
+      "Verify smooth color transitions",
+      "Adjust timing if needed"
+    ],
+    "passes": false
+  },
+  {
+    "category": "polish",
+    "description": "Add favicon and page title",
+    "steps": [
+      "Create or find algorithm-themed favicon.ico",
+      "Add favicon to public/ directory",
+      "Open index.html",
+      "Add link tag for favicon",
+      "Verify title is set to 'Algorithm Visualizer Playground'",
+      "Add meta description",
+      "Test in browser"
+    ],
+    "passes": false
+  },
+  {
+    "category": "polish",
+    "description": "Optimize canvas rendering performance",
+    "steps": [
+      "Open src/components/SortingVisualizer.vue",
+      "Add requestAnimationFrame for draw calls",
+      "Implement dirty flag to skip unnecessary redraws",
+      "Use offscreen canvas for complex rendering",
+      "Test with large array sizes",
+      "Verify smooth 60fps animation",
+      "Profile with browser devtools"
+    ],
+    "passes": false
+  },
+  {
+    "category": "polish",
+    "description": "Add help tooltips to controls",
+    "steps": [
+      "Install tooltip library or create custom",
+      "Open src/components/AlgorithmSelector.vue",
+      "Add tooltip explaining algorithm selection",
+      "Repeat for SpeedControl",
+      "Repeat for ArraySizeInput",
+      "Repeat for ControlButtons",
+      "Style tooltips with TailwindCSS",
+      "Verify tooltips appear on hover"
+    ],
+    "passes": false
+  },
+  {
+    "category": "deployment",
+    "description": "Configure Vite for production build",
+    "steps": [
+      "Open vite.config.ts",
+      "Set base URL for deployment",
+      "Configure build output directory",
+      "Enable CSS code splitting",
+      "Enable minification",
+      "Run 'npm run build'",
+      "Verify dist/ directory is created",
+      "Check bundle size"
+    ],
+    "passes": false
+  },
+  {
+    "category": "deployment",
+    "description": "Create deployment documentation",
+    "steps": [
+      "Create DEPLOYMENT.md file",
+      "Add section for Vercel deployment",
+      "Add section for Netlify deployment",
+      "Add section for GitHub Pages deployment",
+      "Document build command",
+      "Document output directory",
+      "Add environment variables section",
+      "Verify markdown formatting"
+    ],
+    "passes": false
+  },
+  {
+    "category": "final-validation",
+    "description": "Run full test suite",
+    "steps": [
+      "Run 'npm run typecheck'",
+      "Verify no TypeScript errors",
+      "Run 'npm run test:unit'",
+      "Verify all unit tests pass",
+      "Run 'npm run test'",
+      "Verify all E2E tests pass",
+      "Review test coverage",
+      "Document any skipped tests"
+    ],
+    "passes": false
+  },
+  {
+    "category": "final-validation",
+    "description": "Perform manual testing of all features",
+    "steps": [
+      "Start dev server with 'npm run dev'",
+      "Test all sorting algorithms with different array sizes",
+      "Test all pathfinding algorithms with different grids",
+      "Test theme switching",
+      "Test speed controls",
+      "Test all control buttons",
+      "Test responsive design on different viewports",
+      "Test keyboard navigation",
+      "Document any issues found"
+    ],
+    "passes": false
+  },
+  {
+    "category": "final-validation",
+    "description": "Build and test production bundle",
+    "steps": [
+      "Run 'npm run build'",
+      "Verify build completes without errors",
+      "Run 'npm run preview'",
+      "Open preview URL in browser",
+      "Test key features in production build",
+      "Verify all assets load correctly",
+      "Check console for errors",
+      "Verify bundle size is reasonable"
+    ],
+    "passes": false
+  }
+]
