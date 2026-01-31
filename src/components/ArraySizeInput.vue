@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
+import Tooltip from './Tooltip.vue';
 
 /**
  * Props for the ArraySizeInput component
@@ -91,36 +92,40 @@ const isValid = computed(() => validationError.value === '');
     </label>
     <div class="flex items-center gap-3">
       <span class="text-xs text-gray-500 dark:text-gray-400">{{ min }}</span>
-      <input
-        id="array-size"
-        type="range"
-        :value="size"
-        :min="min"
-        :max="max"
-        @input="handleSliderInput"
-        class="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        aria-label="Array size slider"
-      />
+      <Tooltip text="Drag to change the array size">
+        <input
+          id="array-size"
+          type="range"
+          :value="size"
+          :min="min"
+          :max="max"
+          @input="handleSliderInput"
+          class="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          aria-label="Array size slider"
+        />
+      </Tooltip>
       <span class="text-xs text-gray-500 dark:text-gray-400">{{ max }}</span>
-      <input
-        id="array-size-number"
-        type="number"
-        :value="inputValue"
-        :min="min"
-        :max="max"
-        @input="handleNumberInput"
-        @blur="handleNumberBlur"
-        @keydown="handleNumberKeydown"
-        :class="[
-          'w-16 px-2 py-1 text-center text-sm rounded border transition-colors',
-          isValid
-            ? 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
-            : 'border-red-500 dark:border-red-400 bg-red-50 dark:bg-red-900/20 text-red-900 dark:text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500'
-        ]"
-        aria-label="Array size number input"
-        :aria-invalid="!isValid"
-        :aria-describedby="validationError ? 'array-size-error' : undefined"
-      />
+      <Tooltip text="Type exact size value">
+        <input
+          id="array-size-number"
+          type="number"
+          :value="inputValue"
+          :min="min"
+          :max="max"
+          @input="handleNumberInput"
+          @blur="handleNumberBlur"
+          @keydown="handleNumberKeydown"
+          :class="[
+            'w-16 px-2 py-1 text-center text-sm rounded border transition-colors',
+            isValid
+              ? 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+              : 'border-red-500 dark:border-red-400 bg-red-50 dark:bg-red-900/20 text-red-900 dark:text-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500'
+          ]"
+          aria-label="Array size number input"
+          :aria-invalid="!isValid"
+          :aria-describedby="validationError ? 'array-size-error' : undefined"
+        />
+      </Tooltip>
     </div>
     <transition
       enter-active-class="transition-all duration-200 ease-out"

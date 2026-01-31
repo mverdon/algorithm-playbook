@@ -29,20 +29,24 @@
           <SpeedControl v-model:speed="animationSpeed" />
           
           <div class="flex items-end gap-2">
-            <button
-              @click="clearWalls"
-              :disabled="isPlaying || isLoading"
-              class="flex-1 px-4 py-2 bg-orange-700 hover:bg-orange-800 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:bg-orange-700 dark:hover:bg-orange-600"
-            >
-              Clear Walls
-            </button>
-            <button
-              @click="resetGrid"
-              :disabled="isPlaying || isLoading"
-              class="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:bg-purple-700 dark:hover:bg-purple-600"
-            >
-              Reset Grid
-            </button>
+            <Tooltip text="Remove all walls from the grid">
+              <button
+                @click="clearWalls"
+                :disabled="isPlaying || isLoading"
+                class="flex-1 px-4 py-2 bg-orange-700 hover:bg-orange-800 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:bg-orange-700 dark:hover:bg-orange-600"
+              >
+                Clear Walls
+              </button>
+            </Tooltip>
+            <Tooltip text="Clear entire grid and reset positions">
+              <button
+                @click="resetGrid"
+                :disabled="isPlaying || isLoading"
+                class="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:bg-purple-700 dark:hover:bg-purple-600"
+              >
+                Reset Grid
+              </button>
+            </Tooltip>
           </div>
         </div>
 
@@ -110,6 +114,7 @@ import SpeedControl from './SpeedControl.vue';
 import ControlButtons from './ControlButtons.vue';
 import GridVisualizer from './GridVisualizer.vue';
 import NotificationToast from './NotificationToast.vue';
+import Tooltip from './Tooltip.vue';
 import { useAnimationEngine } from '@/composables/useAnimationEngine';
 import { aStarAnimated } from '@/algorithms/grid/aStar';
 import { dijkstraAnimated } from '@/algorithms/grid/dijkstra';

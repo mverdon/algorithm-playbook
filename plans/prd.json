@@ -2244,7 +2244,7 @@
       "Style tooltips with TailwindCSS",
       "Verify tooltips appear on hover"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "deployment",

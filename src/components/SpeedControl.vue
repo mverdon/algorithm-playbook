@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { AnimationSpeed } from '@/types/algorithms';
+import Tooltip from './Tooltip.vue';
 
 /**
  * Props for the SpeedControl component
@@ -42,25 +43,27 @@ const handleSpeedChange = (event: Event) => {
     >
       Animation Speed
     </label>
-    <select
-      id="speed-control"
-      :value="speed"
-      @change="handleSpeedChange"
-      class="px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent text-gray-900 dark:text-gray-100 transition-colors"
-      role="combobox"
-      aria-label="Animation speed control"
-      aria-required="false"
-      :aria-describedby="'speed-description-' + speed"
-    >
-      <option
-        v-for="speedOption in speeds"
-        :key="speedOption.value"
-        :value="speedOption.value"
-        :aria-label="`${speedOption.label} speed: ${speedOption.description} delay`"
+    <Tooltip text="Control how fast the animation plays" position="right">
+      <select
+        id="speed-control"
+        :value="speed"
+        @change="handleSpeedChange"
+        class="px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent text-gray-900 dark:text-gray-100 transition-colors"
+        role="combobox"
+        aria-label="Animation speed control"
+        aria-required="false"
+        :aria-describedby="'speed-description-' + speed"
       >
-        {{ speedOption.label }} ({{ speedOption.description }})
-      </option>
-    </select>
+        <option
+          v-for="speedOption in speeds"
+          :key="speedOption.value"
+          :value="speedOption.value"
+          :aria-label="`${speedOption.label} speed: ${speedOption.description} delay`"
+        >
+          {{ speedOption.label }} ({{ speedOption.description }})
+        </option>
+      </select>
+    </Tooltip>
     <span
       :id="'speed-description-' + speed"
       class="sr-only"

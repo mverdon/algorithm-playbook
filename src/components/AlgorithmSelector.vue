@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { SortingAlgorithm, PathfindingAlgorithm, AlgorithmCategory } from '@/types/algorithms';
+import Tooltip from './Tooltip.vue';
 
 /**
  * Props for the AlgorithmSelector component
@@ -52,23 +53,25 @@ const handleChange = (event: Event) => {
     <label for="algorithm-select" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
       Select Algorithm
     </label>
-    <select
-      id="algorithm-select"
-      :value="selectedAlgorithm"
-      @change="handleChange"
-      role="combobox"
-      :aria-label="`Select ${category === AlgorithmCategory.Sorting ? 'sorting' : 'pathfinding'} algorithm`"
-      aria-required="false"
-      class="block w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100"
-    >
-      <option
-        v-for="algo in algorithms"
-        :key="algo.value"
-        :value="algo.value"
+    <Tooltip :text="`Choose which ${category === AlgorithmCategory.Sorting ? 'sorting' : 'pathfinding'} algorithm to visualize`" position="right">
+      <select
+        id="algorithm-select"
+        :value="selectedAlgorithm"
+        @change="handleChange"
+        role="combobox"
+        :aria-label="`Select ${category === AlgorithmCategory.Sorting ? 'sorting' : 'pathfinding'} algorithm`"
+        aria-required="false"
+        class="block w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100"
       >
-        {{ algo.label }}
-      </option>
-    </select>
+        <option
+          v-for="algo in algorithms"
+          :key="algo.value"
+          :value="algo.value"
+        >
+          {{ algo.label }}
+        </option>
+      </select>
+    </Tooltip>
   </div>
 </template>
 
