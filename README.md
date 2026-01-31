@@ -67,6 +67,8 @@ http://localhost:5173
 6. Click "Shuffle" to generate a new random array
 7. Use "Reset" to restart the current visualization
 
+![Sorting Visualization](tests/e2e/visual-regression.spec.ts-snapshots/sorting-bubble-sort-chromium-linux.png)
+
 ### Pathfinding Visualization
 
 1. Select a pathfinding algorithm from the dropdown (A*, Dijkstra, BFS, or DFS)
@@ -80,9 +82,30 @@ http://localhost:5173
 9. Use "Clear Walls" to remove all walls
 10. Use "Reset" to clear everything
 
+![Pathfinding Visualization](tests/e2e/visual-regression.spec.ts-snapshots/pathfinding-astar-chromium-linux.png)
+
 ### Theme Switching
 
 Click the theme toggle button (🌙/☀️) in the header to switch between light and dark modes. Your preference is automatically saved.
+
+### Keyboard Shortcuts
+
+**Sorting Visualization**
+- `Space` or `Enter` - Start/Resume animation
+- `Escape` - Pause animation
+- `R` - Reset current animation
+- `S` - Shuffle array (generate new random values)
+- `Arrow Up` - Increase animation speed
+- `Arrow Down` - Decrease animation speed
+
+**Pathfinding Visualization**
+- `Space` or `Enter` - Start/Resume pathfinding
+- `Escape` - Pause animation
+- `R` - Reset (clear path but keep walls)
+- `C` - Clear all walls
+- `G` - Reset grid completely (removes walls, resets start/end positions)
+
+All keyboard shortcuts work when the visualization area is focused (automatically focused on load).
 
 ## Available Scripts
 

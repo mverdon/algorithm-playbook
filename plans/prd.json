@@ -2033,7 +2033,7 @@
       "Add theme switching instructions",
       "Verify markdown formatting"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "documentation",

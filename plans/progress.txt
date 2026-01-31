@@ -391,3 +391,28 @@ Next person: Deployment documentation is now complete with comprehensive guidanc
 10. Other priorities: Canvas rendering optimization, polish tasks
 11. The application is 87% complete with 148/171 features implemented
 12. All core functionality is working excellently with clear deployment path
+
+[2026-01-31T14:05:00Z] Enhanced README with comprehensive usage instructions
+- Added keyboard shortcuts section documenting all available keyboard controls
+- Documented Sorting Visualization shortcuts: Space/Enter (play), Escape (pause), R (reset), S (shuffle), Arrow keys (speed)
+- Documented Pathfinding Visualization shortcuts: Space/Enter (play), Escape (pause), R (reset path), C (clear walls), G (reset grid)
+- Added screenshot references to visualize the sorting and pathfinding interfaces
+- Screenshots link to actual test snapshots in tests/e2e/visual-regression.spec.ts-snapshots/
+- Explained that visualizations are auto-focused for immediate keyboard access
+- Usage section now complete with step-by-step instructions, visual aids, and keyboard shortcuts
+- All 531 unit tests pass and TypeScript type checking passes successfully
+- Updated PRD: 149/171 tasks complete (87% complete)
+
+Next person: README Usage documentation is now complete with keyboard shortcuts and screenshots. Key improvements:
+1. Comprehensive keyboard shortcuts documented for both sorting and pathfinding modes
+2. All shortcuts include their function (Space/Enter, Escape, R, S, C, G, Arrow keys)
+3. Screenshot references added showing actual UI from visual regression tests
+4. Usage instructions now provide complete guidance for new users
+5. Accessibility features documented (auto-focus, keyboard navigation)
+6. Users can now easily discover all available controls without exploring code
+7. Documentation is complete enough for public release
+8. Consider working on remaining features: final validation, remaining tests, algorithm improvements
+9. Other priorities: JSDoc comments for pathfinding, canvas optimization
+10. The application is 87% complete with 149/171 features implemented
+11. Documentation quality is now excellent with clear usage instructions
+12. Application is ready for users with comprehensive README
