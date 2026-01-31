@@ -512,7 +512,7 @@
       "Add JSDoc comments",
       "Verify TypeScript syntax is correct"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "core-test",
