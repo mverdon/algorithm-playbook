@@ -18,5 +18,9 @@
     "vite"
   ],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "vite": "^7.3.1",
+    "vue": "^3.5.27"
+  }
 }

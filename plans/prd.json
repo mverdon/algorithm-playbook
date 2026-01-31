@@ -32,7 +32,7 @@
       "Check node_modules contains vue and vite directories",
       "Verify package-lock.json is created"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
