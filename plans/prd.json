@@ -1513,7 +1513,7 @@
       "Export getColorScheme function",
       "Verify TypeScript syntax is correct"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "core-test",
@@ -1526,7 +1526,7 @@
       "Write test to verify colorful theme colors",
       "Run 'npm run test:unit' and verify tests pass"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "visualization",

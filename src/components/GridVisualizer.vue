@@ -19,6 +19,7 @@
 import { ref, watch, onMounted, onUnmounted, computed } from 'vue';
 import type { Grid, GridAnimationStep } from '../types/grid';
 import { NodeState } from '../types/grid';
+import { getPathfindingColors, isDarkMode } from '@/utils/colorScheme';
 
 interface Props {
   grid: Grid;
@@ -54,17 +55,7 @@ const cellSize = computed(() => {
 });
 
 const colorScheme = computed(() => {
-  const isDark = document.documentElement.classList.contains('dark');
-  return {
-    default: isDark ? '#374151' : '#f3f4f6',
-    wall: isDark ? '#1f2937' : '#4b5563',
-    start: isDark ? '#3b82f6' : '#60a5fa',
-    end: isDark ? '#ef4444' : '#f87171',
-    visiting: isDark ? '#eab308' : '#fbbf24',
-    visited: isDark ? '#8b5cf6' : '#a78bfa',
-    path: isDark ? '#10b981' : '#34d399',
-    border: isDark ? '#4b5563' : '#d1d5db',
-  };
+  return getPathfindingColors(isDarkMode());
 });
 
 function drawGrid() {

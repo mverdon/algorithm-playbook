@@ -12,6 +12,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch, computed } from 'vue';
 import { AnimationState, type AnimationStep } from '@/types/algorithms';
+import { getSortingColors, isDarkMode } from '@/utils/colorScheme';
 
 interface Props {
   array: number[];
@@ -30,27 +31,8 @@ const canvasRef = ref<HTMLCanvasElement | null>(null);
 const canvasWidth = computed(() => props.width);
 const canvasHeight = computed(() => props.height);
 
-// Color scheme for different states
-const colors = {
-  default: '#3b82f6', // blue-500
-  comparing: '#eab308', // yellow-500
-  swapping: '#ef4444', // red-500
-  sorted: '#22c55e', // green-500
-};
-
-const darkColors = {
-  default: '#60a5fa', // blue-400
-  comparing: '#fbbf24', // yellow-400
-  swapping: '#f87171', // red-400
-  sorted: '#4ade80', // green-400
-};
-
-function isDarkMode(): boolean {
-  return document.documentElement.classList.contains('dark');
-}
-
 function getBarColor(index: number, step: AnimationStep | null): string {
-  const colorScheme = isDarkMode() ? darkColors : colors;
+  const colorScheme = getSortingColors(isDarkMode());
   
   if (!step) {
     return colorScheme.default;
