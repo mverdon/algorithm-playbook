@@ -1734,7 +1734,7 @@
       "Add ThemeToggle to header",
       "Verify navigation works correctly"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "integration",
