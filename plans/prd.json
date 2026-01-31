@@ -90,7 +90,7 @@
       "Verify postcss.config.js is created",
       "Update content paths to include src/**/*.{vue,ts}"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
