@@ -8,15 +8,16 @@ describe('ArraySizeInput', () => {
       const wrapper = mount(ArraySizeInput, {
         props: { size: 50 },
       });
-      expect(wrapper.find('label').text()).toContain('Array Size: 50');
+      expect(wrapper.find('label').text()).toBe('Array Size');
       expect(wrapper.find('input[type="range"]').exists()).toBe(true);
+      expect(wrapper.find('input[type="number"]').exists()).toBe(true);
     });
 
-    it('should display current size in label', () => {
+    it('should display current size in number input', () => {
       const wrapper = mount(ArraySizeInput, {
         props: { size: 75 },
       });
-      expect(wrapper.find('label').text()).toBe('Array Size: 75');
+      expect(wrapper.find('input[type="number"]').element.value).toBe('75');
     });
 
     it('should display min and max values', () => {
@@ -171,16 +172,109 @@ describe('ArraySizeInput', () => {
       const wrapper = mount(ArraySizeInput, {
         props: { size: 5, min: 5, max: 100 },
       });
-      expect(wrapper.find('label').text()).toBe('Array Size: 5');
       expect(wrapper.find('input[type="range"]').element.value).toBe('5');
+      expect(wrapper.find('input[type="number"]').element.value).toBe('5');
     });
 
     it('should handle size at maximum boundary', () => {
       const wrapper = mount(ArraySizeInput, {
         props: { size: 100, min: 5, max: 100 },
       });
-      expect(wrapper.find('label').text()).toBe('Array Size: 100');
       expect(wrapper.find('input[type="range"]').element.value).toBe('100');
+      expect(wrapper.find('input[type="number"]').element.value).toBe('100');
+    });
+  });
+
+  describe('number input validation', () => {
+    it('should show error when value is below minimum', async () => {
+      const wrapper = mount(ArraySizeInput, {
+        props: { size: 50, min: 5, max: 100 },
+      });
+      const numberInput = wrapper.find('input[type="number"]');
+      await numberInput.setValue('3');
+      await numberInput.trigger('blur');
+      await wrapper.vm.$nextTick();
+      expect(wrapper.text()).toContain('Array size must be at least 5');
+    });
+
+    it('should show error when value exceeds maximum', async () => {
+      const wrapper = mount(ArraySizeInput, {
+        props: { size: 50, min: 5, max: 100 },
+      });
+      const numberInput = wrapper.find('input[type="number"]');
+      await numberInput.setValue('150');
+      await numberInput.trigger('blur');
+      await wrapper.vm.$nextTick();
+      expect(wrapper.text()).toContain('Array size must not exceed 100');
+    });
+
+    it('should show error for invalid input', async () => {
+      const wrapper = mount(ArraySizeInput, {
+        props: { size: 50, min: 5, max: 100 },
+      });
+      const numberInput = wrapper.find('input[type="number"]');
+      await numberInput.setValue('abc');
+      await numberInput.trigger('blur');
+      await wrapper.vm.$nextTick();
+      expect(wrapper.text()).toContain('Please enter a valid number');
+    });
+
+    it('should emit update:size when valid value is entered', async () => {
+      const wrapper = mount(ArraySizeInput, {
+        props: { size: 50, min: 5, max: 100 },
+      });
+      const numberInput = wrapper.find('input[type="number"]');
+      await numberInput.setValue('75');
+      await numberInput.trigger('blur');
+      await wrapper.vm.$nextTick();
+      expect(wrapper.emitted('update:size')).toBeTruthy();
+      expect(wrapper.emitted('update:size')?.[0]).toEqual([75]);
+    });
+
+    it('should reset to current size on invalid input', async () => {
+      const wrapper = mount(ArraySizeInput, {
+        props: { size: 50, min: 5, max: 100 },
+      });
+      const numberInput = wrapper.find('input[type="number"]');
+      await numberInput.setValue('200');
+      await numberInput.trigger('blur');
+      await wrapper.vm.$nextTick();
+      expect(numberInput.element.value).toBe('50');
+    });
+
+    it('should validate on Enter key press', async () => {
+      const wrapper = mount(ArraySizeInput, {
+        props: { size: 50, min: 5, max: 100 },
+      });
+      const numberInput = wrapper.find('input[type="number"]');
+      await numberInput.setValue('80');
+      await numberInput.trigger('keydown', { key: 'Enter' });
+      await wrapper.vm.$nextTick();
+      expect(wrapper.emitted('update:size')).toBeTruthy();
+      expect(wrapper.emitted('update:size')?.[0]).toEqual([80]);
+    });
+
+    it('should apply error styling to number input when invalid', async () => {
+      const wrapper = mount(ArraySizeInput, {
+        props: { size: 50, min: 5, max: 100 },
+      });
+      const numberInput = wrapper.find('input[type="number"]');
+      await numberInput.setValue('200');
+      await numberInput.trigger('blur');
+      await wrapper.vm.$nextTick();
+      expect(numberInput.classes()).toContain('border-red-500');
+    });
+
+    it('should have accessible error attributes', async () => {
+      const wrapper = mount(ArraySizeInput, {
+        props: { size: 50, min: 5, max: 100 },
+      });
+      const numberInput = wrapper.find('input[type="number"]');
+      await numberInput.setValue('200');
+      await numberInput.trigger('blur');
+      await wrapper.vm.$nextTick();
+      expect(numberInput.attributes('aria-invalid')).toBe('true');
+      expect(numberInput.attributes('aria-describedby')).toBe('array-size-error');
     });
   });
 });

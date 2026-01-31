@@ -2187,7 +2187,7 @@
       "Clear error on valid input",
       "Verify validation works correctly"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "polish",
