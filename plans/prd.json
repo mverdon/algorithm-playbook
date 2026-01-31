@@ -139,7 +139,7 @@
       "Verify JSON is valid",
       "Document MCP setup in README section"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
