@@ -284,6 +284,145 @@ algorithm-playbook/
 - **Playwright** - End-to-end testing
 - **Canvas API** - High-performance rendering
 
+## Deployment
+
+### Building for Production
+
+To create a production-ready build:
+
+```bash
+npm run build
+```
+
+This generates optimized files in the `dist/` directory with:
+- Code splitting (separate vendor and app bundles)
+- Minified JavaScript and CSS
+- Content-based hashing for cache invalidation
+- Organized asset structure (`dist/assets/js/`, etc.)
+
+### Deployment Options
+
+#### Static Hosting Services
+
+The application is a pure static site and can be deployed to any static hosting service:
+
+**Netlify**
+```bash
+# Install Netlify CLI
+npm install -g netlify-cli
+
+# Deploy
+netlify deploy --prod --dir=dist
+```
+
+**Vercel**
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Deploy
+vercel --prod
+```
+
+**GitHub Pages**
+```bash
+# Build the project
+npm run build
+
+# Deploy to gh-pages branch
+npx gh-pages -d dist
+```
+
+**Cloudflare Pages**
+1. Connect your GitHub repository to Cloudflare Pages
+2. Set build command: `npm run build`
+3. Set output directory: `dist`
+4. Deploy automatically on push
+
+#### Traditional Web Servers
+
+For Apache, Nginx, or other web servers:
+
+1. Build the project:
+```bash
+npm run build
+```
+
+2. Copy the `dist/` directory contents to your web server:
+```bash
+# Example: Copy to web server
+scp -r dist/* user@server:/var/www/html/
+```
+
+3. Configure server for single-page application:
+
+**Nginx**
+```nginx
+location / {
+  try_files $uri $uri/ /index.html;
+}
+```
+
+**Apache** (create `.htaccess` in `dist/`):
+```apache
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+```
+
+#### Docker Deployment
+
+Create a `Dockerfile`:
+```dockerfile
+FROM nginx:alpine
+COPY dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+Create `nginx.conf`:
+```nginx
+server {
+    listen 80;
+    server_name localhost;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+```
+
+Build and run:
+```bash
+docker build -t algorithm-playbook .
+docker run -p 8080:80 algorithm-playbook
+```
+
+### Environment Considerations
+
+- The app uses `base: './'` in Vite config, allowing deployment to subdirectories
+- No server-side rendering or API endpoints required
+- All assets are self-contained in the `dist/` directory
+- Theme preference is stored in browser localStorage
+- No environment variables or build-time configuration needed
+
+### Pre-deployment Checklist
+
+Before deploying, ensure:
+1. ✅ All tests pass: `npm run test:run`
+2. ✅ TypeScript checks pass: `npm run typecheck`
+3. ✅ Production build succeeds: `npm run build`
+4. ✅ Preview build locally: `npm run preview`
+5. ✅ E2E tests pass: `npm run test:e2e`
+
 ## Browser Support
 
 - Chrome/Edge 90+
