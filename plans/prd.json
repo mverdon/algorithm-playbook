@@ -1765,7 +1765,7 @@
       "Take screenshot named 'sorting-visualization.png'",
       "Run 'npm run test' and verify test passes"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "visual-test",
