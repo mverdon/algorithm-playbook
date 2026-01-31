@@ -4,6 +4,11 @@ import { getNeighbors, reconstructPath, clearGrid } from './gridUtils';
 
 /**
  * Priority queue implementation for Dijkstra algorithm
+ * 
+ * Simple priority queue using an array with linear insertion.
+ * Elements are dequeued in order of lowest priority first.
+ * 
+ * @template T - Type of elements stored in the queue
  */
 class PriorityQueue<T> {
   private items: { element: T; priority: number }[] = [];
@@ -35,8 +40,28 @@ class PriorityQueue<T> {
 }
 
 /**
- * Dijkstra pathfinding algorithm implementation
- * Finds the shortest path from start to end using only distance (no heuristic)
+ * Dijkstra's pathfinding algorithm implementation
+ * 
+ * Finds the shortest path from start to end using a greedy approach based on
+ * cumulative distance. Unlike A*, this algorithm does not use a heuristic,
+ * exploring nodes in order of their distance from the start node.
+ * 
+ * Guarantees the shortest path in weighted and unweighted graphs.
+ * 
+ * Time Complexity: O((V + E) log V) with a proper priority queue
+ * Space Complexity: O(V) for the open set and closed set
+ * 
+ * @param grid - The grid to search for a path
+ * @returns PathfindingResult containing the path, visited nodes, distance, and success status
+ * 
+ * @example
+ * ```typescript
+ * const result = dijkstra(grid);
+ * if (result.success) {
+ *   console.log(`Shortest path found with distance ${result.distance}`);
+ *   console.log(`Explored ${result.visitedNodes.length} nodes`);
+ * }
+ * ```
  */
 export function dijkstra(grid: Grid): PathfindingResult {
   // Create a working copy of the grid

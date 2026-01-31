@@ -4,6 +4,11 @@ import { getNeighbors, manhattanDistance, reconstructPath, clearGrid } from './g
 
 /**
  * Priority queue implementation for A* algorithm
+ * 
+ * Simple priority queue using an array with linear insertion.
+ * Elements are dequeued in order of lowest priority (f-score) first.
+ * 
+ * @template T - Type of elements stored in the queue
  */
 class PriorityQueue<T> {
   private items: { element: T; priority: number }[] = [];
@@ -35,8 +40,33 @@ class PriorityQueue<T> {
 }
 
 /**
- * A* pathfinding algorithm implementation
- * Finds the shortest path from start to end using Manhattan distance heuristic
+ * A* (A-Star) pathfinding algorithm implementation
+ * 
+ * Finds the shortest path from start to end using a combination of actual distance
+ * and a heuristic estimate. Uses Manhattan distance as the heuristic, which is
+ * admissible for 4-directional grid movement.
+ * 
+ * The algorithm maintains an f-score = g-score + h-score where:
+ * - g-score: actual distance from start
+ * - h-score: heuristic estimate to goal (Manhattan distance)
+ * - f-score: total estimated cost
+ * 
+ * A* is optimal (finds shortest path) when the heuristic is admissible.
+ * 
+ * Time Complexity: O((V + E) log V) with a proper priority queue
+ * Space Complexity: O(V) for the open set and closed set
+ * 
+ * @param grid - The grid to search for a path
+ * @returns PathfindingResult containing the path, visited nodes, distance, and success status
+ * 
+ * @example
+ * ```typescript
+ * const result = aStar(grid);
+ * if (result.success) {
+ *   console.log(`Optimal path found with distance ${result.distance}`);
+ *   console.log(`Visited ${result.visitedNodes.length} nodes (fewer than Dijkstra)`);
+ * }
+ * ```
  */
 export function aStar(grid: Grid): PathfindingResult {
   // Create a working copy of the grid

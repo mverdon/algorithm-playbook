@@ -3,10 +3,28 @@ import { NodeState } from '@/types/grid';
 import { getNeighbors, reconstructPath, clearGrid } from './gridUtils';
 
 /**
- * DFS (Depth-First Search) pathfinding algorithm
- * Uses a stack (LIFO) to explore deeply into one direction before backtracking
- * Time complexity: O(V + E) where V is vertices and E is edges
- * Note: DFS does NOT guarantee the shortest path
+ * Depth-First Search (DFS) pathfinding algorithm
+ * 
+ * Explores nodes by going as deep as possible along each branch before backtracking.
+ * Uses a stack (LIFO) for traversal. This algorithm explores paths exhaustively
+ * but does NOT guarantee the shortest path will be found first.
+ * 
+ * Time Complexity: O(V + E) where V is vertices and E is edges
+ * Space Complexity: O(V) for the stack and visited set
+ * 
+ * Note: DFS does NOT guarantee the shortest path. Use BFS, Dijkstra, or A* for optimal paths.
+ * 
+ * @param grid - The grid to search for a path
+ * @returns PathfindingResult containing the path, visited nodes, distance, and success status
+ * 
+ * @example
+ * ```typescript
+ * const result = dfs(grid);
+ * if (result.success) {
+ *   console.log(`Found a path (not necessarily shortest)`);
+ *   console.log(`Path length: ${result.distance}`);
+ * }
+ * ```
  */
 export function dfs(grid: Grid): PathfindingResult {
   // Create a working copy of the grid

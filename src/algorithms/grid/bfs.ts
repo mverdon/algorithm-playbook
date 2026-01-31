@@ -3,9 +3,26 @@ import { NodeState } from '@/types/grid';
 import { getNeighbors, reconstructPath, clearGrid } from './gridUtils';
 
 /**
- * Breadth-First Search pathfinding algorithm
- * Uses a queue (FIFO) to explore nodes level by level
- * Guarantees shortest path in unweighted grids
+ * Breadth-First Search (BFS) pathfinding algorithm
+ * 
+ * Explores nodes in a level-by-level manner using a queue (FIFO).
+ * Guarantees the shortest path in unweighted grids by visiting all nodes
+ * at distance k before visiting any node at distance k+1.
+ * 
+ * Time Complexity: O(V + E) where V is vertices and E is edges
+ * Space Complexity: O(V) for the queue and visited set
+ * 
+ * @param grid - The grid to search for a path
+ * @returns PathfindingResult containing the path, visited nodes, distance, and success status
+ * 
+ * @example
+ * ```typescript
+ * const result = bfs(grid);
+ * if (result.success) {
+ *   console.log(`Found path of length ${result.distance}`);
+ *   console.log(`Visited ${result.visitedNodes.length} nodes`);
+ * }
+ * ```
  */
 export function bfs(grid: Grid): PathfindingResult {
   // Create a working copy of the grid
