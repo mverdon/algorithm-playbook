@@ -24,7 +24,7 @@
       <div class="flex space-x-3">
         <button
           @click="retry"
-          class="flex-1 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors font-medium"
+          class="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors font-medium"
         >
           Try Again
         </button>

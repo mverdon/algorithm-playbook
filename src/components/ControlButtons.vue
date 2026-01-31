@@ -43,7 +43,7 @@ const playPauseDisabledReason = computed(() => {
     <button
       :disabled="!canPlay || isComplete"
       @click="isPlaying ? emit('pause') : emit('play')"
-      class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700"
+      class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700"
       type="button"
       :aria-label="playPauseAriaLabel"
       :aria-pressed="isPlaying"
