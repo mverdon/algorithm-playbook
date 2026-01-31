@@ -79,7 +79,7 @@
       "Verify devDependencies contains tailwindcss, postcss, and autoprefixer",
       "Check node_modules for installed packages"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
