@@ -155,7 +155,7 @@
       "Add title 'Algorithm Visualizer Playground'",
       "Verify HTML is valid"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
@@ -169,7 +169,7 @@
       "Create src/composables/ directory",
       "Verify all directories exist"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
@@ -182,7 +182,7 @@
       "Call createApp(App).mount('#app')",
       "Verify TypeScript syntax is correct"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
@@ -195,7 +195,7 @@
       "Add basic body styling",
       "Verify CSS syntax is correct"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
@@ -207,7 +207,7 @@
       "Add <style scoped> section",
       "Verify Vue SFC syntax is correct"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
