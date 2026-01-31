@@ -114,7 +114,7 @@
       "Run 'npx playwright install chromium'",
       "Verify Playwright browsers are installed"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "core-types",
@@ -219,7 +219,7 @@
       "Add 'test' script: 'playwright test'",
       "Verify JSON is valid"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
