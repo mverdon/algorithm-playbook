@@ -281,7 +281,7 @@
       "Check console output for errors",
       "Stop dev server"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
