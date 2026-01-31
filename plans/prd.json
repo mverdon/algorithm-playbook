@@ -2018,7 +2018,7 @@
       "Add link to localhost:5173",
       "Verify markdown formatting"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "documentation",
