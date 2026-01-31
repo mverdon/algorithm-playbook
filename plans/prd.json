@@ -1777,7 +1777,7 @@
       "Save baseline to tests/e2e/__screenshots__/",
       "Commit baseline image to git"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "visual-test",
@@ -1791,7 +1791,7 @@
       "Take screenshot for each selection",
       "Run 'npm run test' and verify test passes"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "visual-test",
@@ -1806,7 +1806,7 @@
       "Click step and verify single step advances",
       "Run 'npm run test' and verify test passes"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "visual-test",
@@ -1821,7 +1821,7 @@
       "Verify animation speed increases",
       "Run 'npm run test' and verify test passes"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "visual-test",
@@ -1836,7 +1836,7 @@
       "Verify document classes change",
       "Run 'npm run test' and verify test passes"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "visual-test",
@@ -1847,7 +1847,7 @@
       "Save baselines for light, dark, colorful themes",
       "Commit baseline images to git"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "visual-test",
@@ -1862,7 +1862,7 @@
       "Take screenshot named 'grid-setup.png'",
       "Run 'npm run test' and verify test passes"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "visual-test",
@@ -1890,7 +1890,7 @@
       "Save baseline to tests/e2e/__screenshots__/",
       "Commit baseline image to git"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "visual-test",
@@ -1906,7 +1906,7 @@
       "Take screenshot named 'desktop-view.png'",
       "Run 'npm run test' and verify test passes"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "visual-test",
@@ -1919,7 +1919,7 @@
       "Save baselines for all viewports",
       "Commit baseline images to git"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "accessibility",
