@@ -292,7 +292,7 @@
       "Check command exits with code 0",
       "Review any warnings in output"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "testing-infrastructure",
@@ -444,7 +444,7 @@
       "Define ColorScheme interface with primary, secondary, accent colors",
       "Verify TypeScript syntax is correct"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "core-algorithm",
