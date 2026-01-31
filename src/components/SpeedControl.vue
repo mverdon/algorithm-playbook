@@ -39,14 +39,25 @@ const handleSpeedChange = (event: Event) => {
       :value="speed"
       @change="handleSpeedChange"
       class="px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent text-gray-900 dark:text-gray-100 transition-colors"
+      role="combobox"
+      aria-label="Animation speed control"
+      aria-required="false"
+      :aria-describedby="'speed-description-' + speed"
     >
       <option
         v-for="speedOption in speeds"
         :key="speedOption.value"
         :value="speedOption.value"
+        :aria-label="`${speedOption.label} speed: ${speedOption.description} delay`"
       >
         {{ speedOption.label }} ({{ speedOption.description }})
       </option>
     </select>
+    <span
+      :id="'speed-description-' + speed"
+      class="sr-only"
+    >
+      Current animation speed: {{ speeds.find(s => s.value === speed)?.label }}
+    </span>
   </div>
 </template>
