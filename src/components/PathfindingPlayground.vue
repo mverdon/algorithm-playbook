@@ -1,5 +1,12 @@
 <template>
-  <div class="pathfinding-playground bg-white dark:bg-gray-900 min-h-screen p-6">
+  <div 
+    class="pathfinding-playground bg-white dark:bg-gray-900 min-h-screen p-6"
+    tabindex="0"
+    @keydown="handleKeydown"
+    role="application"
+    :aria-label="ariaLabel"
+    ref="containerRef"
+  >
     <div class="max-w-7xl mx-auto">
       <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
         Pathfinding Algorithm Visualizer
@@ -62,11 +69,14 @@
         />
       </div>
     </div>
+    <div class="sr-only" aria-live="polite" aria-atomic="true">
+      {{ screenReaderAnnouncement }}
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import AlgorithmSelector from './AlgorithmSelector.vue';
 import SpeedControl from './SpeedControl.vue';
 import ControlButtons from './ControlButtons.vue';
@@ -93,6 +103,8 @@ import { NodeState } from '@/types/grid';
 
 const selectedAlgorithm = ref<PathfindingAlgorithm>(PathfindingAlgorithm.AStar);
 const animationSpeed = ref<AnimationSpeed>(AnimationSpeed.Normal);
+const containerRef = ref<HTMLDivElement | null>(null);
+const screenReaderAnnouncement = ref<string>('');
 
 const gridConfig: GridConfig = {
   rows: 25,
@@ -156,6 +168,14 @@ const currentAnimationStep = computed(() => {
 const isPlaying = computed(() => animationEngine.isPlaying.value);
 const isComplete = computed(() => animationEngine.isComplete.value);
 const canPlay = computed(() => animationEngine.canPlay.value);
+
+const ariaLabel = computed(() => {
+  const algorithm = selectedAlgorithm.value;
+  const status = isPlaying.value ? 'running' : isComplete.value ? 'complete' : 'ready';
+  const wallCount = grid.value.flat().filter(node => node.isWall).length;
+  
+  return `Pathfinding visualization using ${algorithm} algorithm. Status: ${status}. Grid has ${wallCount} walls. Press Space to start, R to reset, C to clear walls. Use arrow keys to navigate grid.`;
+});
 
 const handleToggleWall = (row: number, col: number) => {
   if (!isPlaying.value) {
@@ -223,10 +243,96 @@ watch(selectedAlgorithm, () => {
   animationSteps.value = [];
   displayGrid.value = grid.value;
 });
+
+function handleKeydown(event: KeyboardEvent) {
+  // Prevent default behavior for handled keys
+  const handledKeys = [' ', 'Enter', 'Escape', 'r', 'R', 'c', 'C', 'g', 'G'];
+  if (handledKeys.includes(event.key)) {
+    event.preventDefault();
+  }
+
+  switch (event.key) {
+    case ' ':
+    case 'Enter':
+      // Play or toggle
+      if (!isPlaying.value) {
+        handlePlay();
+        announceAction('Pathfinding animation started');
+      } else {
+        handlePause();
+        announceAction('Pathfinding animation paused');
+      }
+      break;
+    case 'Escape':
+      // Pause
+      if (isPlaying.value) {
+        handlePause();
+        announceAction('Pathfinding animation paused');
+      }
+      break;
+    case 'r':
+    case 'R':
+      // Reset
+      if (!isPlaying.value) {
+        handleReset();
+        announceAction('Grid reset to initial state');
+      }
+      break;
+    case 'c':
+    case 'C':
+      // Clear walls
+      if (!isPlaying.value) {
+        clearWalls();
+        announceAction('All walls cleared from grid');
+      }
+      break;
+    case 'g':
+    case 'G':
+      // Reset grid completely
+      if (!isPlaying.value) {
+        resetGrid();
+        announceAction('Grid reset with start and end positions restored');
+      }
+      break;
+  }
+}
+
+function announceAction(message: string) {
+  screenReaderAnnouncement.value = message;
+  // Clear after a short delay to allow the announcement to be read
+  setTimeout(() => {
+    screenReaderAnnouncement.value = '';
+  }, 1000);
+}
+
+onMounted(() => {
+  // Auto-focus the container for immediate keyboard access
+  containerRef.value?.focus();
+});
+
 </script>
 
 <style scoped>
 .pathfinding-playground {
   min-height: 100vh;
+  outline: none;
+}
+
+.pathfinding-playground:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 4px;
+  border-radius: 0.5rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 </style>
