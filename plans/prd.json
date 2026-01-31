@@ -2259,7 +2259,7 @@
       "Verify dist/ directory is created",
       "Check bundle size"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "deployment",
