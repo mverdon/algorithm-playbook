@@ -1542,7 +1542,7 @@
       "Export useTheme function",
       "Verify TypeScript syntax is correct"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "core-test",
