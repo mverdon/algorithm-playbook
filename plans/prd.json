@@ -117,18 +117,16 @@
     "passes": false
   },
   {
-    "category": "setup",
-    "description": "Create playwright.config.ts",
+    "category": "core-types",
+    "description": "Define algorithm types",
     "steps": [
-      "Create playwright.config.ts in root directory",
-      "Configure testDir to './tests'",
-      "Set baseURL to 'http://localhost:5173'",
-      "Configure chromium browser",
-      "Enable screenshots on failure",
-      "Set testMatch pattern",
+      "Create src/types/algorithms.ts file",
+      "Define SortingAlgorithm enum with Bubble, Quick, Merge, Heap",
+      "Define PathfindingAlgorithm enum with AStar, Dijkstra, BFS, DFS",
+      "Define AlgorithmCategory enum with Sorting, Pathfinding",
       "Verify TypeScript syntax is correct"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
