@@ -396,7 +396,7 @@
       "Add TypeScript type annotations",
       "Verify file compiles without errors"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "core-types",
