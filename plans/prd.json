@@ -103,7 +103,7 @@
       "Configure server port to 5173",
       "Verify TypeScript syntax is correct"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",
