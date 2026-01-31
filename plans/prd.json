@@ -21,7 +21,7 @@
       "Add description field",
       "Verify file is valid JSON"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "setup",

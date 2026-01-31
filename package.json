@@ -1,0 +1,22 @@
+{
+  "name": "algorithm-visualizer-playground",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "An interactive algorithm visualization playground built with Vue 3, TypeScript, and Vite",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit",
+    "test": "vitest"
+  },
+  "keywords": [
+    "algorithm",
+    "visualization",
+    "vue3",
+    "typescript",
+    "vite"
+  ],
+  "author": "",
+  "license": "MIT"
+}
