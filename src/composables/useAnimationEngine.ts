@@ -1,5 +1,5 @@
 import { ref, computed, watch, onUnmounted, type Ref } from 'vue';
-import { AnimationSpeed, type AnimationStep } from '@/types/algorithms';
+import { AnimationSpeed } from '@/types/algorithms';
 
 export interface AnimationEngineState {
   isPlaying: boolean;
@@ -10,7 +10,7 @@ export interface AnimationEngineState {
   canPlay: boolean;
 }
 
-export function useAnimationEngine<T extends AnimationStep>(
+export function useAnimationEngine<T>(
   steps: Ref<T[]>,
   speed: Ref<AnimationSpeed>,
   onStepChange?: (step: T, index: number) => void

@@ -49,3 +49,7 @@ export interface GridAnimationStep {
   distance?: number;
   heuristic?: number;
 }
+
+export interface GridAnimationStepWithGrid extends GridAnimationStep {
+  grid: Grid;
+}

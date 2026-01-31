@@ -1,0 +1,232 @@
+<template>
+  <div class="pathfinding-playground bg-white dark:bg-gray-900 min-h-screen p-6">
+    <div class="max-w-7xl mx-auto">
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
+        Pathfinding Algorithm Visualizer
+      </h1>
+
+      <div class="controls-panel bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md mb-6 space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <AlgorithmSelector
+            :category="AlgorithmCategory.Pathfinding"
+            v-model:selectedAlgorithm="selectedAlgorithm"
+          />
+          
+          <SpeedControl v-model:speed="animationSpeed" />
+          
+          <div class="flex items-end gap-2">
+            <button
+              @click="clearWalls"
+              :disabled="isPlaying"
+              class="flex-1 px-4 py-2 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:bg-orange-700 dark:hover:bg-orange-600"
+            >
+              Clear Walls
+            </button>
+            <button
+              @click="resetGrid"
+              :disabled="isPlaying"
+              class="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:bg-purple-700 dark:hover:bg-purple-600"
+            >
+              Reset Grid
+            </button>
+          </div>
+        </div>
+
+        <ControlButtons
+          :isPlaying="isPlaying"
+          :isComplete="isComplete"
+          :canPlay="canPlay"
+          @play="handlePlay"
+          @pause="handlePause"
+          @reset="handleReset"
+        />
+      </div>
+
+      <div class="visualizer-container bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md">
+        <div class="mb-4 text-sm text-gray-700 dark:text-gray-300">
+          <p class="mb-2"><strong>Instructions:</strong></p>
+          <ul class="list-disc list-inside space-y-1">
+            <li>Click or drag to add/remove walls</li>
+            <li>Drag the blue (start) or red (end) node to reposition</li>
+            <li>Select an algorithm and click "Play" to visualize</li>
+          </ul>
+        </div>
+        <GridVisualizer
+          :grid="displayGrid"
+          :currentStep="currentAnimationStep"
+          :width="600"
+          :height="600"
+          @toggleWall="handleToggleWall"
+          @setStart="handleSetStart"
+          @setEnd="handleSetEnd"
+        />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, computed, watch } from 'vue';
+import AlgorithmSelector from './AlgorithmSelector.vue';
+import SpeedControl from './SpeedControl.vue';
+import ControlButtons from './ControlButtons.vue';
+import GridVisualizer from './GridVisualizer.vue';
+import { useAnimationEngine } from '@/composables/useAnimationEngine';
+import { aStarAnimated } from '@/algorithms/grid/aStar';
+import { dijkstraAnimated } from '@/algorithms/grid/dijkstra';
+import { bfsAnimated } from '@/algorithms/grid/bfs';
+import { dfsAnimated } from '@/algorithms/grid/dfs';
+import {
+  createGrid,
+  toggleWall,
+  setStartNode,
+  setEndNode,
+  resetGrid as resetGridUtil,
+} from '@/algorithms/grid/gridUtils';
+import {
+  AlgorithmCategory,
+  PathfindingAlgorithm,
+  AnimationSpeed,
+} from '@/types/algorithms';
+import type { Grid, GridConfig, GridAnimationStepWithGrid } from '@/types/grid';
+import { NodeState } from '@/types/grid';
+
+const selectedAlgorithm = ref<PathfindingAlgorithm>(PathfindingAlgorithm.AStar);
+const animationSpeed = ref<AnimationSpeed>(AnimationSpeed.Normal);
+
+const gridConfig: GridConfig = {
+  rows: 25,
+  cols: 25,
+  startPos: { row: 5, col: 5 },
+  endPos: { row: 19, col: 19 },
+};
+
+const grid = ref<Grid>(createGrid(gridConfig));
+const displayGrid = ref<Grid>(createGrid(gridConfig));
+const animationSteps = ref<GridAnimationStepWithGrid[]>([]);
+
+const pathfindingAlgorithms = {
+  [PathfindingAlgorithm.AStar]: aStarAnimated,
+  [PathfindingAlgorithm.Dijkstra]: dijkstraAnimated,
+  [PathfindingAlgorithm.BFS]: bfsAnimated,
+  [PathfindingAlgorithm.DFS]: dfsAnimated,
+};
+
+const startPathfinding = () => {
+  const pathfindFn = pathfindingAlgorithms[selectedAlgorithm.value];
+  const generator = pathfindFn(grid.value);
+  
+  // Convert generator to array and add grid snapshot to each step
+  const steps: GridAnimationStepWithGrid[] = [];
+  const workingGrid = JSON.parse(JSON.stringify(grid.value)) as Grid;
+  
+  for (const step of generator) {
+    // Update working grid based on step
+    const node = workingGrid[step.position.row][step.position.col];
+    if (!node.isStart && !node.isEnd) {
+      node.state = step.state;
+    }
+    
+    // Create step with grid snapshot
+    steps.push({
+      ...step,
+      grid: JSON.parse(JSON.stringify(workingGrid)) as Grid,
+    });
+  }
+  
+  animationSteps.value = steps;
+};
+
+const animationEngine = useAnimationEngine<GridAnimationStepWithGrid>(
+  animationSteps,
+  animationSpeed,
+  (step: GridAnimationStepWithGrid) => {
+    if (step) {
+      displayGrid.value = step.grid;
+    }
+  }
+);
+
+const currentAnimationStep = computed(() => {
+  const stepIndex = animationEngine.currentStep.value;
+  return stepIndex > 0 && stepIndex <= animationSteps.value.length
+    ? animationSteps.value[stepIndex - 1]
+    : null;
+});
+const isPlaying = computed(() => animationEngine.isPlaying.value);
+const isComplete = computed(() => animationEngine.isComplete.value);
+const canPlay = computed(() => animationEngine.canPlay.value);
+
+const handleToggleWall = (row: number, col: number) => {
+  if (!isPlaying.value) {
+    const position = { row, col };
+    grid.value = toggleWall(grid.value, position);
+    displayGrid.value = grid.value;
+    animationSteps.value = [];
+  }
+};
+
+const handleSetStart = (row: number, col: number) => {
+  if (!isPlaying.value) {
+    const position = { row, col };
+    grid.value = setStartNode(grid.value, position);
+    displayGrid.value = grid.value;
+    animationSteps.value = [];
+  }
+};
+
+const handleSetEnd = (row: number, col: number) => {
+  if (!isPlaying.value) {
+    const position = { row, col };
+    grid.value = setEndNode(grid.value, position);
+    displayGrid.value = grid.value;
+    animationSteps.value = [];
+  }
+};
+
+const clearWalls = () => {
+  // Clear all walls by resetting to default state
+  grid.value = grid.value.map(row =>
+    row.map(node => ({
+      ...node,
+      isWall: false,
+      state: node.isStart ? node.state : node.isEnd ? node.state : NodeState.Default as NodeState,
+    }))
+  );
+  displayGrid.value = grid.value;
+  animationSteps.value = [];
+};
+
+const resetGrid = () => {
+  grid.value = resetGridUtil(gridConfig);
+  displayGrid.value = grid.value;
+  animationSteps.value = [];
+};
+
+const handlePlay = () => {
+  if (animationEngine.totalSteps.value === 0) {
+    startPathfinding();
+  }
+  animationEngine.play();
+};
+
+const handlePause = () => {
+  animationEngine.pause();
+};
+
+const handleReset = () => {
+  animationEngine.reset();
+  displayGrid.value = grid.value;
+};
+
+watch(selectedAlgorithm, () => {
+  animationSteps.value = [];
+  displayGrid.value = grid.value;
+});
+</script>
+
+<style scoped>
+.pathfinding-playground {
+  min-height: 100vh;
+}
+</style>
