@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
     <header class="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700 shadow-lg">
-      <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between">
           <h1 class="text-3xl font-bold text-white">
             Algorithm Visualizer Playground
@@ -41,10 +41,10 @@
     </nav>
     
     <main>
-      <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto py-8 sm:px-6 lg:px-8">
         <div class="px-4 sm:px-0">
           <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden">
-            <div class="p-6">
+            <div class="p-8">
               <ErrorBoundary>
                 <SortingPlayground v-if="activeTab === 'sorting'" />
                 <PathfindingPlayground v-else-if="activeTab === 'pathfinding'" />
