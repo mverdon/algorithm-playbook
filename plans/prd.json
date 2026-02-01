@@ -2610,7 +2610,7 @@
       "Add rotation animation on toggle",
       "Test in dev server"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "dark-mode-enhancement",
