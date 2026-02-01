@@ -2566,7 +2566,7 @@
       "Test gradient in both light and dark mode",
       "Run 'npm run typecheck'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "component-styling",

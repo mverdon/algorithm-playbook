@@ -108,7 +108,7 @@ describe('App', () => {
       const html = wrapper.html();
       expect(html).toContain('dark:bg-gray-900');
       expect(html).toContain('dark:bg-gray-800');
-      expect(html).toContain('dark:text-white');
+      expect(html).toContain('dark:from-blue-700');
     });
   });
 
