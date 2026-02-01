@@ -146,7 +146,8 @@ describe('ControlButtons', () => {
     it('applies dark mode classes to play button', () => {
       const wrapper = mount(ControlButtons)
       const playButton = wrapper.findAll('button')[0]
-      expect(playButton.classes()).toContain('dark:bg-blue-600')
+      expect(playButton.classes()).toContain('dark:from-blue-600')
+      expect(playButton.classes()).toContain('dark:to-blue-500')
       expect(playButton.classes()).toContain('dark:hover:bg-blue-700')
     })
 

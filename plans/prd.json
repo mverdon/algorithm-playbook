@@ -2522,7 +2522,7 @@
       "Add shadow-md class",
       "Test in dev server"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "component-styling",
