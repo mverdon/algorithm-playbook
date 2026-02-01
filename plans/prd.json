@@ -2768,7 +2768,7 @@
       "Add steps for npm install, typecheck, and test",
       "Run 'git add .github/' and commit"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "deployment",
