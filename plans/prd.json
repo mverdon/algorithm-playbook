@@ -2742,7 +2742,7 @@
       "Set compatibility_date to current date",
       "Run 'npm run typecheck' to verify"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "deployment",
