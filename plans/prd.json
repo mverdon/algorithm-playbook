@@ -2533,7 +2533,7 @@
       "Add hover:shadow-lg to buttons",
       "Test in dev server"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "component-styling",
@@ -2544,7 +2544,7 @@
       "Test button animations in dev server",
       "Run 'npm run typecheck'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "component-styling",
@@ -2555,7 +2555,7 @@
       "Add disabled:cursor-not-allowed",
       "Test disabled state in dev server"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "component-styling",

@@ -148,7 +148,8 @@ describe('ControlButtons', () => {
       const playButton = wrapper.findAll('button')[0]
       expect(playButton.classes()).toContain('dark:from-blue-600')
       expect(playButton.classes()).toContain('dark:to-blue-500')
-      expect(playButton.classes()).toContain('dark:hover:bg-blue-700')
+      expect(playButton.classes()).toContain('dark:hover:from-blue-700')
+      expect(playButton.classes()).toContain('dark:hover:to-blue-600')
     })
 
     it('applies dark mode classes to reset button', () => {
