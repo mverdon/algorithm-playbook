@@ -1,3 +1,5 @@
+import { theme } from './src/config/theme';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [

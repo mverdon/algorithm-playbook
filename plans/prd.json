@@ -2346,7 +2346,7 @@
       "Verify file syntax is correct",
       "Run 'npm run typecheck'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "theme-foundation",
