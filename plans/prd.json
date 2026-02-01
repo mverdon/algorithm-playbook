@@ -2731,7 +2731,7 @@
       "Test that app works correctly",
       "Verify all styles are applied"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "deployment",
