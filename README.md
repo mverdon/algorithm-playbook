@@ -357,10 +357,43 @@ npx gh-pages -d dist
 ```
 
 **Cloudflare Pages**
+
+This project includes automated deployment to Cloudflare Pages via GitHub Actions.
+
+**Automated Deployment (Recommended)**
+1. Fork or clone this repository to GitHub
+2. Get your Cloudflare credentials:
+   - Go to [Cloudflare Dashboard](https://dash.cloudflare.com/)
+   - Navigate to "Workers & Pages" → "Overview"
+   - Note your Account ID from the right sidebar
+   - Create an API token at "My Profile" → "API Tokens" → "Create Token"
+   - Use the "Edit Cloudflare Workers" template or create a custom token with "Account:Cloudflare Pages:Edit" permission
+3. Add GitHub repository secrets:
+   - Go to your GitHub repository → Settings → Secrets and variables → Actions
+   - Add `CLOUDFLARE_API_TOKEN` with your API token
+   - Add `CLOUDFLARE_ACCOUNT_ID` with your account ID
+4. The GitHub Actions workflow (`.github/workflows/deploy.yml`) will automatically deploy on push to main branch
+
+**Manual Deployment**
 1. Connect your GitHub repository to Cloudflare Pages
 2. Set build command: `npm run build`
 3. Set output directory: `dist`
 4. Deploy automatically on push
+
+**Using Wrangler CLI**
+```bash
+# Install Wrangler
+npm install -g wrangler
+
+# Login to Cloudflare
+wrangler login
+
+# Deploy
+npm run build
+wrangler pages deploy dist --project-name=algorithm-playbook
+```
+
+The project includes a `wrangler.toml` configuration file with proper settings for Cloudflare Pages deployment.
 
 #### Traditional Web Servers
 
@@ -436,6 +469,17 @@ docker run -p 8080:80 algorithm-playbook
 - All assets are self-contained in the `dist/` directory
 - Theme preference is stored in browser localStorage
 - No environment variables or build-time configuration needed
+
+### Continuous Integration
+
+The project includes a GitHub Actions CI workflow (`.github/workflows/ci.yml`) that runs on every push and pull request:
+
+- ✅ TypeScript type checking
+- ✅ Unit tests (522 tests)
+- ✅ Production build
+- ✅ End-to-end tests with Playwright
+
+This ensures code quality and catches issues before deployment.
 
 ### Pre-deployment Checklist
 

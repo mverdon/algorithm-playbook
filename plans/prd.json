@@ -2755,7 +2755,7 @@
       "Include output directory: dist",
       "Add link to Cloudflare Pages docs"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "deployment",

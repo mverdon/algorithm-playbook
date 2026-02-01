@@ -902,3 +902,22 @@ Next person: GitHub Actions CI workflow is now set up and ready to run on every 
 - Updated PRD: Task 'Create GitHub Actions workflow for Cloudflare deployment' marked as complete
 
 Next person: GitHub Actions deployment workflow is now set up! The app will automatically deploy to Cloudflare Pages on every push to main. 3 deployment tasks remaining: add deployment docs to README, add deployment badge to README, verify deployed site. To use this workflow, you'll need to add CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets to the GitHub repository settings. Continue with adding deployment documentation to README next.
+[2026-02-01T10:52:32Z] Added comprehensive deployment documentation to README
+- Expanded Cloudflare Pages section with three deployment methods:
+  * Automated deployment via GitHub Actions (recommended) with detailed setup steps
+  * Manual deployment through Cloudflare Pages dashboard
+  * Wrangler CLI deployment for command-line users
+- Added detailed GitHub Actions setup instructions:
+  * How to obtain Cloudflare API token and Account ID
+  * Where to add GitHub repository secrets (CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID)
+  * Explanation that .github/workflows/deploy.yml handles automatic deployment
+- Added new "Continuous Integration" section documenting:
+  * CI workflow runs on every push and pull request
+  * Automated checks: TypeScript type checking, 522 unit tests, production build, e2e tests
+  * Ensures code quality before deployment
+- Referenced existing wrangler.toml configuration file
+- TypeScript type checking passes with no errors
+- All 522 unit tests pass
+- Updated PRD: Task 'Add deployment documentation to README' marked as complete
+
+Next person: Deployment documentation is now comprehensive and covers all deployment scenarios! 2 deployment tasks remaining: add deployment badge to README, verify deployed site works correctly. Continue with adding the deployment badge next.
