@@ -50,7 +50,7 @@ const handleChange = (event: Event) => {
 
 <template>
   <div class="algorithm-selector">
-    <label for="algorithm-select" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+    <label for="algorithm-select" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
       Select Algorithm
     </label>
     <Tooltip :text="`Choose which ${category === AlgorithmCategory.Sorting ? 'sorting' : 'pathfinding'} algorithm to visualize`" position="right">
@@ -61,7 +61,7 @@ const handleChange = (event: Event) => {
         role="combobox"
         :aria-label="`Select ${category === AlgorithmCategory.Sorting ? 'sorting' : 'pathfinding'} algorithm`"
         aria-required="false"
-        class="block w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100"
+        class="block w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-gray-100 transition-all duration-200 ease-in-out hover:shadow-lg focus:shadow-lg"
       >
         <option
           v-for="algo in algorithms"

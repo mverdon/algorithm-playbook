@@ -2445,7 +2445,7 @@
       "Add hover:shadow-md class",
       "Test in dev server"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "component-styling",
@@ -2456,7 +2456,7 @@
       "Test hover animation in dev server",
       "Run 'npm run typecheck'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "component-styling",
@@ -2467,7 +2467,7 @@
       "Update border radius to rounded-lg",
       "Test in dev server"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "component-styling",
@@ -2478,7 +2478,7 @@
       "Test keyboard focus in dev server",
       "Run 'npm run typecheck'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "component-styling",
