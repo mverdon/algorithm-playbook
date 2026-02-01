@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <div
     class="pathfinding-playground bg-white dark:bg-gray-900 min-h-screen p-6"
     tabindex="0"
     @keydown="handleKeydown"
@@ -13,7 +13,7 @@
       :type="notificationType"
       @close="showNotification = false"
     />
-    
+
     <div class="max-w-7xl mx-auto">
       <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
         Pathfinding Algorithm Visualizer
@@ -25,9 +25,9 @@
             :category="AlgorithmCategory.Pathfinding"
             v-model:selectedAlgorithm="selectedAlgorithm"
           />
-          
+
           <SpeedControl v-model:speed="animationSpeed" />
-          
+
           <div class="flex items-end gap-2">
             <Tooltip text="Remove all walls from the grid">
               <button
@@ -62,8 +62,8 @@
 
       <div class="visualizer-container bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md relative">
         <!-- Loading Overlay -->
-        <div 
-          v-if="isLoading" 
+        <div
+          v-if="isLoading"
           class="absolute inset-0 bg-white/80 dark:bg-gray-900/80 flex items-center justify-center z-10 rounded-lg"
           role="status"
           aria-live="polite"
@@ -73,7 +73,7 @@
             <p class="mt-3 text-gray-700 dark:text-gray-300 font-medium">Generating animation steps...</p>
           </div>
         </div>
-        
+
         <div class="mb-4 text-sm text-gray-700 dark:text-gray-300">
           <p class="mb-2"><strong>Instructions:</strong></p>
           <ul class="list-disc list-inside space-y-1">
@@ -102,7 +102,7 @@
 <script setup lang="ts">
 /**
  * PathfindingPlayground Component
- * 
+ *
  * The main component for the pathfinding algorithm visualizer.
  * Provides controls for selecting pathfinding algorithms, adjusting animation speed,
  * and controlling playback. Features an interactive grid where users can draw walls,
@@ -167,30 +167,30 @@ const startPathfinding = () => {
   // Set loading state - Vue will batch this with the next state update
   // so in practice the loading spinner will show briefly during computation
   isLoading.value = true;
-  
+
   const pathfindFn = pathfindingAlgorithms[selectedAlgorithm.value];
   const generator = pathfindFn(grid.value);
-  
+
   // Convert generator to array and add grid snapshot to each step
   const steps: GridAnimationStepWithGrid[] = [];
   const workingGrid = JSON.parse(JSON.stringify(grid.value)) as Grid;
-  
+
   for (const step of generator) {
     // Update working grid based on step
     const node = workingGrid[step.position.row][step.position.col];
     if (!node.isStart && !node.isEnd) {
       node.state = step.state;
     }
-    
+
     // Create step with grid snapshot
     steps.push({
       ...step,
       grid: JSON.parse(JSON.stringify(workingGrid)) as Grid,
     });
   }
-  
+
   animationSteps.value = steps;
-  
+
   // Clear loading state immediately after computation
   isLoading.value = false;
 };
@@ -211,10 +211,10 @@ const animationEngine = useAnimationEngine<GridAnimationStepWithGrid>(
       [PathfindingAlgorithm.BFS]: 'Breadth-First Search',
       [PathfindingAlgorithm.DFS]: 'Depth-First Search',
     };
-    
+
     // Check if a path was found by looking for NodeState.Path in the final grid
     const pathFound = displayGrid.value.flat().some(node => node.state === NodeState.Path);
-    
+
     if (pathFound) {
       notificationMessage.value = `${algorithmNames[selectedAlgorithm.value]} completed! Path found.`;
       notificationType.value = 'success';
@@ -234,13 +234,13 @@ const currentAnimationStep = computed(() => {
 });
 const isPlaying = computed(() => animationEngine.isPlaying.value);
 const isComplete = computed(() => animationEngine.isComplete.value);
-const canPlay = computed(() => animationEngine.canPlay.value && !isLoading.value);
+const canPlay = computed(() => !isPlaying.value && !isLoading.value);
 
 const ariaLabel = computed(() => {
   const algorithm = selectedAlgorithm.value;
   const status = isPlaying.value ? 'running' : isComplete.value ? 'complete' : 'ready';
   const wallCount = grid.value.flat().filter(node => node.isWall).length;
-  
+
   return `Pathfinding visualization using ${algorithm} algorithm. Status: ${status}. Grid has ${wallCount} walls. Press Space to start, R to reset, C to clear walls. Use arrow keys to navigate grid.`;
 });
 
@@ -376,7 +376,7 @@ onMounted(() => {
   // Initialize the grid to ensure it's ready for visualization
   grid.value = createGrid(gridConfig);
   displayGrid.value = grid.value;
-  
+
   // Auto-focus the container for immediate keyboard access
   containerRef.value?.focus();
 });

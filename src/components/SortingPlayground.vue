@@ -6,7 +6,7 @@
       :type="notificationType"
       @close="showNotification = false"
     />
-    
+
     <div class="max-w-7xl mx-auto">
       <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
         Sorting Algorithm Visualizer
@@ -18,15 +18,15 @@
             :category="AlgorithmCategory.Sorting"
             v-model:selectedAlgorithm="selectedAlgorithm"
           />
-          
+
           <SpeedControl v-model:speed="animationSpeed" />
-          
+
           <ArraySizeInput
             v-model:size="arraySize"
             :min="5"
             :max="100"
           />
-          
+
           <div class="flex items-end">
             <button
               @click="generateNewArray"
@@ -51,8 +51,8 @@
 
       <div class="visualizer-container bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md relative">
         <!-- Loading Overlay -->
-        <div 
-          v-if="isLoading" 
+        <div
+          v-if="isLoading"
           class="absolute inset-0 bg-white/80 dark:bg-gray-900/80 flex items-center justify-center z-10 rounded-lg"
           role="status"
           aria-live="polite"
@@ -80,7 +80,7 @@
 <script setup lang="ts">
 /**
  * SortingPlayground Component
- * 
+ *
  * The main component for the sorting algorithm visualizer.
  * Provides controls for selecting sorting algorithms, adjusting animation speed,
  * changing array size, and controlling playback. Visualizes the sorting process
@@ -142,13 +142,13 @@ const startSorting = () => {
   // Set loading state - Vue will batch this with the next state update
   // so in practice the loading spinner will show briefly during computation
   isLoading.value = true;
-  
+
   const sortFn = sortingAlgorithms[selectedAlgorithm.value];
   const result = sortFn([...array.value]);
-  
+
   // Get animation steps (handle different property names)
   const steps = 'steps' in result ? result.steps : result.animationSteps;
-  
+
   // Convert animation steps to include array snapshots
   const workingArray = [...array.value];
   const stepsWithArrays: SortingAnimationStep[] = steps.map((step: AnimationStep) => {
@@ -157,15 +157,15 @@ const startSorting = () => {
       const [i, j] = step.indices;
       [workingArray[i], workingArray[j]] = [workingArray[j], workingArray[i]];
     }
-    
+
     return {
       ...step,
       array: [...workingArray],
     };
   });
-  
+
   animationSteps.value = stepsWithArrays;
-  
+
   // Clear loading state immediately after computation
   isLoading.value = false;
 };
@@ -200,7 +200,7 @@ const currentAnimationStep = computed(() => {
 });
 const isPlaying = computed(() => animationEngine.isPlaying.value);
 const isComplete = computed(() => animationEngine.isComplete.value);
-const canPlay = computed(() => animationEngine.canPlay.value && !isLoading.value);
+const canPlay = computed(() => !isPlaying.value && !isLoading.value);
 
 const handlePlay = () => {
   if (animationEngine.totalSteps.value === 0) {
