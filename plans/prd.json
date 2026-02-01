@@ -2588,7 +2588,7 @@
       "Add rounded corners and padding",
       "Test in dev server"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "component-styling",
