@@ -1,5 +1,7 @@
 # Algorithm Visualizer Playground
 
+[![Deploy to Cloudflare Pages](https://github.com/wazo-tek/ralph/algorithm-playbook/actions/workflows/deploy.yml/badge.svg)](https://github.com/wazo-tek/ralph/algorithm-playbook/actions/workflows/deploy.yml)
+
 An interactive web application for visualizing sorting and pathfinding algorithms in real-time. Built with Vue 3, TypeScript, and Vite.
 
 ## Features

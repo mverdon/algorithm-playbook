@@ -921,3 +921,13 @@ Next person: GitHub Actions deployment workflow is now set up! The app will auto
 - Updated PRD: Task 'Add deployment documentation to README' marked as complete
 
 Next person: Deployment documentation is now comprehensive and covers all deployment scenarios! 2 deployment tasks remaining: add deployment badge to README, verify deployed site works correctly. Continue with adding the deployment badge next.
+[2026-02-01T10:54:35Z] Added deployment badge to README
+- Added GitHub Actions deployment workflow badge to top of README.md
+- Badge displays deployment status and links to workflow runs
+- Badge format: [![Deploy to Cloudflare Pages](badge-url)](workflow-url)
+- Positioned prominently right below the title for visibility
+- TypeScript type checking passes with no errors
+- All 522 unit tests pass (24 passed/25 files)
+- Updated PRD: Task 'Add deployment badge to README' marked as complete
+
+Next person: Deployment badge is now visible in the README! 1 deployment task remaining: verify deployed site works correctly. This is the final task before the project is complete. Continue with verifying the deployed site next.

@@ -2792,7 +2792,7 @@
       "Add link to live site",
       "Commit changes"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "deployment",
