@@ -2368,7 +2368,7 @@
       "Test shadow classes in a component",
       "Run 'npm run typecheck'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "theme-foundation",

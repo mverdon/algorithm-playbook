@@ -19,6 +19,12 @@ export default {
         warning: theme.light.colors.warning,
         info: theme.light.colors.info,
       },
+      boxShadow: {
+        sm: theme.light.shadows.sm,
+        md: theme.light.shadows.md,
+        lg: theme.light.shadows.lg,
+        xl: theme.light.shadows.xl,
+      },
     },
   },
   plugins: [],
