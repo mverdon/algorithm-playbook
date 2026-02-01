@@ -2621,7 +2621,7 @@
       "Add transition-transform",
       "Test in dev server"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "dark-mode-enhancement",
@@ -2632,7 +2632,7 @@
       "Add shadow on hover",
       "Test in dev server"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "play-button-fix",
