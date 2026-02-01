@@ -1,52 +1,68 @@
 import { ref, watch } from 'vue';
-import { ThemeType } from '../types/config';
 
 const THEME_STORAGE_KEY = 'algorithm-playbook-theme';
 
-const currentTheme = ref<ThemeType>(ThemeType.Light);
+const isDark = ref<boolean>(false);
+let isInitialized = false;
+
+// Get system theme preference
+const getSystemTheme = (): boolean => {
+  if (typeof window === 'undefined' || !window.matchMedia) return false;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+};
+
+// Apply theme class to document
+const applyTheme = (dark: boolean) => {
+  if (typeof document === 'undefined') return;
+  const root = document.documentElement;
+  if (dark) {
+    root.classList.add('dark');
+    root.classList.remove('light');
+  } else {
+    root.classList.add('light');
+    root.classList.remove('dark');
+  }
+};
+
+// Initialize theme from localStorage or system preference
+const initializeTheme = () => {
+  const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+  if (savedTheme !== null) {
+    isDark.value = savedTheme === 'dark';
+  } else {
+    isDark.value = getSystemTheme();
+  }
+  applyTheme(isDark.value);
+  isInitialized = true;
+};
+
+// Watch for theme changes and persist
+watch(isDark, (newValue) => {
+  if (typeof localStorage !== 'undefined') {
+    localStorage.setItem(THEME_STORAGE_KEY, newValue ? 'dark' : 'light');
+  }
+  applyTheme(newValue);
+}, { flush: 'sync' });
 
 export function useTheme() {
-  // Initialize theme from localStorage or default to light
-  const initializeTheme = () => {
-    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
-    if (savedTheme && Object.values(ThemeType).includes(savedTheme as ThemeType)) {
-      currentTheme.value = savedTheme as ThemeType;
-    } else {
-      currentTheme.value = ThemeType.Light;
-    }
-    applyTheme(currentTheme.value);
+  // Toggle theme
+  const toggleTheme = () => {
+    isDark.value = !isDark.value;
   };
-
-  // Apply theme to document
-  const applyTheme = (theme: ThemeType) => {
-    const root = document.documentElement;
-    
-    // Remove all theme classes
-    root.classList.remove('light', 'dark', 'colorful');
-    
-    // Add the current theme class
-    root.classList.add(theme);
-  };
-
-  // Set theme and persist to localStorage
-  const setTheme = (theme: ThemeType) => {
-    currentTheme.value = theme;
-    localStorage.setItem(THEME_STORAGE_KEY, theme);
-    applyTheme(theme);
-  };
-
-  // Watch for theme changes
-  watch(currentTheme, (newTheme) => {
-    applyTheme(newTheme);
-  });
 
   // Initialize on first use
-  if (typeof window !== 'undefined' && !document.documentElement.classList.contains('light') && !document.documentElement.classList.contains('dark') && !document.documentElement.classList.contains('colorful')) {
+  if (typeof window !== 'undefined' && !isInitialized) {
     initializeTheme();
   }
 
   return {
-    currentTheme,
-    setTheme,
+    isDark,
+    toggleTheme,
   };
+}
+
+// For testing: reset initialization state
+export function _resetThemeForTesting() {
+  isInitialized = false;
+  isDark.value = false;
 }

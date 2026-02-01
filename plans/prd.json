@@ -2379,7 +2379,7 @@
       "Export empty useTheme function",
       "Run 'npm run typecheck'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "theme-foundation",
@@ -2390,7 +2390,7 @@
       "Return isDark from useTheme function",
       "Run 'npm run typecheck'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "theme-foundation",
@@ -2401,7 +2401,7 @@
       "Save theme to localStorage when changed",
       "Run 'npm run typecheck'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "theme-foundation",
@@ -2412,7 +2412,7 @@
       "Use system theme if no localStorage value",
       "Run 'npm run typecheck'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "theme-foundation",
@@ -2423,7 +2423,7 @@
       "Return toggleTheme from useTheme",
       "Run 'npm run typecheck'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "theme-foundation",
@@ -2434,7 +2434,7 @@
       "Toggle 'dark' class on document.documentElement",
       "Run 'npm run typecheck'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "component-styling",

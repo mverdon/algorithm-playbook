@@ -1,14 +1,16 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { useTheme } from '@/composables/useTheme';
-import { ThemeType } from '@/types/config';
+import { useTheme, _resetThemeForTesting } from '@/composables/useTheme';
 
 describe('useTheme', () => {
   beforeEach(() => {
+    // Reset theme state for each test
+    _resetThemeForTesting();
+    
     // Clear localStorage before each test
     localStorage.clear();
     
     // Clear all theme classes from document root
-    document.documentElement.classList.remove('light', 'dark', 'colorful');
+    document.documentElement.classList.remove('light', 'dark');
   });
 
   afterEach(() => {
@@ -17,84 +19,75 @@ describe('useTheme', () => {
 
   describe('Initialization', () => {
     it('should initialize with light theme by default', () => {
-      const { currentTheme } = useTheme();
+      const { isDark } = useTheme();
       
-      expect(currentTheme.value).toBe(ThemeType.Light);
+      expect(isDark.value).toBe(false);
       expect(document.documentElement.classList.contains('light')).toBe(true);
     });
 
     it('should load theme from localStorage if available', () => {
-      localStorage.setItem('algorithm-playbook-theme', ThemeType.Dark);
+      localStorage.setItem('algorithm-playbook-theme', 'dark');
       
-      const { currentTheme } = useTheme();
+      const { isDark } = useTheme();
       
-      expect(currentTheme.value).toBe(ThemeType.Dark);
+      expect(isDark.value).toBe(true);
       expect(document.documentElement.classList.contains('dark')).toBe(true);
     });
 
     it('should ignore invalid theme in localStorage', () => {
       localStorage.setItem('algorithm-playbook-theme', 'invalid-theme');
       
-      const { currentTheme } = useTheme();
+      const { isDark } = useTheme();
       
-      expect(currentTheme.value).toBe(ThemeType.Light);
+      expect(isDark.value).toBe(false);
       expect(document.documentElement.classList.contains('light')).toBe(true);
-    });
-
-    it('should apply colorful theme from localStorage', () => {
-      localStorage.setItem('algorithm-playbook-theme', ThemeType.Colorful);
-      
-      const { currentTheme } = useTheme();
-      
-      expect(currentTheme.value).toBe(ThemeType.Colorful);
-      expect(document.documentElement.classList.contains('colorful')).toBe(true);
     });
   });
 
-  describe('setTheme', () => {
-    it('should change theme to dark', () => {
-      const { currentTheme, setTheme } = useTheme();
+  describe('toggleTheme', () => {
+    it('should toggle from light to dark', () => {
+      const { isDark, toggleTheme } = useTheme();
       
-      setTheme(ThemeType.Dark);
+      expect(isDark.value).toBe(false);
+      toggleTheme();
       
-      expect(currentTheme.value).toBe(ThemeType.Dark);
+      expect(isDark.value).toBe(true);
       expect(document.documentElement.classList.contains('dark')).toBe(true);
       expect(document.documentElement.classList.contains('light')).toBe(false);
-      expect(localStorage.getItem('algorithm-playbook-theme')).toBe(ThemeType.Dark);
+      expect(localStorage.getItem('algorithm-playbook-theme')).toBe('dark');
     });
 
-    it('should change theme to colorful', () => {
-      const { currentTheme, setTheme } = useTheme();
+    it('should toggle from dark to light', () => {
+      localStorage.setItem('algorithm-playbook-theme', 'dark');
+      const { isDark, toggleTheme } = useTheme();
       
-      setTheme(ThemeType.Colorful);
+      expect(isDark.value).toBe(true);
+      toggleTheme();
       
-      expect(currentTheme.value).toBe(ThemeType.Colorful);
-      expect(document.documentElement.classList.contains('colorful')).toBe(true);
-      expect(document.documentElement.classList.contains('light')).toBe(false);
-      expect(localStorage.getItem('algorithm-playbook-theme')).toBe(ThemeType.Colorful);
+      expect(isDark.value).toBe(false);
+      expect(document.documentElement.classList.contains('light')).toBe(true);
+      expect(document.documentElement.classList.contains('dark')).toBe(false);
+      expect(localStorage.getItem('algorithm-playbook-theme')).toBe('light');
     });
 
     it('should persist theme changes to localStorage', () => {
-      const { setTheme } = useTheme();
+      const { toggleTheme } = useTheme();
       
-      setTheme(ThemeType.Dark);
-      expect(localStorage.getItem('algorithm-playbook-theme')).toBe(ThemeType.Dark);
+      toggleTheme();
+      expect(localStorage.getItem('algorithm-playbook-theme')).toBe('dark');
       
-      setTheme(ThemeType.Colorful);
-      expect(localStorage.getItem('algorithm-playbook-theme')).toBe(ThemeType.Colorful);
-      
-      setTheme(ThemeType.Light);
-      expect(localStorage.getItem('algorithm-playbook-theme')).toBe(ThemeType.Light);
+      toggleTheme();
+      expect(localStorage.getItem('algorithm-playbook-theme')).toBe('light');
     });
 
-    it('should remove old theme class when changing themes', () => {
-      const { setTheme } = useTheme();
+    it('should remove old theme class when toggling', () => {
+      const { toggleTheme } = useTheme();
       
-      setTheme(ThemeType.Dark);
+      toggleTheme();
       expect(document.documentElement.classList.contains('dark')).toBe(true);
       expect(document.documentElement.classList.contains('light')).toBe(false);
       
-      setTheme(ThemeType.Light);
+      toggleTheme();
       expect(document.documentElement.classList.contains('light')).toBe(true);
       expect(document.documentElement.classList.contains('dark')).toBe(false);
     });
@@ -102,29 +95,29 @@ describe('useTheme', () => {
 
   describe('Reactivity', () => {
     it('should update document classes when theme changes', () => {
-      const { currentTheme, setTheme } = useTheme();
+      const { isDark, toggleTheme } = useTheme();
       
       expect(document.documentElement.classList.contains('light')).toBe(true);
       
-      setTheme(ThemeType.Dark);
+      toggleTheme();
       expect(document.documentElement.classList.contains('dark')).toBe(true);
       expect(document.documentElement.classList.contains('light')).toBe(false);
-      expect(currentTheme.value).toBe(ThemeType.Dark);
+      expect(isDark.value).toBe(true);
     });
 
     it('should maintain reactivity across multiple theme changes', () => {
-      const { setTheme } = useTheme();
+      const { toggleTheme } = useTheme();
       
-      setTheme(ThemeType.Dark);
+      toggleTheme();
       expect(document.documentElement.classList.contains('dark')).toBe(true);
       
-      setTheme(ThemeType.Colorful);
-      expect(document.documentElement.classList.contains('colorful')).toBe(true);
+      toggleTheme();
+      expect(document.documentElement.classList.contains('light')).toBe(true);
       expect(document.documentElement.classList.contains('dark')).toBe(false);
       
-      setTheme(ThemeType.Light);
-      expect(document.documentElement.classList.contains('light')).toBe(true);
-      expect(document.documentElement.classList.contains('colorful')).toBe(false);
+      toggleTheme();
+      expect(document.documentElement.classList.contains('dark')).toBe(true);
+      expect(document.documentElement.classList.contains('light')).toBe(false);
     });
   });
 
@@ -133,10 +126,10 @@ describe('useTheme', () => {
       const theme1 = useTheme();
       const theme2 = useTheme();
       
-      theme1.setTheme(ThemeType.Dark);
+      theme1.toggleTheme();
       
-      expect(theme1.currentTheme.value).toBe(ThemeType.Dark);
-      expect(theme2.currentTheme.value).toBe(ThemeType.Dark);
+      expect(theme1.isDark.value).toBe(true);
+      expect(theme2.isDark.value).toBe(true);
       expect(document.documentElement.classList.contains('dark')).toBe(true);
     });
 
@@ -144,38 +137,37 @@ describe('useTheme', () => {
       const theme1 = useTheme();
       const theme2 = useTheme();
       
-      theme1.setTheme(ThemeType.Colorful);
-      expect(theme2.currentTheme.value).toBe(ThemeType.Colorful);
+      theme1.toggleTheme();
+      expect(theme2.isDark.value).toBe(true);
       
-      theme2.setTheme(ThemeType.Light);
-      expect(theme1.currentTheme.value).toBe(ThemeType.Light);
+      theme2.toggleTheme();
+      expect(theme1.isDark.value).toBe(false);
     });
   });
 
   describe('Edge cases', () => {
     it('should handle rapid theme changes', () => {
-      const { setTheme } = useTheme();
+      const { toggleTheme } = useTheme();
       
-      setTheme(ThemeType.Dark);
-      setTheme(ThemeType.Light);
-      setTheme(ThemeType.Colorful);
-      setTheme(ThemeType.Dark);
+      toggleTheme();
+      toggleTheme();
+      toggleTheme();
+      toggleTheme();
       
-      expect(document.documentElement.classList.contains('dark')).toBe(true);
-      expect(document.documentElement.classList.contains('light')).toBe(false);
-      expect(document.documentElement.classList.contains('colorful')).toBe(false);
-      expect(localStorage.getItem('algorithm-playbook-theme')).toBe(ThemeType.Dark);
+      expect(document.documentElement.classList.contains('light')).toBe(true);
+      expect(document.documentElement.classList.contains('dark')).toBe(false);
+      expect(localStorage.getItem('algorithm-playbook-theme')).toBe('light');
     });
 
-    it('should handle setting the same theme multiple times', () => {
-      const { setTheme } = useTheme();
+    it('should handle toggling multiple times to same state', () => {
+      const { isDark, toggleTheme } = useTheme();
       
-      setTheme(ThemeType.Dark);
-      setTheme(ThemeType.Dark);
-      setTheme(ThemeType.Dark);
+      toggleTheme();
+      toggleTheme();
       
-      expect(document.documentElement.classList.contains('dark')).toBe(true);
-      expect(localStorage.getItem('algorithm-playbook-theme')).toBe(ThemeType.Dark);
+      expect(isDark.value).toBe(false);
+      expect(document.documentElement.classList.contains('light')).toBe(true);
+      expect(localStorage.getItem('algorithm-playbook-theme')).toBe('light');
     });
   });
 });
