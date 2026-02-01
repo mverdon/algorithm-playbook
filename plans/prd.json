@@ -2687,7 +2687,7 @@
       "Verify play button is enabled on load",
       "Click play and verify animation starts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "play-button-fix",
@@ -2698,7 +2698,7 @@
       "Verify play button is enabled on load",
       "Click play and verify animation starts"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "play-button-fix",
@@ -2709,6 +2709,6 @@
       "Click pause and verify it stops",
       "Click reset and verify it returns to start"
     ],
-    "passes": false
+    "passes": true
   }
 ]
