@@ -22,9 +22,7 @@ Use this to leave a note for the next person working in the codebase. \
 ONLY WORK ON A SINGLE TASK. \
 If, while implementing the task, you notice the PRD is complete, output <promise>COMPLETE</promise>. \
 NEVER OUTPUT <promise>COMPLETE</promise> UNLESS THE PRD IS ACTUALLY COMPLETE. \
-" --allow-all-tools)
-
-  echo "$result"
+" --allow-all-tools | tee /dev/tty)
 
   if [[ "$result" == *"<promise>COMPLETE</promise>"* ]]; then
     echo "PRD complete, exiting."
