@@ -2339,179 +2339,375 @@
   },
   {
     "category": "theme-foundation",
-    "description": "Update Tailwind config with custom theme",
+    "description": "Import theme in tailwind.config.js",
     "steps": [
-      "Import theme configuration in tailwind.config.js",
-      "Extend Tailwind theme with custom colors from theme.ts",
-      "Add custom shadows, spacing, and border radius values",
-      "Configure CSS custom properties for dynamic theme switching",
-      "Add transition utilities for smooth theme changes",
-      "Verify configuration is valid",
-      "Run 'npm run dev' to test build",
-      "Verify no Tailwind compilation errors"
+      "Open tailwind.config.js",
+      "Add import statement for src/config/theme.ts at top",
+      "Verify file syntax is correct",
+      "Run 'npm run typecheck'"
     ],
     "passes": false
   },
   {
     "category": "theme-foundation",
-    "description": "Create useTheme composable for dark/light mode",
+    "description": "Extend Tailwind with custom colors",
     "steps": [
-      "Create src/composables/useTheme.ts file",
-      "Implement theme state management with ref",
-      "Add localStorage persistence for theme preference",
-      "Add system theme detection (prefers-color-scheme)",
-      "Implement toggleTheme function",
-      "Apply theme class to document.documentElement",
-      "Export theme state and toggle function",
-      "Create test file tests/composables/useTheme.test.ts",
-      "Write tests for theme persistence and toggle",
-      "Run 'npm run test' to verify tests pass"
+      "Open tailwind.config.js",
+      "In theme.extend.colors, add custom colors from theme.ts",
+      "Verify colors are properly structured",
+      "Run 'npm run dev' and check no errors"
+    ],
+    "passes": false
+  },
+  {
+    "category": "theme-foundation",
+    "description": "Add custom shadows to Tailwind",
+    "steps": [
+      "Open tailwind.config.js",
+      "In theme.extend.boxShadow, add shadow values",
+      "Test shadow classes in a component",
+      "Run 'npm run typecheck'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "theme-foundation",
+    "description": "Create useTheme composable file",
+    "steps": [
+      "Create src/composables/useTheme.ts",
+      "Import ref and computed from Vue",
+      "Export empty useTheme function",
+      "Run 'npm run typecheck'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "theme-foundation",
+    "description": "Add theme state to useTheme",
+    "steps": [
+      "Open src/composables/useTheme.ts",
+      "Add ref for isDark state (boolean)",
+      "Return isDark from useTheme function",
+      "Run 'npm run typecheck'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "theme-foundation",
+    "description": "Add localStorage persistence to useTheme",
+    "steps": [
+      "Open src/composables/useTheme.ts",
+      "Read theme from localStorage on initialization",
+      "Save theme to localStorage when changed",
+      "Run 'npm run typecheck'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "theme-foundation",
+    "description": "Add system theme detection to useTheme",
+    "steps": [
+      "Open src/composables/useTheme.ts",
+      "Add matchMedia check for prefers-color-scheme",
+      "Use system theme if no localStorage value",
+      "Run 'npm run typecheck'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "theme-foundation",
+    "description": "Add toggleTheme function to useTheme",
+    "steps": [
+      "Open src/composables/useTheme.ts",
+      "Create toggleTheme function that flips isDark",
+      "Return toggleTheme from useTheme",
+      "Run 'npm run typecheck'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "theme-foundation",
+    "description": "Apply theme class to document in useTheme",
+    "steps": [
+      "Open src/composables/useTheme.ts",
+      "Add watch for isDark changes",
+      "Toggle 'dark' class on document.documentElement",
+      "Run 'npm run typecheck'"
     ],
     "passes": false
   },
   {
     "category": "component-styling",
-    "description": "Modernize AlgorithmSelector component",
+    "description": "Add card shadow to AlgorithmSelector",
     "steps": [
-      "Update AlgorithmSelector.vue template with modern card design",
-      "Add subtle box shadows (shadow-sm, hover:shadow-md)",
-      "Implement smooth hover transitions (transition-all duration-200)",
-      "Add gradient focus rings (focus:ring-2 focus:ring-blue-500/50)",
-      "Improve spacing and padding (p-3, rounded-lg)",
-      "Add border with theme-aware colors",
-      "Update dark mode styles for consistency",
-      "Verify component renders correctly in dev server",
-      "Run 'npm run typecheck' to confirm no errors"
+      "Open src/components/AlgorithmSelector.vue",
+      "Add shadow-sm class to wrapper div",
+      "Add hover:shadow-md class",
+      "Test in dev server"
     ],
     "passes": false
   },
   {
     "category": "component-styling",
-    "description": "Modernize SpeedControl component",
+    "description": "Add transitions to AlgorithmSelector",
     "steps": [
-      "Update SpeedControl.vue template with card styling",
-      "Add smooth hover effects on select element",
-      "Implement transition animations (transition-all duration-200)",
-      "Add subtle shadows and borders matching theme",
-      "Improve label typography and spacing",
-      "Add focus states with gradient rings",
-      "Update dark mode styles for consistency",
-      "Verify component renders correctly in dev server",
-      "Run 'npm run typecheck' to confirm no errors"
+      "Open src/components/AlgorithmSelector.vue",
+      "Add transition-all duration-200 classes",
+      "Test hover animation in dev server",
+      "Run 'npm run typecheck'"
     ],
     "passes": false
   },
   {
     "category": "component-styling",
-    "description": "Modernize ControlButtons component",
+    "description": "Improve AlgorithmSelector spacing",
     "steps": [
-      "Update ControlButtons.vue with gradient button backgrounds",
-      "Add modern hover states (scale, brightness, shadow transitions)",
-      "Implement active states with transform feedback",
-      "Improve disabled states with opacity and cursor changes",
-      "Add smooth transitions for all button interactions",
-      "Add subtle shadows on buttons (shadow-md, hover:shadow-lg)",
-      "Update icon styling and spacing",
-      "Update dark mode button styles",
-      "Verify buttons work correctly in dev server",
-      "Run 'npm run typecheck' to confirm no errors"
+      "Open src/components/AlgorithmSelector.vue",
+      "Update padding to p-3",
+      "Update border radius to rounded-lg",
+      "Test in dev server"
     ],
     "passes": false
   },
   {
     "category": "component-styling",
-    "description": "Modernize App.vue layout and styling",
+    "description": "Add focus rings to AlgorithmSelector",
     "steps": [
-      "Update App.vue with proper margins and padding",
-      "Add gradient backgrounds for header and main sections",
-      "Implement card-based design for main content areas",
-      "Add consistent spacing between sections",
-      "Improve shadow depth for visual hierarchy",
-      "Add smooth transitions for tab switching",
-      "Update responsive breakpoints for better mobile experience",
-      "Verify layout looks modern on different screen sizes",
-      "Run 'npm run typecheck' to confirm no errors"
+      "Open src/components/AlgorithmSelector.vue",
+      "Add focus:ring-2 focus:ring-blue-500/50 to select",
+      "Test keyboard focus in dev server",
+      "Run 'npm run typecheck'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "component-styling",
+    "description": "Add card shadow to SpeedControl",
+    "steps": [
+      "Open src/components/SpeedControl.vue",
+      "Add shadow-sm class to wrapper",
+      "Add hover:shadow-md class",
+      "Test in dev server"
+    ],
+    "passes": false
+  },
+  {
+    "category": "component-styling",
+    "description": "Add transitions to SpeedControl",
+    "steps": [
+      "Open src/components/SpeedControl.vue",
+      "Add transition-all duration-200 classes",
+      "Test hover animation in dev server",
+      "Run 'npm run typecheck'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "component-styling",
+    "description": "Improve SpeedControl spacing",
+    "steps": [
+      "Open src/components/SpeedControl.vue",
+      "Update padding to p-3",
+      "Improve label typography",
+      "Test in dev server"
+    ],
+    "passes": false
+  },
+  {
+    "category": "component-styling",
+    "description": "Update play button in ControlButtons",
+    "steps": [
+      "Open src/components/ControlButtons.vue",
+      "Add gradient background to play button",
+      "Add shadow-md class",
+      "Test in dev server"
+    ],
+    "passes": false
+  },
+  {
+    "category": "component-styling",
+    "description": "Add hover effects to ControlButtons",
+    "steps": [
+      "Open src/components/ControlButtons.vue",
+      "Add hover:scale-105 to buttons",
+      "Add hover:shadow-lg to buttons",
+      "Test in dev server"
+    ],
+    "passes": false
+  },
+  {
+    "category": "component-styling",
+    "description": "Add transitions to ControlButtons",
+    "steps": [
+      "Open src/components/ControlButtons.vue",
+      "Add transition-all duration-200 to all buttons",
+      "Test button animations in dev server",
+      "Run 'npm run typecheck'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "component-styling",
+    "description": "Improve disabled states in ControlButtons",
+    "steps": [
+      "Open src/components/ControlButtons.vue",
+      "Update disabled button opacity",
+      "Add disabled:cursor-not-allowed",
+      "Test disabled state in dev server"
+    ],
+    "passes": false
+  },
+  {
+    "category": "component-styling",
+    "description": "Add gradient to App.vue header",
+    "steps": [
+      "Open src/App.vue",
+      "Add gradient background to header",
+      "Test gradient in both light and dark mode",
+      "Run 'npm run typecheck'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "component-styling",
+    "description": "Improve App.vue spacing",
+    "steps": [
+      "Open src/App.vue",
+      "Add consistent margin/padding to sections",
+      "Improve spacing between header and main",
+      "Test in dev server"
+    ],
+    "passes": false
+  },
+  {
+    "category": "component-styling",
+    "description": "Add card design to App.vue main content",
+    "steps": [
+      "Open src/App.vue",
+      "Add card wrapper with shadow to main content",
+      "Add rounded corners and padding",
+      "Test in dev server"
+    ],
+    "passes": false
+  },
+  {
+    "category": "component-styling",
+    "description": "Add tab switching transitions in App.vue",
+    "steps": [
+      "Open src/App.vue",
+      "Add transition component for tab content",
+      "Add smooth fade/slide animation",
+      "Test tab switching in dev server"
     ],
     "passes": false
   },
   {
     "category": "dark-mode-enhancement",
-    "description": "Enhance ThemeToggle component",
+    "description": "Add icon transitions to ThemeToggle",
     "steps": [
-      "Update ThemeToggle.vue with smooth icon transitions",
-      "Add sun/moon icons with rotation animations",
-      "Implement tooltip showing current theme",
-      "Add hover effects and scale transitions",
-      "Improve button positioning and styling",
-      "Add gradient background on hover",
-      "Ensure accessibility with proper aria labels",
-      "Verify theme toggle works smoothly",
-      "Run 'npm run typecheck' to confirm no errors"
+      "Open src/components/ThemeToggle.vue",
+      "Add transition classes to icon",
+      "Add rotation animation on toggle",
+      "Test in dev server"
     ],
     "passes": false
   },
   {
     "category": "dark-mode-enhancement",
-    "description": "Verify dark mode consistency across all components",
+    "description": "Add hover effects to ThemeToggle",
     "steps": [
-      "Test all components in light mode",
-      "Test all components in dark mode",
-      "Verify color contrast meets accessibility standards",
-      "Check that all text is readable in both themes",
-      "Verify backgrounds transition smoothly",
-      "Test theme persistence across page refreshes",
-      "Check system theme detection works",
-      "Document any inconsistencies and fix them",
-      "Run 'npm run test' to verify tests pass"
+      "Open src/components/ThemeToggle.vue",
+      "Add hover:scale-110 class",
+      "Add transition-transform",
+      "Test in dev server"
+    ],
+    "passes": false
+  },
+  {
+    "category": "dark-mode-enhancement",
+    "description": "Improve ThemeToggle button styling",
+    "steps": [
+      "Open src/components/ThemeToggle.vue",
+      "Add better background color",
+      "Add shadow on hover",
+      "Test in dev server"
     ],
     "passes": false
   },
   {
     "category": "play-button-fix",
-    "description": "Auto-generate initial data on component mount",
+    "description": "Add onMounted to SortingPlayground",
     "steps": [
-      "Update SortingPlayground.vue to call generateNewArray in onMounted",
-      "Update PathfindingPlayground.vue to initialize grid in onMounted",
-      "Ensure animation steps are generated on first load",
-      "Verify totalSteps > 0 after mount",
-      "Test that play button becomes enabled after initialization",
-      "Add loading state during initial generation",
-      "Verify no race conditions in async operations",
-      "Run 'npm run test' to verify tests pass",
-      "Test in dev server that play button is clickable on load"
+      "Open src/components/SortingPlayground.vue",
+      "Import onMounted from Vue",
+      "Add empty onMounted lifecycle hook",
+      "Run 'npm run typecheck'"
     ],
     "passes": false
   },
   {
     "category": "play-button-fix",
-    "description": "Add loading states during animation generation",
+    "description": "Call generateNewArray in SortingPlayground mount",
     "steps": [
-      "Add isGenerating state to track animation step generation",
-      "Update UI to show loading spinner during generation",
-      "Disable controls during loading",
-      "Add loading message 'Generating animation...'",
-      "Ensure smooth transition from loading to ready state",
-      "Test loading states for all sorting algorithms",
-      "Test loading states for all pathfinding algorithms",
-      "Verify loading indicator is accessible",
-      "Run 'npm run typecheck' to confirm no errors"
+      "Open src/components/SortingPlayground.vue",
+      "Inside onMounted, call generateNewArray()",
+      "Test that array is generated on page load",
+      "Verify play button becomes enabled"
     ],
     "passes": false
   },
   {
     "category": "play-button-fix",
-    "description": "Test playback controls for all algorithms",
+    "description": "Add onMounted to PathfindingPlayground",
     "steps": [
-      "Test play button enables after initial load",
-      "Test play button starts animation for bubble sort",
-      "Test play button for quick sort, merge sort, heap sort",
-      "Test play button for A*, Dijkstra, BFS, DFS",
-      "Test pause button stops animation mid-way",
-      "Test reset button returns to initial state",
-      "Test shuffle generates new data correctly",
-      "Verify canPlay logic works correctly for all scenarios",
-      "Test that animation completes and can be reset",
-      "Run e2e tests if available to verify full workflow"
+      "Open src/components/PathfindingPlayground.vue",
+      "Import onMounted from Vue",
+      "Add empty onMounted lifecycle hook",
+      "Run 'npm run typecheck'"
+    ],
+    "passes": false
+  },
+  {
+    "category": "play-button-fix",
+    "description": "Initialize grid in PathfindingPlayground mount",
+    "steps": [
+      "Open src/components/PathfindingPlayground.vue",
+      "Inside onMounted, call grid initialization function",
+      "Test that grid is created on page load",
+      "Verify play button becomes enabled"
+    ],
+    "passes": false
+  },
+  {
+    "category": "play-button-fix",
+    "description": "Test play button for sorting algorithms",
+    "steps": [
+      "Open dev server",
+      "Navigate to sorting tab",
+      "Verify play button is enabled on load",
+      "Click play and verify animation starts"
+    ],
+    "passes": false
+  },
+  {
+    "category": "play-button-fix",
+    "description": "Test play button for pathfinding algorithms",
+    "steps": [
+      "Open dev server",
+      "Navigate to pathfinding tab",
+      "Verify play button is enabled on load",
+      "Click play and verify animation starts"
+    ],
+    "passes": false
+  },
+  {
+    "category": "play-button-fix",
+    "description": "Test pause and reset buttons",
+    "steps": [
+      "Open dev server",
+      "Start an animation",
+      "Click pause and verify it stops",
+      "Click reset and verify it returns to start"
     ],
     "passes": false
   }
