@@ -52,8 +52,9 @@ describe('SortingPlayground', () => {
       expect(arraySizeInput.props('size')).toBe(50);
     });
 
-    it('initializes with a random array', () => {
+    it('initializes with a random array', async () => {
       const wrapper = mount(SortingPlayground);
+      await wrapper.vm.$nextTick();
       const visualizer = wrapper.findComponent(SortingVisualizer);
       const array = visualizer.props('array');
       
@@ -133,6 +134,7 @@ describe('SortingPlayground', () => {
   describe('Shuffle Functionality', () => {
     it('generates new array on shuffle button click', async () => {
       const wrapper = mount(SortingPlayground);
+      await wrapper.vm.$nextTick();
       const visualizer = wrapper.findComponent(SortingVisualizer);
       const initialArray = [...visualizer.props('array')];
       
@@ -199,6 +201,7 @@ describe('SortingPlayground', () => {
 
     it('resets to original array on reset', async () => {
       const wrapper = mount(SortingPlayground);
+      await wrapper.vm.$nextTick();
       const visualizer = wrapper.findComponent(SortingVisualizer);
       const originalArray = [...visualizer.props('array')];
       const controlButtons = wrapper.findComponent(ControlButtons);
@@ -213,6 +216,7 @@ describe('SortingPlayground', () => {
 
     it('generates new array on shuffle event', async () => {
       const wrapper = mount(SortingPlayground);
+      await wrapper.vm.$nextTick();
       const visualizer = wrapper.findComponent(SortingVisualizer);
       const initialArray = [...visualizer.props('array')];
       const controlButtons = wrapper.findComponent(ControlButtons);
@@ -226,8 +230,9 @@ describe('SortingPlayground', () => {
   });
 
   describe('Visualizer Integration', () => {
-    it('passes array to visualizer', () => {
+    it('passes array to visualizer', async () => {
       const wrapper = mount(SortingPlayground);
+      await wrapper.vm.$nextTick();
       const visualizer = wrapper.findComponent(SortingVisualizer);
       
       expect(visualizer.props('array')).toHaveLength(50);

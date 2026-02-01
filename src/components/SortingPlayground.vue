@@ -86,7 +86,7 @@
  * changing array size, and controlling playback. Visualizes the sorting process
  * with animated bar charts and displays completion notifications.
  */
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import AlgorithmSelector from './AlgorithmSelector.vue';
 import SpeedControl from './SpeedControl.vue';
 import ArraySizeInput from './ArraySizeInput.vue';
@@ -227,7 +227,9 @@ watch(selectedAlgorithm, () => {
   displayArray.value = [...array.value];
 });
 
-generateNewArray();
+onMounted(() => {
+  generateNewArray();
+});
 </script>
 
 <style scoped>
