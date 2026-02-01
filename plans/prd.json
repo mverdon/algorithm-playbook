@@ -2357,7 +2357,7 @@
       "Verify colors are properly structured",
       "Run 'npm run dev' and check no errors"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "theme-foundation",
