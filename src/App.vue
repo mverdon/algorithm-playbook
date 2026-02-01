@@ -69,5 +69,14 @@ const activeTab = ref<Tab>('sorting');
 </script>
 
 <style scoped>
-/* Component-specific styles */
+/* Tab switching transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

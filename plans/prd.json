@@ -2599,7 +2599,7 @@
       "Add smooth fade/slide animation",
       "Test tab switching in dev server"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "dark-mode-enhancement",
