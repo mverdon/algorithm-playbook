@@ -2710,5 +2710,101 @@
       "Click reset and verify it returns to start"
     ],
     "passes": true
+  },
+  {
+    "category": "deployment",
+    "description": "Test production build",
+    "steps": [
+      "Run 'npm run build'",
+      "Verify build completes without errors",
+      "Check dist/ folder is created",
+      "Verify dist/index.html exists"
+    ],
+    "passes": false
+  },
+  {
+    "category": "deployment",
+    "description": "Test production preview",
+    "steps": [
+      "Run 'npm run preview'",
+      "Open preview URL in browser",
+      "Test that app works correctly",
+      "Verify all styles are applied"
+    ],
+    "passes": false
+  },
+  {
+    "category": "deployment",
+    "description": "Create Cloudflare Pages configuration",
+    "steps": [
+      "Create wrangler.toml file in project root",
+      "Configure pages_build_output_dir = 'dist'",
+      "Set compatibility_date to current date",
+      "Run 'npm run typecheck' to verify"
+    ],
+    "passes": false
+  },
+  {
+    "category": "deployment",
+    "description": "Add deployment documentation to README",
+    "steps": [
+      "Open README.md",
+      "Add 'Deployment' section",
+      "Document Cloudflare Pages setup steps",
+      "Include build command: npm run build",
+      "Include output directory: dist",
+      "Add link to Cloudflare Pages docs"
+    ],
+    "passes": false
+  },
+  {
+    "category": "deployment",
+    "description": "Create GitHub Actions workflow for CI",
+    "steps": [
+      "Create .github/workflows directory",
+      "Create ci.yml file",
+      "Add workflow to run on push and pull_request",
+      "Configure Node.js setup",
+      "Add steps for npm install, typecheck, and test",
+      "Run 'git add .github/' and commit"
+    ],
+    "passes": false
+  },
+  {
+    "category": "deployment",
+    "description": "Create GitHub Actions workflow for Cloudflare deployment",
+    "steps": [
+      "Create .github/workflows/deploy.yml",
+      "Add workflow to run on push to main branch",
+      "Configure Node.js and build steps",
+      "Add Cloudflare Pages deployment action",
+      "Document required GitHub secrets in README",
+      "Run 'git add .github/' and commit"
+    ],
+    "passes": false
+  },
+  {
+    "category": "deployment",
+    "description": "Add deployment badge to README",
+    "steps": [
+      "Open README.md",
+      "Add deployment status badge at top",
+      "Add link to live site",
+      "Commit changes"
+    ],
+    "passes": false
+  },
+  {
+    "category": "deployment",
+    "description": "Verify deployed site works correctly",
+    "steps": [
+      "Visit deployed Cloudflare Pages URL",
+      "Test sorting algorithms",
+      "Test pathfinding algorithms",
+      "Test theme toggle",
+      "Test all controls work",
+      "Verify responsive design on mobile"
+    ],
+    "passes": false
   }
 ]

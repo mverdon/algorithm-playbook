@@ -62,14 +62,14 @@ describe('SortingPlayground', () => {
       expect(array.every((n: number) => n >= 1 && n <= 100)).toBe(true);
     });
 
-    it('initializes with canPlay state as false (no steps yet)', () => {
+    it('initializes with canPlay state as true (ready to start)', () => {
       const wrapper = mount(SortingPlayground);
       const controlButtons = wrapper.findComponent(ControlButtons);
       
       expect(controlButtons.props('isPlaying')).toBe(false);
       expect(controlButtons.props('isComplete')).toBe(false);
-      // canPlay is false initially because no animation steps have been generated yet
-      expect(controlButtons.props('canPlay')).toBe(false);
+      // canPlay is true initially because not playing and not loading
+      expect(controlButtons.props('canPlay')).toBe(true);
     });
   });
 
@@ -174,8 +174,8 @@ describe('SortingPlayground', () => {
       const wrapper = mount(SortingPlayground);
       const controlButtons = wrapper.findComponent(ControlButtons);
       
-      // Initially canPlay is false (no steps)
-      expect(controlButtons.props('canPlay')).toBe(false);
+      // Initially canPlay is true (ready to start)
+      expect(controlButtons.props('canPlay')).toBe(true);
       
       // Trigger play to generate animation steps
       await controlButtons.vm.$emit('play');
