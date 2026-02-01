@@ -2489,7 +2489,7 @@
       "Add hover:shadow-md class",
       "Test in dev server"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "component-styling",
@@ -2500,7 +2500,7 @@
       "Test hover animation in dev server",
       "Run 'npm run typecheck'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "component-styling",
@@ -2511,7 +2511,7 @@
       "Improve label typography",
       "Test in dev server"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "component-styling",
