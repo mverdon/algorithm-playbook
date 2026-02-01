@@ -2781,7 +2781,7 @@
       "Document required GitHub secrets in README",
       "Run 'git add .github/' and commit"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "deployment",
