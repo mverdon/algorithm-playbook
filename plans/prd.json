@@ -2665,7 +2665,7 @@
       "Add empty onMounted lifecycle hook",
       "Run 'npm run typecheck'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "play-button-fix",
@@ -2676,7 +2676,7 @@
       "Test that grid is created on page load",
       "Verify play button becomes enabled"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "category": "play-button-fix",

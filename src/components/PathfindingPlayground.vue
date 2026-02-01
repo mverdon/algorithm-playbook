@@ -373,6 +373,10 @@ function announceAction(message: string) {
 }
 
 onMounted(() => {
+  // Initialize the grid to ensure it's ready for visualization
+  grid.value = createGrid(gridConfig);
+  displayGrid.value = grid.value;
+  
   // Auto-focus the container for immediate keyboard access
   containerRef.value?.focus();
 });
